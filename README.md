@@ -1,6 +1,11 @@
 # HULK -- Havana University Language for Kompilers
 
-Reference definition for the HULK language
+> Reference definition for the HULK language.
+
+This repository contains the reference definition for the HULK programming language.
+
+HULK is a didactic, type-safe, object-oriented and incremental language designed for teaching compilers at college level.
+You can read all about the language [here](https://matcom.github.com/hulk).
 
 ## License
 
