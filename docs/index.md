@@ -15,8 +15,6 @@ A simple "Hello World" in HULK looks like this:
 print("Hello World");
 ```
 
-## What is HULK
-
 In a bird's eye view HULK is an object-oriented programming language, with simple inheritance, polymorphism, and encapsulation at the class level. Also, in HULK it is possible to define global functions outside the scope of all classes. It is also possible to define a _single global expression_ that constitutes the entry point to the program.
 
 Most of the syntactic constructions in HULK are expressions, including conditional instructions and cycles. HULK is a statically typed language with optional type inference, which means that some (or all) parts of a program can be annotated with types, and the compiler will verify the consistency of all operations.
