@@ -1,4 +1,3 @@
 remote_theme: pmarsceill/just-the-docs
 aux_links:
-    "HULK Resources on GitHub":
-      - "//github.com/matcom/hulk"
+    "HULK Resources on GitHub": "//github.com/matcom/hulk"
