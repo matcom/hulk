@@ -33,4 +33,4 @@ This design has been conceived to allow the use of HULK in a wide range of learn
 
 ## BANNER: Intermediate Representation
 
-Even though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it's called BANNER -- **B**asic 3-**A**dress li**N**ear i**N**t**E**mediate **R**representation.
+Even though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it's called BANNER -- **B**asic 3-**A**dress li**N**ear i**N**t**E**mediate **R**epresentation.
