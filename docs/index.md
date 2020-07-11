@@ -7,7 +7,7 @@ permalink: /
 
 # Introduction to HULK
 
-**HULK** (Havana University Language for Kompilers) is a didactic, type-safe, object-oriented and incremental programming language, designed for the course Introduction to Compilers in the Computer Science major at University of Havana.
+**HULK** (**H**avana **U**niversity **L**anguage for **K**ompilers) is a didactic, type-safe, object-oriented and incremental programming language, designed for the course Introduction to Compilers in the Computer Science major at University of Havana.
 
 A simple "Hello World" in HULK looks like this:
 
