@@ -26,14 +26,19 @@ print(42);
 
 In this program, `print` refers to a builtin function that prints the result of any expression in the output stream. We will talk about functions in a later section.
 
-The rest of this section explains all the basic expressions in HULK.
+The rest of this section explains all the expressions in HULK.
 
-## Literals
+## Arithmetic expressions
 
-HULK defines two types of literal values: numbers and strings.
+HULK defines two types of literal values: **numbers** and **strings**.
 
-Numbers are 32-bit floating-point and allow for all basic arithmetic operations.
+Numbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: `+`, `-`, `*`, `\`, `^`, and parenthesized expressions.
+We will talk about strings later.
 
-The following
+The following is a valid HULK program that computes a rather useless arithmetic expression:
 
-Strings
+```
+print((((1 + 2) ^ 3) * 4) / 5)
+```
+
+All usual syntactic and precedence rules apply.
