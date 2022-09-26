@@ -61,23 +61,18 @@ print(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));
 
 More formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function, and you can freely mix arithmetic expressions and mathematical functions, as you would expect in any programming language.
 
-## Inline functions
+## Expression blocks
 
-HULK also lets you define your own functions (of course!). The easiest way is the inline function form. Here's an example:
+Anywhere an expression is allowed (or almost), you can also use an expression block, which is nothing but a series of expressions between curly braces (`{` and `}`), and separated by `;`.
 
-```
-tan(x) => sin(x) / cos(x);
-```
-
-In HULK, all functions must be defined before the final global expression. All these functions live in a single global namespace, hence it is not allowed to repeat function names. Similarly, there are no overloads in HULK (at least in "basic" HULK).
-
-Finally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:
+The most trivial usage of expression blocks is to allow multiple `print` statements as the body of a program. For example, the following is a valid HULK program:
 
 ```
-cot(x) => 1 / tan(x);
-tan(x) => sin(x) / cos(x);
-
-print(tan(PI) ** 2 + cot(PI) ** 2);
+{
+    print(42);
+    print(sin(PI/2));
+    print("Hello World");
+}
 ```
 
-Of course, inline functions (and any other type of function) can call themselves recursively.
+When you use an expression block instead of a single expression, it is often not necessary to end with a semicolon (`;`), but it is not erroneous to do so either.
