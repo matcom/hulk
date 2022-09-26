@@ -5,7 +5,7 @@
 This repository contains the reference definition for the HULK programming language.
 
 HULK is a didactic, type-safe, object-oriented and incremental language designed for teaching compilers at college level.
-You can read all about the language [here](https://matcom.github.com/hulk).
+You can read all about the language [here](https://matcom.github.io/hulk).
 
 ## License
 
