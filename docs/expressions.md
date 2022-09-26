@@ -9,7 +9,6 @@ permalink: /expressions
 
 HULK is ultimately an expression-based language. Most of the syntactic constructions in HULK are expressions, including the body of all functions, loops, and any other block of code.
 
-
 The body of a program in HULK always ends with a single global expression (and a final semicolon) that serves as the entrypoint of the program. This means that, of course, a program in HULK can consist of just one global expression.
 
 For example, the following is a valid program in HULK:
@@ -60,4 +59,25 @@ As expected, functions can be nested in HULK (provided the use of types is consi
 print(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));
 ```
 
-More formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function.
+More formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function, and you can freely mix arithmetic expressions and mathematical functions, as you would expect in any programming language.
+
+## Inline functions
+
+HULK also lets you define your own functions (of course!). The easiest way is the inline function form. Here's an example:
+
+```
+tan(x) => sin(x) / cos(x);
+```
+
+In HULK, all functions must be defined before the final global expression. All these functions live in a single global namespace, hence it is not allowed to repeat function names. Similarly, there are no overloads in HULK (at least in "basic" HULK).
+
+Finally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:
+
+```
+cot(x) => 1 / tan(x);
+tan(x) => sin(x) / cos(x);
+
+print(tan(PI) ** 2 + cot(PI) ** 2);
+```
+
+Of course, inline functions (and any other type of function) can call themselves recursively.
