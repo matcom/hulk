@@ -46,3 +46,13 @@ operate(x, y) {
     print(x / y);
 }
 ```
+
+Note that the following form is not allowed:
+
+```
+fun(<args>) => {
+    <...>
+}
+```
+
+That is, you can either use the inline form with `=>` and a simple expression, or the full form with `{}` and an expression block.
