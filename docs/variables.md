@@ -116,3 +116,30 @@ let a = 7 in
     let a = 7 * 6 in
         print(a);
 ```
+
+## Destructive assignment
+
+Most of the time in HULK you won't need to overwrite a variable, but there are cases where you do. In those cases, you can use the destructive assignment operator `:=`, like this:
+
+```
+let a = 0 in {
+    print(a);
+    a := 1;
+    print(a);
+}
+```
+
+The previous program prints `0` and then `1`, since the value of `a` is overwritten before the second `print`.
+This is the **only** way in which a variable can be written to outside of a `let`.
+
+As you would expect, the `:=` operator defines an expression too, which returns the value just assigned, so you can do the following:
+
+```
+let a = 0 in
+    let b = a := 1 in {
+        print(a);
+        print(b);
+    };
+```
+
+This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its not null) and store it for later use.
