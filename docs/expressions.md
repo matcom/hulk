@@ -9,7 +9,7 @@ permalink: /expressions
 
 HULK is ultimately an expression-based language. Most of the syntactic constructions in HULK are expressions, including the body of all functions, loops, and any other block of code.
 
-The body of a program in HULK always ends with a single global expression (and a final semicolon) that serves as the entrypoint of the program. This means that, of course, a program in HULK can consist of just one global expression.
+The body of a program in HULK always ends with a single global expression (and, if necessary, a final semicolon) that serves as the entrypoint of the program. This means that, of course, a program in HULK can consist of just one global expression.
 
 For example, the following is a valid program in HULK:
 
@@ -17,7 +17,7 @@ For example, the following is a valid program in HULK:
 42;
 ```
 
-Of course, this program has no side effects. A slightly more complicated program, probably the first one that does something, is this:
+Obviously, this program has no side effects. A slightly more complicated program, probably the first one that does something, is this:
 
 ```
 print(42);
@@ -25,7 +25,7 @@ print(42);
 
 In this program, `print` refers to a builtin function that prints the result of any expression in the output stream. We will talk about functions in a later section.
 
-The rest of this section explains all the expressions in HULK.
+The rest of this section explains the basic expressions in HULK.
 
 ## Arithmetic expressions
 
