@@ -30,7 +30,7 @@ tan(x) => sin(x) / cos(x);
 print(tan(PI) ** 2 + cot(PI) ** 2);
 ```
 
-Of course, inline functions (and any other type of function) can call themselves recursively.
+And of course, inline functions (and any other type of function) can call themselves recursively.
 
 ## Full-form functions
 
