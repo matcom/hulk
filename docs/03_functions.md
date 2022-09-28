@@ -9,11 +9,13 @@ permalink: /functions
 
 HULK also lets you define your own functions (of course!). A program in HULK can have an arbitrary number of functions defined before the final global expression (or expression block).
 
+A function's body is always an expression (or expression block), hence all functions have a return value (and type), that is, the return value (and type) of its body.
+
 ## Inline functions
 
  The easiest way to define a function is the inline form. Here's an example:
 
-```
+```js
 tan(x) => sin(x) / cos(x);
 ```
 
@@ -23,7 +25,7 @@ In HULK, all functions must be defined before the final global expression. All t
 
 Finally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:
 
-```
+```js
 cot(x) => 1 / tan(x);
 tan(x) => sin(x) / cos(x);
 
@@ -38,7 +40,7 @@ Since inline functions only allow for a single expression as body (as complex as
 
 Here's an example of a rather useless function that prints 4 times:
 
-```
+```js
 operate(x, y) {
     print(x + y);
     print(x - y);
@@ -49,7 +51,7 @@ operate(x, y) {
 
 Note that the following form is not allowed:
 
-```
+```js
 fun(<args>) => {
     <...>
 }

@@ -1,21 +1,21 @@
 ---
 layout: default
-title: Variables
-nav_order: 4
-permalink: /variables
+title: Conditionals
+nav_order: 5
+permalink: /conditionals
 ---
 
 # Conditionals
 
 The `if` expression allows evaluating different expressions based on a condition.
 
-```
+```js
 let a = 42 in if (a % 2 == 0) print("Even") else print("odd");
 ```
 
 Since `if` is itself an expression, returning the value of the branch that evaluated true, the previous program can be rewritten as follows:
 
-```
+```js
 let a = 42 in print(if (a % 2 == 0) "even" else "odd");
 ```
 
@@ -29,7 +29,7 @@ Conditions are just expressions of boolean type. The following are the valid boo
 
 The body of the `if` or the `else` part of a conditional (or both) can be an expression block as well:
 
-```
+```js
 let a = 42 in
     if (a % 2 == 0) {
         print(a);
@@ -42,7 +42,7 @@ let a = 42 in
 
 The `if` expression supports multiple branches with the `elseif` construction, which introduces another conditioned branch:
 
-```
+```js
 let a = 42, let mod = a % 3 in
     print(
         if (mod == 0) "Magic"

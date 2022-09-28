@@ -13,13 +13,13 @@ The body of a program in HULK always ends with a single global expression (and, 
 
 For example, the following is a valid program in HULK:
 
-```
+```js
 42;
 ```
 
 Obviously, this program has no side effects. A slightly more complicated program, probably the first one that does something, is this:
 
-```
+```js
 print(42);
 ```
 
@@ -36,11 +36,33 @@ Numbers are 32-bit floating-point and support all basic arithmetic operations wi
 
 The following is a valid HULK program that computes and prints the result of a rather useless arithmetic expression:
 
-```
+```js
 print((((1 + 2) ^ 3) * 4) / 5);
 ```
 
 All usual syntactic and precedence rules apply.
+
+## Strings
+
+String literals in HULK are defined within enclosed double-quotes (`"`), such as in:
+
+```js
+print("Hello World");
+```
+
+A double-quote can be included literally by escaping it:
+
+```js
+print("The message is \"Hello World\"");
+```
+
+Other escaped characters are `\n` for line endings, and `\t` for tabs.
+
+Strings can be concatenated with other strings (or the string representation of numbers) using the `@` operator:
+
+```js
+print("The meaning of life is " @ 42);
+```
 
 ## Builtin math functions and constants
 
@@ -55,7 +77,7 @@ Besides these functions, HULK also ships with two global constants: `PI` and `E`
 
 As expected, functions can be nested in HULK (provided the use of types is consistent, but so far all we care about is functions from numbers to numbers, so we can forget about types until later on). Hence, the following is a valid HULK program.
 
-```
+```js
 print(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));
 ```
 
@@ -67,7 +89,7 @@ Anywhere an expression is allowed (or almost), you can also use an expression bl
 
 The most trivial usage of expression blocks is to allow multiple `print` statements as the body of a program. For example, the following is a valid HULK program:
 
-```
+```js
 {
     print(42);
     print(sin(PI/2));
