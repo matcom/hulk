@@ -102,6 +102,8 @@ type PolarPoint(phi, rho) inherits Point(rho * sin(phi), rho * cos(phi)) {
 
 During construction, the expressions for type arguments of the parent are evaluated in a namespace that contains global symbols plus the type arguments of the inheritor. Like before, you cannot assume a specific order of evaluation.
 
+In HULK, the three builtin types (`Number`, `String`, and `Boolean`) implicitely inherit from `Object`, but it is a semantic error to inherit from these types.
+
 ## Polymorphism
 
 All type methods in HULK are virtual by definition, and can be redefined by an inheritor provided the exact same signature is used:
