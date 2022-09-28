@@ -42,4 +42,30 @@ On the invocation side, the type checker will verify that the values passed as p
 
 Inside methods of a type `T`, the implicitly defined `self` symbol is always assumed as if annotated with type `T`.
 
+## Typing attributes and type arguments
+
+In type definitions, attributes and type arguments can be type-annotated as follows:
+
+```js
+type Point(x: Number, y: Number) {
+    x: Number = x;
+    y: Number = y;
+
+    // ...
+}
+```
+
+The type checker will verify that type arguments are used consistently inside attribute initialization expressions, and that the inferred type for each attribute initialization expression conforms to the attribute annotation.
+
 ## Type conforming
+
+The basic type relation in HULK is called *conforming* (`<=`). A type `T1` is said to *conform to* to another type `T2` (writen as `T1 <= T2`) if a variable of type `T2`  can hold a value of type `T1` such that every possible operation that is semantically valid with `T2` is guaranteed to be semantically valid with `T1`.
+
+In general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).
+
+The following rules provide an initial definition for the *conforming* relationship. The formal definition is given in the section about [type semantics](/type_semantics).
+
+- Every type conforms to `Object`.
+- If `T1` inherits `T2` then `T1` conforms to `T2`.
+- If `T1` conforms to `T2` and `T2` conforms to `T3` then `T1` conforms to `T3`.
+- The only types that conform to `Number`, `String`, and `Boolean`, are respectively those same types.
