@@ -44,9 +44,9 @@ for (x in range(0, 10)) print(x);
 The `for` loop is semantically and operationally equivalent to the following:
 
 ```js
-let collection = range(0, 10) in
-    while (collection.next())
-        let x = collection.current() in
+let iterable = range(0, 10) in
+    while (iterable.next())
+        let x = iterable.current() in
             print(x);
 ```
 

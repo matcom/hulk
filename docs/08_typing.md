@@ -66,6 +66,9 @@ In general, this means that the type checker will verify that the inferred type 
 The following rules provide an initial definition for the *conforming* relationship. The formal definition is given in the section about [type semantics](/type_semantics).
 
 - Every type conforms to `Object`.
+- Every type conforms to itself.
 - If `T1` inherits `T2` then `T1` conforms to `T2`.
 - If `T1` conforms to `T2` and `T2` conforms to `T3` then `T1` conforms to `T3`.
 - The only types that conform to `Number`, `String`, and `Boolean`, are respectively those same types.
+
+Types in HULK form a single hierarchy rooted at `Object`. In this hierarchy the *conforming* relationship is equivalent to the *descendant* relationship. Thus, if `T1` conforms to `T2` that means that `T1` is a descendant of `T2` (or trivially the same type). Thus, we can talk of the lowest common ancestor of a set of types `T1`, `T2`, ..., `Tn`, which is the most specific type `T` such that all `Ti` conform to `T`. When two types are in different branches of the type hierarchy, they are effectively incomparable.
