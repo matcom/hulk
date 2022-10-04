@@ -21,7 +21,7 @@ Hence, there are two different moments when a semantic error can be reported. Fi
 
 ## Type inference of expressions
 
-The first task of the type inferer is to infer the runtime type of any expression that appears in a HULK program. This process is performed bottom-up, starting from atomic sub-expressions (e.g., literals) and working up the AST. The exact rules for type inference of expressions is given in the section a`bout [type semantics](/type_semantics), but an intuitive introduction can be given at this point.
+The first task of the type inferer is to infer the runtime type of any expression that appears in a HULK program. This process is performed bottom-up, starting from atomic sub-expressions (e.g., literals) and working up the AST. The exact rules for type inference of expressions is given in the section about [type semantics](/type_semantics), but an intuitive introduction can be given at this point.
 
 Literals are the easiest to type-infer, because their type comes directly from the parser. Arithmetic expressions are also easy, because their type is always `Number`. Likewise, string and boolean operators are straightforward.
 

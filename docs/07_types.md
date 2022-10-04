@@ -7,7 +7,7 @@ permalink: /types
 
 # Types
 
-HULK is ultimately an object-oriented language with simple inheritance and nominal typing. It also has features of structural typing via [protocols](/protocols), which support language features such as [iteratbles](/iteratbles), which we will explain later.
+HULK is ultimately an object-oriented language with simple inheritance and nominal typing. It also has features of structural typing via [protocols](/protocols), which support language features such as [iterables](/iterables), which we will explain later.
 
 This section explains the basics of HULK's nominal typing system.
 

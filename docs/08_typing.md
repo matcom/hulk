@@ -9,7 +9,7 @@ permalink: /typing
 
 HULK is a statically-typed language with optional type annotations. So far you haven't seen any because HULK has a powerful [type inference system](/inference) which we will talk about later on. However, all symbols in HULK have a static type, and all programs in HULK are statically checked during compilation.
 
-Tye annotations can be added anywhere a symbol is defined, that is:
+Type annotations can be added anywhere a symbol is defined, that is:
 
 - in variable declarations with `let` expressions;
 - in function or method arguments and return type;

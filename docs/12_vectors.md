@@ -21,7 +21,7 @@ let numbers = [1,2,3,4,5,6,7,8,9] in
         print(x);
 ```
 
-Because vectors implement the iterable protocol, you can explicitely find a `next` and `current` methods in case you ever need them. Besides that, vectors also have a `size(): Number` method that returns the number of items in the vector.
+Because vectors implement the iterable protocol, you can explicitly find a `next` and `current` methods in case you ever need them. Besides that, vectors also have a `size(): Number` method that returns the number of items in the vector.
 
 Vectors also support an indexing syntax using square brackets `[]`, as in the following example:
 
