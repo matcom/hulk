@@ -43,7 +43,7 @@ let a = 42 in
 The `if` expression supports multiple branches with the `elseif` construction, which introduces another conditioned branch:
 
 ```js
-let a = 42, let mod = a % 3 in
+let a = 42, mod = a % 3 in
     print(
         if (mod == 0) "Magic"
         elseif (mod % 3 == 1) "Woke"

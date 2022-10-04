@@ -142,4 +142,4 @@ let a = 0 in
     };
 ```
 
-This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its not null) and store it for later use.
+This is useful if you want to evaluate a complex expression to both test it (e.g, to see if its not null) and store it for later use.
