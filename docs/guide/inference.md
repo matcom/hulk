@@ -1,10 +1,3 @@
----
-layout: default
-title: Type inference
-nav_order: 9
-permalink: /inference
----
-
 # Type inference
 
 Since every program in HULK is statically type-checked, and type annotations are optional in most cases, this means that HULK infers types for most of the symbols in a program.
@@ -55,13 +48,13 @@ let x = 42 in print(x);
 In the following function, the type of the argument `n` should be inferred as `Number` because it is the only possible type where arithmetic operators (i.e., `+`) are defined, as there is no operator overloading in HULK:
 
 ```js
-fib(n) => if (n == 0 | n == 1) 1 else fib(n-1) + fib(n-2);
+function fib(n) => if (n == 0 | n == 1) 1 else fib(n-1) + fib(n-2);
 ```
 
 For the same reason, in the following function, the type of the argument `x` should be inferred as `Number`. Likewise, the type of the variable `f` should be inferred as `Number` because the initialization expression is a literal `Number`.
 
 ```js
-fact(x) => let f = 1 in for (i in range(1, x+1)) f := f * i;
+function fact(x) => let f = 1 in for (i in range(1, x+1)) f := f * i;
 ```
 
 > **TODO**: Add more examples...

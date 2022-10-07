@@ -1,10 +1,3 @@
----
-layout: default
-title: Iterables
-nav_order: 12
-permalink: /vectors
----
-
 # Vectors
 
 The builtin vector type provides a simple but powerful abstraction for creating collections of objects of the same type. In terms of functionality, a vector is close to plain arrays as defined in most programming languages. Vectors implement the [iterable protocol](/iterables) so they can be iterated with a `for` syntax.

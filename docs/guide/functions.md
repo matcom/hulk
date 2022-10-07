@@ -1,10 +1,3 @@
----
-layout: default
-title: Functions
-nav_order: 3
-permalink: /functions
----
-
 # Functions
 
 HULK also lets you define your own functions (of course!). A program in HULK can have an arbitrary number of functions defined before the final global expression (or expression block).
@@ -16,7 +9,7 @@ A function's body is always an expression (or expression block), hence all funct
  The easiest way to define a function is the inline form. Here's an example:
 
 ```js
-tan(x) => sin(x) / cos(x);
+function tan(x) => sin(x) / cos(x);
 ```
 
 An inline function is defined by an identifier followed by arguments between parenthesis, then the `=>` symbol, and then a simple expression (not an expression block) as body, ending in `;`.
@@ -26,8 +19,8 @@ In HULK, all functions must be defined before the final global expression. All t
 Finally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:
 
 ```js
-cot(x) => 1 / tan(x);
-tan(x) => sin(x) / cos(x);
+function cot(x) => 1 / tan(x);
+function tan(x) => sin(x) / cos(x);
 
 print(tan(PI) ** 2 + cot(PI) ** 2);
 ```
@@ -41,7 +34,7 @@ Since inline functions only allow for a single expression as body (as complex as
 Here's an example of a rather useless function that prints 4 times:
 
 ```js
-operate(x, y) {
+function operate(x, y) {
     print(x + y);
     print(x - y);
     print(x * y);
@@ -49,12 +42,12 @@ operate(x, y) {
 }
 ```
 
-Note that the following form is not allowed:
+Note that the following form is discouraged for stylistic reasons:
 
 ```js
-fun(<args>) => {
+function id(<args>) => {
     <...>
 }
 ```
 
-That is, you can either use the inline form with `=>` and a simple expression, or the full form with `{}` and an expression block.
+That is, you should either use the inline form with `=>` and a simple expression, or the full form with `{}` and an expression block.

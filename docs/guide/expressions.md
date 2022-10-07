@@ -1,10 +1,3 @@
----
-layout: default
-title: Expressions
-nav_order: 2
-permalink: /expressions
----
-
 # Expressions
 
 HULK is ultimately an expression-based language. Most of the syntactic constructions in HULK are expressions, including the body of all functions, loops, and any other block of code.
@@ -68,10 +61,12 @@ print("The meaning of life is " @ 42);
 
 Besides `print`, HULK also provides some common mathematical operations encapsulated as builtin functions with their usual semantics. The list of builtin math functions is the following:
 
+- `sqrt(<value>)` computes the square root if a value.
 - `sin(<angle>)` computes the sine of an angle in radians.
-- `cos(<angle>)` computes the cosie of an angle in radians.
+- `cos(<angle>)` computes the cosine of an angle in radians.
 - `exp(<value>)` computes the value of `e` raised to a value.
 - `log(<base>, <value>)` computes the logarithm of a value in a given base.
+- `rand()` returns a random uniform number between 0 and 1 (both inclusive).
 
 Besides these functions, HULK also ships with two global constants: `PI` and `E` which represent the floating-point value of these mathematical constants.
 

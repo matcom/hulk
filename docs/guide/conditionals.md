@@ -1,10 +1,3 @@
----
-layout: default
-title: Conditionals
-nav_order: 5
-permalink: /conditionals
----
-
 # Conditionals
 
 The `if` expression allows evaluating different expressions based on a condition.
@@ -40,13 +33,13 @@ let a = 42 in
 
 ## Multiple branches
 
-The `if` expression supports multiple branches with the `elseif` construction, which introduces another conditioned branch:
+The `if` expression supports multiple branches with the `elif` construction, which introduces another conditioned branch:
 
 ```js
 let a = 42, let mod = a % 3 in
     print(
         if (mod == 0) "Magic"
-        elseif (mod % 3 == 1) "Woke"
+        elif (mod % 3 == 1) "Woke"
         else "Dumb"
     );
 ```

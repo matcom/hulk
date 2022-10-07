@@ -1,10 +1,3 @@
----
-layout: default
-title: Variables
-nav_order: 6
-permalink: /loops
----
-
 # Loops
 
 HULK defines two kinds of loops, the `while` expression and the `for` expression.

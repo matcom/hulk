@@ -1,10 +1,3 @@
----
-layout: default
-title: Iterables
-nav_order: 11
-permalink: /iterables
----
-
 # Iterables
 
 An iterable in HULK is any object that follows the iterable protocol, which is defined as follows:
@@ -35,7 +28,7 @@ Notice that since protocols are covariant in the return types of the methods, th
 
 As explained in [the loops section](/loops), the `for` loop works with the `Iterable` protocol, which means you can apply `for` on any instance of a type that implements the protocol.
 
-In compile-time, `for` is transpiled to a code that is equivalent, but explicitely uses the `Iterable` protocol.
+In compile-time, `for` is transpiled to a code that is equivalent, but explicitely uses the `Iterable` protocol members.
 
 For example, the code:
 
@@ -60,3 +53,5 @@ This transpilation guarantees that even though the `Iterable` protocol defines t
 As a matter of fact, due to the transpilation process, the `Iterable` protocol itself is not even necessary, since nowhere is a symbol annotated as `Iterable`. However, the protocol is explicitely defined as a builtin type so that you can explicitly use it if you need to annotate a method to receive a black-box iterable.
 
 Keep in mind, thought, that when you annotate something explicitely as `Iterable`, you are effectively forcing the type inferrer to assign `Object` as the type of the iteration variable (`x` in this example). This is one of the  reasons it is often better to let HULK infer types than annotating them yourself.
+
+## Typing iterables

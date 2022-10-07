@@ -1,10 +1,3 @@
----
-layout: default
-title: Variables
-nav_order: 4
-permalink: /variables
----
-
 # Variables
 
 Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the `let` expression to introduce one or more variables in and evaluate an expression in a new scope where does variables are defined.
@@ -142,4 +135,4 @@ let a = 0 in
     };
 ```
 
-This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its not null) and store it for later use.
+This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its greater than zero) and store it for later use.

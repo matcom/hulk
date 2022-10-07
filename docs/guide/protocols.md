@@ -1,10 +1,3 @@
----
-layout: default
-title: Type checking
-nav_order: 10
-permalink: /protocols
----
-
 # Protocols
 
 Protocols are special types which support a limited form of structural typing in HULK. The difference between structural and nominal typing in HULK, is that the latter is explicit while the former is implicitely defined. That is, a type doesn't need to explicitely declare that it conforms to a protocol.
