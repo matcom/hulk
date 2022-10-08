@@ -8,7 +8,7 @@ permalink: /loops
 # Loops
 
 HULK defines two kinds of loops, the `while` expression and the `for` expression.
-Both loop constructions are expressions, returing the value of the
+Both loop constructions are expressions, returning the value of the last body expression.
 
 ## The `while` loop
 

@@ -29,10 +29,10 @@ The rest of this section explains the basic expressions in HULK.
 
 ## Arithmetic expressions
 
-HULK defines three types of literal values: **numbers**, **strings**, and **booleans**.
+HULK defines three types of literal values: **numbers**, **strings** and **booleans**.
 We will leave strings and booleans for later.
 
-Numbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: `+` (addition), `-` (subtraction), `*` (multiplication), `\` (floating-point division), `^` (power), and parenthesized sub-expressions.
+Numbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: `+` (addition), `-` (subtraction), `*` (multiplication), `/` (floating-point division), `^` (power), and parenthesized sub-expressions.
 
 The following is a valid HULK program that computes and prints the result of a rather useless arithmetic expression:
 

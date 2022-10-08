@@ -11,7 +11,7 @@ HULK is ultimately an object-oriented language with simple inheritance and nomin
 
 This section explains the basics of HULK's nominal typing system.
 
-A type in HULK is basically a collection of attributes and methods, encapsulated under a type name. Attributes are always private, which means they can't be read or writen to from any code outside the type in which they are defined (not even inheritors), while methods are always public and virtual.
+A type in HULK is basically a collection of attributes and methods, encapsulated under a type name. Attributes are always private, which means they can't be read or written to from any code outside the type in which they are defined (not even inheritors), while methods are always public and virtual.
 
 ## Declaring types
 
