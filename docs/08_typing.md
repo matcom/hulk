@@ -59,7 +59,7 @@ The type checker will verify that type arguments are used consistently inside at
 
 ## Type conforming
 
-The basic type relation in HULK is called *conforming* (`<=`). A type `T1` is said to *conform to* to another type `T2` (writen as `T1 <= T2`) if a variable of type `T2`  can hold a value of type `T1` such that every possible operation that is semantically valid with `T2` is guaranteed to be semantically valid with `T1`.
+The basic type relation in HULK is called *conforming* (`<=`). A type `T1` is said to *conform to* another type `T2` (writen as `T1 <= T2`) if a variable of type `T2`  can hold a value of type `T1` such that every possible operation that is semantically valid with `T2` is guaranteed to be semantically valid with `T1`.
 
 In general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).
 
