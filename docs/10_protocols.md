@@ -51,7 +51,7 @@ type Person {
 let x : Hashable = new Person() in print(x.hash());
 ```
 
-Anywhere you can annotate a symbol with a type (variables, attributes, function, method, type arguments and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.
+Anywhere you can annotate a symbol with a type (variables, attributes, function, method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.
 
 ## Covariance and contravariance in protocol implementation
 
