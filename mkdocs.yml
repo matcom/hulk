@@ -1,5 +1,5 @@
 site_name: "HULK - Havana University Language for Kompilers"
-site_url: https://matcom.githun.io/hulk
+site_url: https://matcom.in/hulk
 repo_url: https://github.com/matcom/hulk
 
 remote_branch: master
@@ -38,7 +38,7 @@ extra:
     - icon: fontawesome/brands/telegram
       link: https://t.me/matcom_cmp
 
-copyright: CC 4.0 BY-NC-SA &copy; 2022 - School of Math and Computer Science, University of Havana
+copyright: CC 4.0 BY-NC-SA &copy; 2023 - School of Math and Computer Science, University of Havana
 
 markdown_extensions:
   - pymdownx.highlight:
