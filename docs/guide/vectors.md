@@ -27,7 +27,7 @@ let numbers = [1,2,3,4,5,6,7,8,9] in print(numbers[7]);
 An implicit vector can be created using what we call a generator pattern, which is always an expression  Here's an example:
 
 ```js
-let squares = [x^2 | x in range(1,10)] in print(x);
+let squares = [x^2 || x in range(1,10)] in print(x);
 // prints 2, 4, 6, 8, 10, ...
 ```
 
