@@ -1,6 +1,6 @@
 # Variables
 
-Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the `let` expression to introduce one or more variables in and evaluate an expression in a new scope where does variables are defined.
+Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the `let` expression to introduce one or more variables in and evaluate an expression in a new scope where those variables are defined.
 
 The simplest form is introducing a single variable and using a single expression as body.
 
