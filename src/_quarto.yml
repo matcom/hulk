@@ -1,0 +1,33 @@
+project:
+  type: book
+
+book:
+  title: "The Hitchhiker's Guide to Compilers"
+  author: "Alejandro Piad Morffis"
+  date: "7/12/2024"
+  chapters:
+    - index.qmd
+    - part: The HULK Programming Language
+      chapters:
+        - guide/intro.qmd
+        - guide/expressions.md
+        - guide/functions.md
+        - guide/variables.md
+        - guide/conditionals.md
+        - guide/loops.md
+        - guide/types.md
+        - guide/typing.md
+        - guide/inference.md
+        - guide/protocols.md
+        - guide/iterables.md
+        - guide/vectors.md
+        - guide/functors.md
+        - guide/macros.md
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
