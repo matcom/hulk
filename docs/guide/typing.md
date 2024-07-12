@@ -1,6 +1,6 @@
 # Type checking
 
-HULK is a statically-typed language with optional type annotations. So far you haven't seen any because HULK has a powerful [type inference system](/inference) which we will talk about later on. However, all symbols in HULK have a static type, and all programs in HULK are statically checked during compilation.
+HULK is a statically-typed language with optional type annotations. So far you haven't seen any because HULK has a powerful [type inference system](/guide/inference) which we will talk about later on. However, all symbols in HULK have a static type, and all programs in HULK are statically checked during compilation.
 
 Tye annotations can be added anywhere a symbol is defined, that is:
 
@@ -29,7 +29,7 @@ All or a subset of a function's or method's arguments, and its return value, can
 function tan(x: Number): Number => sin(x) / cos(x);
 ```
 
-On the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about [type semantics](/type_semantics). The type checker will also verify that the return type of the body conforms to the annotated return type.
+On the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about [type semantics](/guide/type_semantics). The type checker will also verify that the return type of the body conforms to the annotated return type.
 
 On the invocation side, the type checker will verify that the values passed as parameters conform to the annotated types.
 
@@ -56,7 +56,7 @@ The basic type relation in HULK is called *conforming* (`<=`). A type `T1` is sa
 
 In general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).
 
-The following rules provide an initial definition for the *conforming* relationship. The formal definition is given in the section about [type semantics](/type_semantics).
+The following rules provide an initial definition for the *conforming* relationship. The formal definition is given in the section about [type semantics](/guide/type_semantics).
 
 - Every type conforms to `Object`.
 - Every type conforms to itself.
@@ -66,7 +66,7 @@ The following rules provide an initial definition for the *conforming* relations
 
 Types in HULK form a single hierarchy rooted at `Object`. In this hierarchy the *conforming* relationship is equivalent to the *descendant* relationship. Thus, if `T1` conforms to `T2` that means that `T1` is a descendant of `T2` (or trivially the same type). Thus, we can talk of the lowest common ancestor of a set of types `T1`, `T2`, ..., `Tn`, which is the most specific type `T` such that all `Ti` conform to `T`. When two types are in different branches of the type hierarchy, they are effectively incomparable.
 
-> **NOTE**: this conforming relationship is extended when we add [protocols](./protocols).
+> **NOTE**: this conforming relationship is extended when we add [protocols](/guide/protocols).
 
 ## Testing for dynamic types
 

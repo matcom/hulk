@@ -58,7 +58,7 @@ markdown_extensions:
 
 nav:
   - Home: index.md
-  - User Guide:
+  - Language Guide:
     - Expressions: guide/expressions.md
     - Functions: guide/functions.md
     - Variables: guide/variables.md
@@ -70,6 +70,8 @@ nav:
     - Protocols: guide/protocols.md
     - Iterables: guide/iterables.md
     - Vectors: guide/vectors.md
+    - Functors: guide/functors.md
+    - Macros: guide/macros.md
 
 watch:
   - docs

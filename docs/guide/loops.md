@@ -17,7 +17,7 @@ let a = 10 in while (a >= 0) {
 Since the return value of the `while` loop is the return value of its expression body, it can often be used directly as the body of a function.
 
 ```js
-gcd(a, b) => while (a > 0)
+function gcd(a, b) => while (a > 0)
     let m = a % b in {
         b := a;
         a := m;

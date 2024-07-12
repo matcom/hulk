@@ -24,13 +24,57 @@ let numbers = [1,2,3,4,5,6,7,8,9] in print(numbers[7]);
 
 ## Implicit syntax
 
-An implicit vector can be created using what we call a generator pattern, which is always an expression  Here's an example:
+An implicit vector can be created using what we call a generator pattern, which is always an expression.
+
+Here's one example:
 
 ```js
 let squares = [x^2 | x in range(1,10)] in print(x);
 // prints 2, 4, 6, 8, 10, ...
 ```
 
+In general, the syntax has the form `[<expr> | <symbol> in <iterable>]`, where `<expr>` is run in a new scope where `symbol` is iteratively bound to each element in the vector.
+
 ## Typing vectors
 
-Actually, there is not one single `Vector` type in HULK, at least not in a way that is accesible from HULK code.
+Since vectors are iterables, you can safely pass a vector as argument to method that expects an iterable:
+
+```js
+function sum(numbers: Number*): Number =>
+    let total = 0 in
+        for (x in numbers)
+            total := total + x;
+
+let numbers = [1,2,3,4,5] in
+    print(sum(numbers));
+```
+
+However, inside `sum` you cannot use the indexing operator `[]` or the `size` method, because the argument is typed as an iterable, and not explicitly as a vector. To fix this, HULK provides another special syntax for vectors, using the `T[]` notation:
+
+```js
+function mean(numbers: Number[]): Number =>
+    let total = 0 in {
+        for (x in numbers)
+            total := total + x;
+
+        // here `numbers` is known to be vector
+        total / numbers.size();
+    };
+
+let numbers = [1,2,3,4,5] in
+    print(mean(numbers));
+```
+
+Like with iterables, what happens under the hood is that the compiler implicitely defines a type with the following structure:
+
+```js
+type Vector_T {
+    size() {
+        // impementation of size ...
+    }
+
+    iter(): Iterable_T {
+        // implementation of iter
+    }
+}
+```

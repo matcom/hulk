@@ -18,7 +18,7 @@ protocol Hashable {
 
 A protocol can have any number of method declarations. For obvious reasons, all method declarations in protocol definitions must be fully typed, as it is impossible to infer any types since they have no body.
 
-A protocol can extend anoter protocol by adding new methods, but never overriding (since there is no actual body) or removing any method.
+A protocol can extend anoter protocol by adding new methods, but never overriding (since there is no actual body) or removing any method (althought you can override the types of some method arguments or return types provided with some restrictions explained below).
 
 ```js
 protocol Equatable extends Hashable {
@@ -44,8 +44,18 @@ type Person {
 let x : Hashable = new Person() in print(x.hash());
 ```
 
-Anywhere you can annotate a symbol with a type (variables, attributes, function,method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.
+Anywhere you can annotate a symbol with a type (variables, attributes, function, method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.
 
-## Covariance and contravariance in protocol implementation
+## Variance in protocol implementation
 
 In order to implementing a protocol, a type doesn't necessarily have to match the exact signature of the protocol. Instead, method and type arguments are considered *contravariant*, and return values *covariant*. This means that arguments can be of the same type or higher, and the return values of the same type or lower than as defined in the protocol.
+
+Similarly, when you extend a protocol, you can override some of the methods as long as you respect the variance constraints.
+
+## Conforming with protocols
+
+More formally, protocols extend the notion of type conforming by adding the following rules:
+
+- A type `T` conforms to a protocol `P` if `T` has all the method defined in `P` with the appropriate types (respecting the variance constraints explained before).
+- If a protocol `P1` extends a protocol `P2`, then trivially `P1 <= P2`.
+- A protocol `P1` also conforms to another protocol `P2` if any type that conforms to `P1` would also conform to `P2`, even if there is no explicit extension declared.

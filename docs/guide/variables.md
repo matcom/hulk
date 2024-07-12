@@ -1,6 +1,6 @@
 # Variables
 
-Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the `let` expression to introduce one or more variables in and evaluate an expression in a new scope where does variables are defined.
+Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the `let` expression to introduce one or more variables and evaluate an expression in a new scope where those variables are defined.
 
 The simplest form is introducing a single variable and using a single expression as body.
 
@@ -94,7 +94,7 @@ let a = 20 in {
 }
 ```
 
-The previous code prints `42` then `20`, since the inner `let` redefines the value of `a` inside its scope, but the value outside its still the one defined by the outer `let`.
+The previous code prints `42` then `20`, since the inner `let` redefines the value of `a` inside its scope, but the value outside is still the one defined by the outer `let`.
 
 And because of the [scoping rules](#scoping-rules), the following is also valid:
 
@@ -136,3 +136,26 @@ let a = 0 in
 ```
 
 This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its greater than zero) and store it for later use.
+
+## Rules for naming identifiers
+
+Variables (and identifiers in general) in HULK can be named with any sequence of alphanumeric characters, plus underscore `_`, but must *always* begin with a letter (not a digit or `_`), hence the following are all valid identifiers:
+
+- `x`
+- `x0`
+- `x_0`
+- `lowercase`
+- `TitleCase`
+- `snake_case`
+- `camelCase`
+
+The following are invalid HULK identifiers:
+
+- `_x`
+- `x+y`
+- `some method`
+- `8ball`
+
+And many others of course!
+
+Since starting with an underscore `_` is invalid in HULK, you will notice that when we talk about transpilation in HULK, variables and identifiers in transpiled code always start with `_`.
