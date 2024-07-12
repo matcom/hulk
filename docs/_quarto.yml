@@ -7,6 +7,18 @@ book:
   date: "7/12/2024"
   chapters:
     - index.qmd
+    - part: Formal Language Theory
+      chapters:
+        - "theory/intro.qmd"
+    - part: Parsing
+      chapters:
+        - "parsing/intro.qmd"
+    - part: Programing Languages
+      chapters:
+        - "semantics/intro.qmd"
+    - part: Runtime Environments
+      chapters:
+        - "runtime/intro.qmd"
     - part: The HULK Programming Language
       chapters:
         - guide/intro.qmd
