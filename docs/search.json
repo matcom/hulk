@@ -10,6 +10,39 @@
     ]
   },
   {
+    "objectID": "theory/intro.html",
+    "href": "theory/intro.html",
+    "title": "1  Introduction to Formal Languages",
+    "section": "",
+    "text": "1.1 What is a language\nIntuitively, a language is just a collection of correct sentences. In natural languages (Spanish, English, etc,), each sentence is made up of words, which have some intrinsic meaning, and there are rules that describe which sequences of words are valid.\nSome of these rules, which we often call “syntactic” are just about the structure of words and sentences, and not their meaning–like how nouns and adjectives must match in gender and number or how verbs connect to adverbs and other modifiers. Other rules, which we call “semantic”, deal with the valid meanings of collections of words–the reason why the sentence “the salad was happy” is perfectly valid syntactically but makes no sense. In linguistics, the set of rules that determine which sentences are valid is called a “grammar”.\nIn formal language theory, we want to make all these notions as precise as possible in mathematical terms. To achieve so, we will have to make some simplifications which, ultimately, will imply that natural languages fall outside the scope of what formal language theory can fully study. But these simplifications will enable us to define a very robust notion of language for which we can make pretty strong theoretical claims.\nSo let’s build this definition from the ground up, starting with our notion of words, or, formally, symbols:\nExamples of symbols in abstract languages might be single letters like a, b or c. In programming languages, a symbol might be a variable name, a number, or a keyword like for or class. The next step is to define sentences:\nAn example of a sentence formed with the symbols a and b is abba. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.\nWe are almost ready to define a language. But before, we need to define a “vocabulary”, which is just a collection of valid symbols.\nGiven a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.\nLet’s see some examples.",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html#what-is-a-language",
+    "href": "theory/intro.html#what-is-a-language",
+    "title": "1  Introduction to Formal Languages",
+    "section": "",
+    "text": "Definition 1.1 (Symbol) A symbol is an atomic element that has an intrinsic meaning.\n\n\n\nDefinition 1.2 (Sentence) A sentence is a finite sequence of symbols.\n\n\n\n\nDefinition 1.3 (Vocabulary) A vocabulary \\(V\\) is a finite set of symbols.\n\n\n\nDefinition 1.4 (Language) Given a vocabulary \\(V\\), a language \\(L\\) is a set of sentences with symbols taken from \\(V\\).",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html#examples-of-languages",
+    "href": "theory/intro.html#examples-of-languages",
+    "title": "1  Introduction to Formal Languages",
+    "section": "1.2 Examples of languages",
+    "text": "1.2 Examples of languages",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
     "objectID": "guide/intro.html",
     "href": "guide/intro.html",
     "title": "5  Introduction",
@@ -711,50 +744,6 @@
     "crumbs": [
       "The HULK Programming Language",
       "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
-    ]
-  },
-  {
-    "objectID": "theory/intro.html",
-    "href": "theory/intro.html",
-    "title": "1  Introduction to Formal Languages",
-    "section": "",
-    "text": "1.1 What is a language\nIntuitively, a language is just a collection of correct sentences. In natural languages (Spanish, English, etc,), each sentence is made up of words, which have some intrinsic meaning, and there are rules that describe which sequences of words are valid.\nSome of these rules, which we often call “syntactic” are just about the structure of words and sentences, and not their meaning–like how nouns and adjectives must match in gender and number or how verbs connect to adverbs and other modifiers. Other rules, which we call “semantic”, deal with the valid meanings of collections of words–the reason why the sentence “the salad was happy” is perfectly valid syntactically but makes no sense. In linguistics, the set of rules that determine which sentences are valid is called a “grammar”.\nIn formal language theory, we want to make all these notions as precise as possible in mathematical terms. To achieve so, we will have to make some simplifications which, ultimately, will imply that natural languages fall outside the scope of what formal language theory can fully study. But these simplifications will enable us to define a very robust notion of language for which we can make pretty strong theoretical claims.\nSo let’s build this definition from the ground up, starting with our notion of words, or, formally, symbols:\nExamples of symbols in abstract languages might be single letters like a, b or c. In programming languages, a symbol might be a variable name, a number, or a keyword like for or class. The next step is to define sentences:\nAn example of a sentence formed with the symbols a and b is abba. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.\nWe are almost ready to define a language. But before, we need to define a “vocabulary”, which is just a collection of valid symbols.\nGiven a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.\nLet’s see some examples.",
-    "crumbs": [
-      "Formal Language Theory",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
-    ]
-  },
-  {
-    "objectID": "theory/intro.html#symbol",
-    "href": "theory/intro.html#symbol",
-    "title": "1  Introduction to Formal Languages",
-    "section": "1.2 Symbol",
-    "text": "1.2 Symbol",
-    "crumbs": [
-      "Formal Language Theory",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
-    ]
-  },
-  {
-    "objectID": "theory/intro.html#what-is-a-language",
-    "href": "theory/intro.html#what-is-a-language",
-    "title": "1  Introduction to Formal Languages",
-    "section": "",
-    "text": "Definition 1.1 (Symbol) A symbol is an atomic element that has an intrinsic meaning.\n\n\n\nDefinition 1.2 (Sentence) A sentence is a finite sequence of symbols.\n\n\n\n\nDefinition 1.3 (Vocabulary) A vocabulary \\(V\\) is a finite set of symbols.\n\n\n\nDefinition 1.4 (Language) Given a vocabulary \\(V\\), a language \\(L\\) is a set of sentences with symbols taken from \\(V\\).",
-    "crumbs": [
-      "Formal Language Theory",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
-    ]
-  },
-  {
-    "objectID": "theory/intro.html#examples-of-languages",
-    "href": "theory/intro.html#examples-of-languages",
-    "title": "1  Introduction to Formal Languages",
-    "section": "1.2 Examples of languages",
-    "text": "1.2 Examples of languages",
-    "crumbs": [
-      "Formal Language Theory",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
     ]
   }
 ]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 6&nbsp; Expressions</title>
+<title>The Hitchhiker’s Guide to Compilers - 11&nbsp; Types</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../guide/functions.html" rel="next">
-<link href="../guide/intro.html" rel="prev">
+<link href="../guide/typing.html" rel="next">
+<link href="../guide/loops.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/expressions.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/types.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -231,7 +231,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/expressions.html" class="sidebar-item-text sidebar-link active">
+  <a href="../guide/expressions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
   </div>
 </li>
@@ -261,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/types.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/types.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span></a>
   </div>
 </li>
@@ -309,6 +309,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -319,19 +336,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#arithmetic-expressions" id="toc-arithmetic-expressions" class="nav-link active" data-scroll-target="#arithmetic-expressions"><span class="header-section-number">6.1</span> Arithmetic expressions</a></li>
-  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings"><span class="header-section-number">6.2</span> Strings</a></li>
-  <li><a href="#builtin-math-functions-and-constants" id="toc-builtin-math-functions-and-constants" class="nav-link" data-scroll-target="#builtin-math-functions-and-constants"><span class="header-section-number">6.3</span> Builtin math functions and constants</a></li>
-  <li><a href="#expression-blocks" id="toc-expression-blocks" class="nav-link" data-scroll-target="#expression-blocks"><span class="header-section-number">6.4</span> Expression blocks</a></li>
+  <li><a href="#declaring-types" id="toc-declaring-types" class="nav-link active" data-scroll-target="#declaring-types"><span class="header-section-number">11.1</span> Declaring types</a></li>
+  <li><a href="#instantiating-types" id="toc-instantiating-types" class="nav-link" data-scroll-target="#instantiating-types"><span class="header-section-number">11.2</span> Instantiating types</a></li>
+  <li><a href="#inheritance" id="toc-inheritance" class="nav-link" data-scroll-target="#inheritance"><span class="header-section-number">11.3</span> Inheritance</a></li>
+  <li><a href="#polymorphism" id="toc-polymorphism" class="nav-link" data-scroll-target="#polymorphism"><span class="header-section-number">11.4</span> Polymorphism</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/expressions.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/types.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></h1>
 </div>
 
 
@@ -348,58 +365,85 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>HULK is ultimately an expression-based language. Most of the syntactic constructions in HULK are expressions, including the body of all functions, loops, and any other block of code.</p>
-<p>The body of a program in HULK always ends with a single global expression (and, if necessary, a final semicolon) that serves as the entrypoint of the program. This means that, of course, a program in HULK can consist of just one global expression.</p>
-<p>For example, the following is a valid program in HULK:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">42</span><span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Obviously, this program has no side effects. A slightly more complicated program, probably the first one that does something, is this:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="dv">42</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In this program, <code>print</code> refers to a builtin function that prints the result of any expression in the output stream. We will talk about functions in a later section.</p>
-<p>The rest of this section explains the basic expressions in HULK.</p>
-<section id="arithmetic-expressions" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="arithmetic-expressions"><span class="header-section-number">6.1</span> Arithmetic expressions</h2>
-<p>HULK defines three types of literal values: <strong>numbers</strong>, <strong>strings</strong>, and <strong>booleans</strong>. We will leave strings and booleans for later.</p>
-<p>Numbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: <code>+</code> (addition), <code>-</code> (subtraction), <code>*</code> (multiplication), <code>\</code> (floating-point division), <code>^</code> (power), and parenthesized sub-expressions.</p>
-<p>The following is a valid HULK program that computes and prints the result of a rather useless arithmetic expression:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>((((<span class="dv">1</span> <span class="op">+</span> <span class="dv">2</span>) <span class="op">^</span> <span class="dv">3</span>) <span class="op">*</span> <span class="dv">4</span>) <span class="op">/</span> <span class="dv">5</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>All usual syntactic and precedence rules apply.</p>
+<p>HULK is ultimately an object-oriented language with simple inheritance and nominal typing. It also has features of structural typing via <a href="../guide/protocols">protocols</a>, which support language features such as <a href="../guide/iterables">iterables</a>, which we will explain later.</p>
+<p>This section explains the basics of HULK’s nominal typing system.</p>
+<p>A type in HULK is basically a collection of attributes and methods, encapsulated under a type name. Attributes are always private, which means they can’t be read or writen to from any code outside the type in which they are defined (not even inheritors), while methods are always public and virtual.</p>
+<section id="declaring-types" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="declaring-types"><span class="header-section-number">11.1</span> Declaring types</h2>
+<p>A new type is declared using the <code>type</code> keyword followed by a name, and a body composed of attribute definitions and method definitions. All attributes must be given an initialization expression. Methods, like functions, can have a single expression or an expression block as body;</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>type <span class="bu">Point</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getX</span>() <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">x</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getY</span>() <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">y</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setX</span>(x) <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">x</span> <span class="op">:=</span> x<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setY</span>(y) <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">y</span> <span class="op">:=</span> y<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The body of every method is evaluated in a namespace that contains global symbols plus an especial symbol named <code>self</code> that references the current instance. The <code>self</code> symbol is <strong>not</strong> a keyword, which means it can be hidden by a <code>let</code> expression, or by a method argument.</p>
+<p>However, when referring to the current instance, <code>self</code> is not a valid assignment target, so the following code should fail with a semantic error:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>type A {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">f</span>() {</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">self</span> <span class="op">:=</span> <span class="kw">new</span> <span class="fu">A</span>()<span class="op">;</span> <span class="co">// &lt;-- Semantic error, `self` is not a valid assignment target</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="strings" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="strings"><span class="header-section-number">6.2</span> Strings</h2>
-<p>String literals in HULK are defined within enclosed double-quotes (<code>"</code>), such as in:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Hello World"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>A double-quote can be included literally by escaping it:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The message is </span><span class="sc">\"</span><span class="st">Hello World</span><span class="sc">\"</span><span class="st">"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Other escaped characters are <code>\n</code> for line endings, and <code>\t</code> for tabs.</p>
-<p>Strings can be concatenated with other strings (or the string representation of numbers) using the <code>@</code> operator:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"The meaning of life is "</span> @ <span class="dv">42</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="instantiating-types" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="instantiating-types"><span class="header-section-number">11.2</span> Instantiating types</h2>
+<p>To instantiate a type you use the keyword <code>new</code> followed by the type name:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> pt <span class="op">=</span> <span class="kw">new</span> <span class="bu">Point</span>() <span class="kw">in</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x: "</span> @ pt<span class="op">.</span><span class="fu">getX</span>() @ <span class="st">"; y: "</span> @ pt<span class="op">.</span><span class="fu">getY</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As you can see, type members are accessed by dot notation (<code>instance.member</code>).</p>
+<p>You can pass arguments to a type, that you can use in the initialization expressions. This achieves an effect similar to having a single constructor.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>type <span class="bu">Point</span>(x<span class="op">,</span> y) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> y<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Then, at instantiation time, you can pass specific values:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> pt <span class="op">=</span> <span class="kw">new</span> <span class="bu">Point</span>(<span class="dv">3</span><span class="op">,</span><span class="dv">4</span>) <span class="kw">in</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"x: "</span> @ pt<span class="op">.</span><span class="fu">getX</span>() @ <span class="st">"; y: "</span> @ pt<span class="op">.</span><span class="fu">getY</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Each attribute initialization expression is evaluated in a namespace that contains the global symbols and the type arguments, but no the <code>self</code> symbol. This means you cannot use other attributes of the same instance in an attribute initialization expression. This also means that you cannot assume any specifc order of initialization of attributes.</p>
 </section>
-<section id="builtin-math-functions-and-constants" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="builtin-math-functions-and-constants"><span class="header-section-number">6.3</span> Builtin math functions and constants</h2>
-<p>Besides <code>print</code>, HULK also provides some common mathematical operations encapsulated as builtin functions with their usual semantics. The list of builtin math functions is the following:</p>
-<ul>
-<li><code>sqrt(&lt;value&gt;)</code> computes the square root if a value.</li>
-<li><code>sin(&lt;angle&gt;)</code> computes the sine of an angle in radians.</li>
-<li><code>cos(&lt;angle&gt;)</code> computes the cosine of an angle in radians.</li>
-<li><code>exp(&lt;value&gt;)</code> computes the value of <code>e</code> raised to a value.</li>
-<li><code>log(&lt;base&gt;, &lt;value&gt;)</code> computes the logarithm of a value in a given base.</li>
-<li><code>rand()</code> returns a random uniform number between 0 and 1 (both inclusive).</li>
-</ul>
-<p>Besides these functions, HULK also ships with two global constants: <code>PI</code> and <code>E</code> which represent the floating-point value of these mathematical constants.</p>
-<p>As expected, functions can be nested in HULK (provided the use of types is consistent, but so far all we care about is functions from numbers to numbers, so we can forget about types until later on). Hence, the following is a valid HULK program.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sin</span>(<span class="dv">2</span> <span class="op">*</span> <span class="cn">PI</span>) <span class="op">^</span> <span class="dv">2</span> <span class="op">+</span> <span class="fu">cos</span>(<span class="dv">3</span> <span class="op">*</span> <span class="cn">PI</span> <span class="op">/</span> <span class="fu">log</span>(<span class="dv">4</span><span class="op">,</span> <span class="dv">64</span>)))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>More formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function, and you can freely mix arithmetic expressions and mathematical functions, as you would expect in any programming language.</p>
+<section id="inheritance" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="inheritance"><span class="header-section-number">11.3</span> Inheritance</h2>
+<p>Types in HULK can inherit from other types. The base of the type hierarchy is a type named <code>Object</code> which has no public members, which is the type you implicitely inherit from by default. To inherit from a specific type, you use the <code>inherits</code> keyword followed by the type name:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>type PolarPoint inherits <span class="bu">Point</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rho</span>() <span class="kw">=&gt;</span> <span class="fu">sqrt</span>(self<span class="op">.</span><span class="fu">getX</span>() <span class="op">^</span> <span class="dv">2</span> <span class="op">+</span> self<span class="op">.</span><span class="fu">getY</span>() <span class="op">^</span> <span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By default, a type inherits its parent type arguments, which means that to construct a <code>PolarPoint</code> you have to pass the <code>x</code> and <code>y</code> that <code>Point</code> is expecting:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> pt <span class="op">=</span> <span class="kw">new</span> <span class="fu">PolarPoint</span>(<span class="dv">3</span><span class="op">,</span><span class="dv">4</span>) <span class="kw">in</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"rho: "</span> @ pt<span class="op">.</span><span class="fu">rho</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you want to define a different set of type arguments, then you have to provide initialization expressions for the parent type at the declaration:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>type <span class="fu">PolarPoint</span>(phi<span class="op">,</span> rho) inherits <span class="bu">Point</span>(rho <span class="op">*</span> <span class="fu">sin</span>(phi)<span class="op">,</span> rho <span class="op">*</span> <span class="fu">cos</span>(phi)) {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>During construction, the expressions for type arguments of the parent are evaluated in a namespace that contains global symbols plus the type arguments of the inheritor. Like before, you cannot assume a specific order of evaluation.</p>
+<p>In HULK, the three builtin types (<code>Number</code>, <code>String</code>, and <code>Boolean</code>) implicitely inherit from <code>Object</code>, but it is a semantic error to inherit from these types.</p>
 </section>
-<section id="expression-blocks" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="expression-blocks"><span class="header-section-number">6.4</span> Expression blocks</h2>
-<p>Anywhere an expression is allowed (or almost), you can also use an expression block, which is nothing but a series of expressions between curly braces (<code>{</code> and <code>}</code>), and separated by <code>;</code>.</p>
-<p>The most trivial usage of expression blocks is to allow multiple <code>print</code> statements as the body of a program. For example, the following is a valid HULK program:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="dv">42</span>)<span class="op">;</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">sin</span>(<span class="cn">PI</span><span class="op">/</span><span class="dv">2</span>))<span class="op">;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"Hello World"</span>)<span class="op">;</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>When you use an expression block instead of a single expression, it is often not necessary to end with a semicolon (<code>;</code>), but it is not erroneous to do so either.</p>
+<section id="polymorphism" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="polymorphism"><span class="header-section-number">11.4</span> Polymorphism</h2>
+<p>All type methods in HULK are virtual by definition, and can be redefined by an inheritor provided the exact same signature is used:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>type <span class="fu">Person</span>(firstname<span class="op">,</span> lastname) {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    firstname <span class="op">=</span> firstname<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    lastname <span class="op">=</span> lastname<span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">name</span>() <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">firstname</span> @@ self<span class="op">.</span><span class="at">lastname</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<blockquote class="blockquote">
+<p><strong>NOTE</strong>: <code>@@</code> is equivalent to <code>@ "  " @</code>. It is a shorthand to insert a whitespace between two concatenated strings. There is no <code>@@@</code> or beyond, we’re not savages.</p>
+</blockquote>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>type Knight inherits Person {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">name</span>() <span class="kw">=&gt;</span> <span class="st">"Sir"</span> @@ <span class="fu">base</span>()<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Knight</span>(<span class="st">"Phil"</span><span class="op">,</span> <span class="st">"Collins"</span>) <span class="kw">in</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(p<span class="op">.</span><span class="fu">name</span>())<span class="op">;</span> <span class="co">// prints 'Sir Phil Collins'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The <code>base</code> symbol in every method refers to the implementation of the parent (or the closest ancestor that has an implementation).</p>
 
 
 </section>
@@ -794,13 +838,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../guide/intro.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      <a href="../guide/loops.html" class="pagination-link" aria-label="Loops">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../guide/functions.html" class="pagination-link" aria-label="Functions">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/typing.html" class="pagination-link" aria-label="Type checking">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

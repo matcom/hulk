@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 17&nbsp; Functors</title>
+<title>The Hitchhiker’s Guide to Compilers - 14&nbsp; Protocols</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../guide/macros.html" rel="next">
-<link href="../guide/vectors.html" rel="prev">
+<link href="../guide/iterables.html" rel="next">
+<link href="../guide/inference.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/functors.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/protocols.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -279,7 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/protocols.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/protocols.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
   </div>
 </li>
@@ -297,7 +297,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/functors.html" class="sidebar-item-text sidebar-link active">
+  <a href="../guide/functors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></span></a>
   </div>
 </li>
@@ -305,6 +305,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../guide/macros.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
   </div>
 </li>
       </ul>
@@ -319,18 +336,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#implicit-functor-implementation" id="toc-implicit-functor-implementation" class="nav-link active" data-scroll-target="#implicit-functor-implementation"><span class="header-section-number">17.1</span> Implicit functor implementation</a></li>
-  <li><a href="#lambda-expressions" id="toc-lambda-expressions" class="nav-link" data-scroll-target="#lambda-expressions"><span class="header-section-number">17.2</span> Lambda expressions</a></li>
-  <li><a href="#typing-functors" id="toc-typing-functors" class="nav-link" data-scroll-target="#typing-functors"><span class="header-section-number">17.3</span> Typing functors</a></li>
+  <li><a href="#defining-protocols" id="toc-defining-protocols" class="nav-link active" data-scroll-target="#defining-protocols"><span class="header-section-number">14.1</span> Defining protocols</a></li>
+  <li><a href="#implementing-protocols" id="toc-implementing-protocols" class="nav-link" data-scroll-target="#implementing-protocols"><span class="header-section-number">14.2</span> Implementing protocols</a></li>
+  <li><a href="#variance-in-protocol-implementation" id="toc-variance-in-protocol-implementation" class="nav-link" data-scroll-target="#variance-in-protocol-implementation"><span class="header-section-number">14.3</span> Variance in protocol implementation</a></li>
+  <li><a href="#conforming-with-protocols" id="toc-conforming-with-protocols" class="nav-link" data-scroll-target="#conforming-with-protocols"><span class="header-section-number">14.4</span> Conforming with protocols</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/functors.html"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/protocols.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></h1>
+<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></h1>
 </div>
 
 
@@ -347,81 +365,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>A functor in HULK is an object that encapsulates a function, which means it supports the <code>obj()</code> syntax. This can be accomplished with protocols easily, via transpilation. If you have a type that implements a functor protocol, then HULK will allow you to use the functor syntax. A functor protocol is any protocol that has an <code>invoke</code> method with appropriate type annotations.</p>
-<p>For example, suppose you declare the following protocol in HULK:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>protocol NumberFilter {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invoke</span>(<span class="dt">x</span><span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Boolean</span><span class="op">;</span></span>
+<p>Protocols are special types which support a limited form of structural typing in HULK. The difference between structural and nominal typing in HULK, is that the latter is explicit while the former is implicitely defined. That is, a type doesn’t need to explicitely declare that it conforms to a protocol.</p>
+<p>Protocols have a syntax similar to that of types, except that they only have method declarations, and they have no body, only signatures. Hence, protocols define the methods that a type must have in order to support some operation.</p>
+<p>Protocols don’t exist at runtime, they are compile-time only concept that helps writing more flexible programs. After type checking, all information about protocols can be safely removed.</p>
+<section id="defining-protocols" class="level2" data-number="14.1">
+<h2 data-number="14.1" class="anchored" data-anchor-id="defining-protocols"><span class="header-section-number">14.1</span> Defining protocols</h2>
+<p>A protocol is defined with the keyword <code>protocol</code> followed by a collection of method declarations:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>protocol Hashable {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hash</span>()<span class="op">:</span> <span class="bu">Number</span><span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Then, you can annotate a function to receive an object that implements this protocol:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">count_when</span>(numbers<span class="op">:</span> <span class="bu">Number</span><span class="op">*,</span> filter<span class="op">:</span> NumberFilter) {</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> total <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (x <span class="kw">in</span> numbers)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="dt">total</span> <span class="op">:=</span> total <span class="op">+</span> <span class="cf">if</span> (filter<span class="op">.</span><span class="fu">invoke</span>(x)) <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>But, since that protocol is a functor (it contains an <code>invoke</code> method), you can also use it directly as if it where a method, with the following syntax:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">count_when</span>(numbers<span class="op">:</span> <span class="bu">Number</span><span class="op">*,</span> filter<span class="op">:</span> NumberFilter) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> total <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (x <span class="kw">in</span> numbers)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            <span class="dt">total</span> <span class="op">:=</span> total <span class="op">+</span> <span class="cf">if</span> (<span class="fu">filter</span>(x)) <span class="dv">1</span> <span class="cf">else</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>To implement a functor protocol, you simply define a type that implements the protocol, as usual, and then you can use it:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>type IsOdd {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invoke</span>(<span class="dt">x</span><span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Boolean</span> <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>) <span class="kw">in</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> <span class="fu">IsOdd</span>()))<span class="op">;</span> <span class="co">// prints `50`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>But this syntax is extremely cumbersome, so HULK provides lots of syntax sugar to simplify the declaration and usage of functors.</p>
-<section id="implicit-functor-implementation" class="level2" data-number="17.1">
-<h2 data-number="17.1" class="anchored" data-anchor-id="implicit-functor-implementation"><span class="header-section-number">17.1</span> Implicit functor implementation</h2>
-<p>The first aid that HULK provides is by implicitely implementing wrapping functions as functor types upong usage. For example, instead of defining the <code>IsOdd</code> type like before, you can simply define an <code>is_odd</code> function like the following, and pass it directly to the <code>count_when</code> function:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_odd</span>(x<span class="op">:</span> <span class="bu">Number</span>) <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>) <span class="kw">in</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> is_odd))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And then HULK will automatically create an appropriate functor type that implements the desired protocol, which means the previous code is transpiled to something like the following:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">is_odd</span>(x<span class="op">:</span> <span class="bu">Number</span>) <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>type _IsOddWrapper {</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invoke</span>(<span class="dt">x</span><span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Boolean</span> <span class="kw">=&gt;</span> <span class="fu">is_odd</span>(x)<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>) <span class="kw">in</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> <span class="fu">_IsOddWrapper</span>()))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Naturally, this syntax sugar extends to variable assignment as well, which means the following is valid:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">,</span> filter<span class="op">:</span> NumberFilter <span class="op">=</span> is_odd <span class="kw">in</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> filter))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A protocol can have any number of method declarations. For obvious reasons, all method declarations in protocol definitions must be fully typed, as it is impossible to infer any types since they have no body.</p>
+<p>A protocol can extend anoter protocol by adding new methods, but never overriding (since there is no actual body) or removing any method (althought you can override the types of some method arguments or return types provided with some restrictions explained below).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>protocol Equatable <span class="kw">extends</span> Hashable {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">equals</span>(<span class="dt">other</span><span class="op">:</span> <span class="bu">Object</span>)<span class="op">:</span> <span class="bu">Boolean</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="lambda-expressions" class="level2" data-number="17.2">
-<h2 data-number="17.2" class="anchored" data-anchor-id="lambda-expressions"><span class="header-section-number">17.2</span> Lambda expressions</h2>
-<p>Keeping up with the previous example, we can eliminate the explicit <code>is_odd</code> definition and pass a lambda expression, which is an anonymous function defined directly in the place when the functor is needed:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>) <span class="kw">in</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> (x<span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Boolean</span> <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The general syntax for lambda expressions is very similar to the syntax for inline functions, except that you don’t need to name the function.</p>
-<p>Also, if the type inferrer is good enough, you can almost always drop the explicit type annotations:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>) <span class="kw">in</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> (x) <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And of course, lambda expressions can be stored in appropriately typed variables:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">,</span> filter<span class="op">:</span> NumberFilter <span class="op">=</span> (x) <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> filter))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>And the type inferrer is good enough, since <code>count_when</code> requires a <code>NumberFilter</code>, you can drop the explicit type annotation:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> numbers <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">100</span>)<span class="op">,</span> filter <span class="op">=</span> (x) <span class="kw">=&gt;</span> x <span class="op">%</span> <span class="dv">2</span> <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="fu">count_when</span>(numbers<span class="op">,</span> filter))<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="implementing-protocols" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="implementing-protocols"><span class="header-section-number">14.2</span> Implementing protocols</h2>
+<p>A type implements a protocol implicitely, simply by having methods with the right signature. There is no need to explicitely declare which types implement which protocols.</p>
+<p>Thus, you can annotated a variable or argument with a protocol type, and the type checker will correctly verify the consistency of both the method body and the invocation.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>type Person {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">hash</span>() <span class="op">:</span> <span class="bu">Number</span> {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">// ...</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">:</span> Hashable <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span>() <span class="kw">in</span> <span class="fu">print</span>(x<span class="op">.</span><span class="fu">hash</span>())<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Anywhere you can annotate a symbol with a type (variables, attributes, function, method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.</p>
 </section>
-<section id="typing-functors" class="level2" data-number="17.3">
-<h2 data-number="17.3" class="anchored" data-anchor-id="typing-functors"><span class="header-section-number">17.3</span> Typing functors</h2>
-<p>And finally, we can also skip the protocol definition and use a special syntax for typing functors directly in the type annotaion:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">count_when</span>(numbers<span class="op">:</span> <span class="bu">Number</span><span class="op">*,</span> filter<span class="op">:</span> (<span class="bu">Number</span>) <span class="op">-&gt;</span> <span class="bu">Boolean</span>) {</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// same code</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The syntax <code>(Number) -&gt; Boolean</code> indicates that we expect a functor with a single input of type <code>Number</code> and an output of type <code>Boolean</code>. Upon finding this definition, HULK will transpile that into something that is very similar to our explicit protocol definition:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>protocol _Functor0 {</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">invoke</span>(<span class="dt">_arg0</span><span class="op">:</span> <span class="bu">Number</span>) <span class="op">:</span> <span class="bu">Boolean</span><span class="op">;</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">count_when</span>(numbers<span class="op">:</span> <span class="bu">Number</span><span class="op">*,</span> filter<span class="op">:</span> _Functor0) {</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// same code</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="variance-in-protocol-implementation" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="variance-in-protocol-implementation"><span class="header-section-number">14.3</span> Variance in protocol implementation</h2>
+<p>In order to implementing a protocol, a type doesn’t necessarily have to match the exact signature of the protocol. Instead, method and type arguments are considered <em>contravariant</em>, and return values <em>covariant</em>. This means that arguments can be of the same type or higher, and the return values of the same type or lower than as defined in the protocol.</p>
+<p>Similarly, when you extend a protocol, you can override some of the methods as long as you respect the variance constraints.</p>
+</section>
+<section id="conforming-with-protocols" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="conforming-with-protocols"><span class="header-section-number">14.4</span> Conforming with protocols</h2>
+<p>More formally, protocols extend the notion of type conforming by adding the following rules:</p>
+<ul>
+<li>A type <code>T</code> conforms to a protocol <code>P</code> if <code>T</code> has all the method defined in <code>P</code> with the appropriate types (respecting the variance constraints explained before).</li>
+<li>If a protocol <code>P1</code> extends a protocol <code>P2</code>, then trivially <code>P1 &lt;= P2</code>.</li>
+<li>A protocol <code>P1</code> also conforms to another protocol <code>P2</code> if any type that conforms to <code>P1</code> would also conform to <code>P2</code>, even if there is no explicit extension declared.</li>
+</ul>
 
 
 </section>
@@ -816,13 +802,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../guide/vectors.html" class="pagination-link" aria-label="Vectors">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vectors</span></span>
+      <a href="../guide/inference.html" class="pagination-link" aria-label="Type inference">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../guide/macros.html" class="pagination-link" aria-label="Macros">
-        <span class="nav-page-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/iterables.html" class="pagination-link" aria-label="Iterables">
+        <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 3&nbsp; Introduction to Semantic Analysis</title>
+<title>The Hitchhiker’s Guide to Compilers - 8&nbsp; Variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../runtime/intro.html" rel="next">
-<link href="../parsing/intro.html" rel="prev">
+<link href="../guide/conditionals.html" rel="next">
+<link href="../guide/functions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../semantics/intro.html">Programing Languages</a></li><li class="breadcrumb-item"><a href="../semantics/intro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/variables.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -157,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../semantics/intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../semantics/intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></span></a>
   </div>
 </li>
@@ -209,7 +243,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/variables.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/variables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
   </div>
 </li>
@@ -275,20 +309,49 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#multiple-variables" id="toc-multiple-variables" class="nav-link active" data-scroll-target="#multiple-variables"><span class="header-section-number">8.1</span> Multiple variables</a></li>
+  <li><a href="#scoping-rules" id="toc-scoping-rules" class="nav-link" data-scroll-target="#scoping-rules"><span class="header-section-number">8.2</span> Scoping rules</a></li>
+  <li><a href="#expression-block-body" id="toc-expression-block-body" class="nav-link" data-scroll-target="#expression-block-body"><span class="header-section-number">8.3</span> Expression block body</a></li>
+  <li><a href="#the-let-return-value" id="toc-the-let-return-value" class="nav-link" data-scroll-target="#the-let-return-value"><span class="header-section-number">8.4</span> The <code>let</code> return value</a></li>
+  <li><a href="#redefining-symbols" id="toc-redefining-symbols" class="nav-link" data-scroll-target="#redefining-symbols"><span class="header-section-number">8.5</span> Redefining symbols</a></li>
+  <li><a href="#destructive-assignment" id="toc-destructive-assignment" class="nav-link" data-scroll-target="#destructive-assignment"><span class="header-section-number">8.6</span> Destructive assignment</a></li>
+  <li><a href="#rules-for-naming-identifiers" id="toc-rules-for-naming-identifiers" class="nav-link" data-scroll-target="#rules-for-naming-identifiers"><span class="header-section-number">8.7</span> Rules for naming identifiers</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../semantics/intro.html">Programing Languages</a></li><li class="breadcrumb-item"><a href="../semantics/intro.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/variables.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></h1>
+<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></h1>
 </div>
 
 
@@ -305,8 +368,109 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>Variables in HULK are lexically-scoped, which means that their scope is explicitely defined by the syntax. You use the <code>let</code> expression to introduce one or more variables and evaluate an expression in a new scope where those variables are defined.</p>
+<p>The simplest form is introducing a single variable and using a single expression as body.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> msg <span class="op">=</span> <span class="st">"Hello World"</span> <span class="kw">in</span> <span class="fu">print</span>(msg)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Here <code>msg</code> is a new symbol that is defined <em>only</em> within the expression that goes after <code>in</code>.</p>
+<section id="multiple-variables" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="multiple-variables"><span class="header-section-number">8.1</span> Multiple variables</h2>
+<p>The <code>let</code> expression admits defining multiple variables at once like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> number <span class="op">=</span> <span class="dv">42</span><span class="op">,</span> text <span class="op">=</span> <span class="st">"The meaning of life is"</span> <span class="kw">in</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(text @ number)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is semantically equivalent to the following long form:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> number <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> text <span class="op">=</span> <span class="st">"The meaning of life is"</span> <span class="kw">in</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(text @ number)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As you can notice, <code>let</code> associates to the right, so the previous is also equivalent to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> number <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> text <span class="op">=</span> <span class="st">"The meaning of life is"</span> <span class="kw">in</span> (</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">print</span>(text @ number)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="scoping-rules" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="scoping-rules"><span class="header-section-number">8.2</span> Scoping rules</h2>
+<p>Since the binding is performed left-to-right (or equivalently starting from the outer let), and every variable is effectively bound in a new scope, you can safely use one variable when defining another:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">6</span><span class="op">,</span> b <span class="op">=</span> a <span class="op">*</span> <span class="dv">7</span> <span class="kw">in</span> <span class="fu">print</span>(b)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which is equivalent to (and thus valid):</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">6</span> <span class="kw">in</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> b <span class="op">=</span> a <span class="op">*</span> <span class="dv">7</span> <span class="kw">in</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(b)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="expression-block-body" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="expression-block-body"><span class="header-section-number">8.3</span> Expression block body</h2>
+<p>You can also use an expression block as the body of a <code>let</code> expression:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">5</span><span class="op">,</span> b <span class="op">=</span> <span class="dv">10</span><span class="op">,</span> c <span class="op">=</span> <span class="dv">20</span> <span class="kw">in</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(a<span class="op">+</span>b)<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(b<span class="op">*</span>c)<span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(c<span class="op">/</span>a)<span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>As we said before, semicolons (<code>;</code>) are seldom necessary after an expression block, but they are never wrong.</p>
+</section>
+<section id="the-let-return-value" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="the-let-return-value"><span class="header-section-number">8.4</span> The <code>let</code> return value</h2>
+<p>As with almost everything in HULK, <code>let</code> is an expression, so it has a return value, which is obviously the return value of its body. This means the following is a valid HULK program:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> (<span class="kw">let</span> b <span class="op">=</span> <span class="dv">6</span> <span class="kw">in</span> b <span class="op">*</span> <span class="dv">7</span>) <span class="kw">in</span> <span class="fu">print</span>(a)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Or more directly:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="kw">let</span> b <span class="op">=</span> <span class="dv">6</span> <span class="kw">in</span> b <span class="op">*</span> <span class="dv">7</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This can be of course nested ad infinitum.</p>
+</section>
+<section id="redefining-symbols" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="redefining-symbols"><span class="header-section-number">8.5</span> Redefining symbols</h2>
+<p>In HULK every new scope hides the symbols from the parent scope, which means you can redefine a variable name in an inner <code>let</code> expression:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">20</span> <span class="kw">in</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The previous code prints <code>42</code> then <code>20</code>, since the inner <code>let</code> redefines the value of <code>a</code> inside its scope, but the value outside is still the one defined by the outer <code>let</code>.</p>
+<p>And because of the <a href="#scoping-rules">scoping rules</a>, the following is also valid:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">7</span><span class="op">,</span> a <span class="op">=</span> <span class="dv">7</span> <span class="op">*</span> <span class="dv">6</span> <span class="kw">in</span> <span class="fu">print</span>(a)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which is equivalent to:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">7</span> <span class="kw">in</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> a <span class="op">=</span> <span class="dv">7</span> <span class="op">*</span> <span class="dv">6</span> <span class="kw">in</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(a)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="destructive-assignment" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="destructive-assignment"><span class="header-section-number">8.6</span> Destructive assignment</h2>
+<p>Most of the time in HULK you won’t need to overwrite a variable, but there are cases where you do. In those cases, you can use the destructive assignment operator <code>:=</code>, like this:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">a</span> <span class="op">:=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The previous program prints <code>0</code> and then <code>1</code>, since the value of <code>a</code> is overwritten before the second <code>print</code>. This is the <strong>only</strong> way in which a variable can be written to outside of a <code>let</code>.</p>
+<p>As you would expect, the <code>:=</code> operator defines an expression too, which returns the value just assigned, so you can do the following:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> b <span class="op">=</span> a <span class="op">:=</span> <span class="dv">1</span> <span class="kw">in</span> {</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(b)<span class="op">;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This is useful if you want to evaluate a complex expression to both test it (e.g, to se if its greater than zero) and store it for later use.</p>
+</section>
+<section id="rules-for-naming-identifiers" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="rules-for-naming-identifiers"><span class="header-section-number">8.7</span> Rules for naming identifiers</h2>
+<p>Variables (and identifiers in general) in HULK can be named with any sequence of alphanumeric characters, plus underscore <code>_</code>, but must <em>always</em> begin with a letter (not a digit or <code>_</code>), hence the following are all valid identifiers:</p>
+<ul>
+<li><code>x</code></li>
+<li><code>x0</code></li>
+<li><code>x_0</code></li>
+<li><code>lowercase</code></li>
+<li><code>TitleCase</code></li>
+<li><code>snake_case</code></li>
+<li><code>camelCase</code></li>
+</ul>
+<p>The following are invalid HULK identifiers:</p>
+<ul>
+<li><code>_x</code></li>
+<li><code>x+y</code></li>
+<li><code>some method</code></li>
+<li><code>8ball</code></li>
+</ul>
+<p>And many others of course!</p>
+<p>Since starting with an underscore <code>_</code> is invalid in HULK, you will notice that when we talk about transpilation in HULK, variables and identifiers in transpiled code always start with <code>_</code>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -698,13 +862,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../parsing/intro.html" class="pagination-link" aria-label="Introduction to Parsing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Parsing</span></span>
+      <a href="../guide/functions.html" class="pagination-link" aria-label="Functions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../runtime/intro.html" class="pagination-link" aria-label="Code Generation and Execution">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code Generation and Execution</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/conditionals.html" class="pagination-link" aria-label="Conditionals">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

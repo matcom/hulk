@@ -1,5 +1,6 @@
 project:
   type: book
+  output-dir: "../docs"
 
 book:
   title: "The Hitchhiker's Guide to Compilers"

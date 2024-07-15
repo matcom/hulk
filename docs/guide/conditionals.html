@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 13&nbsp; Type inference</title>
+<title>The Hitchhiker’s Guide to Compilers - 9&nbsp; Conditionals</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../guide/protocols.html" rel="next">
-<link href="../guide/typing.html" rel="prev">
+<link href="../guide/loops.html" rel="next">
+<link href="../guide/variables.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/inference.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/conditionals.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -249,7 +249,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/conditionals.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/conditionals.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
   </div>
 </li>
@@ -273,7 +273,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/inference.html" class="sidebar-item-text sidebar-link active">
+  <a href="../guide/inference.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span></a>
   </div>
 </li>
@@ -309,6 +309,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -319,19 +336,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#type-inference-vs-type-checking" id="toc-type-inference-vs-type-checking" class="nav-link active" data-scroll-target="#type-inference-vs-type-checking"><span class="header-section-number">13.1</span> Type inference vs type checking</a></li>
-  <li><a href="#type-inference-of-expressions" id="toc-type-inference-of-expressions" class="nav-link" data-scroll-target="#type-inference-of-expressions"><span class="header-section-number">13.2</span> Type inference of expressions</a></li>
-  <li><a href="#type-inference-of-symbols" id="toc-type-inference-of-symbols" class="nav-link" data-scroll-target="#type-inference-of-symbols"><span class="header-section-number">13.3</span> Type inference of symbols</a></li>
-  <li><a href="#examples-of-type-inference" id="toc-examples-of-type-inference" class="nav-link" data-scroll-target="#examples-of-type-inference"><span class="header-section-number">13.4</span> Examples of type inference</a></li>
+  <li><a href="#expression-blocks-in-conditionals" id="toc-expression-blocks-in-conditionals" class="nav-link active" data-scroll-target="#expression-blocks-in-conditionals"><span class="header-section-number">9.1</span> Expression blocks in conditionals</a></li>
+  <li><a href="#multiple-branches" id="toc-multiple-branches" class="nav-link" data-scroll-target="#multiple-branches"><span class="header-section-number">9.2</span> Multiple branches</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/inference.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/conditionals.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></h1>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></h1>
 </div>
 
 
@@ -348,45 +363,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Since every program in HULK is statically type-checked, and type annotations are optional in most cases, this means that HULK infers types for most of the symbols in a program.</p>
-<p>Because the problem of type inference is computationally complex, and ultimately unsolvable in the general case, the HULK reference definition doesn’t give precise semantics about how the type inferer must work. Rather, we will give only a set of minimal constraints that the type inferer must assert if a type is inferred at all for a given symbol, or otherwise it must fail to infer types.</p>
-<section id="type-inference-vs-type-checking" class="level2" data-number="13.1">
-<h2 data-number="13.1" class="anchored" data-anchor-id="type-inference-vs-type-checking"><span class="header-section-number">13.1</span> Type inference vs type checking</h2>
-<p>The type inferer works before the type checker, and assigns type annotations to all symbols that are not explicitly annotated, and to all the expressions. Afterwards, the type checker verifies that all semantic rules are valid.</p>
-<p>Thus, even if a program is fully annotated, the type inferer still needs to work, since it needs to infer the type of all expressions. When some symbols are not explicitly annotated, the type inferer must also assign types for them.</p>
-<p>Hence, there are two different moments when a semantic error can be reported. First, if the type inferer cannot infer the type of some symbol, a semantic error will be thrown to indicate the programmer that some symbol must be explicitly typed. Second, if the type inferer finished without errors, the type checker will verify that all types are consistent, and will report a semantic error if there is some incompatibilty.</p>
-</section>
-<section id="type-inference-of-expressions" class="level2" data-number="13.2">
-<h2 data-number="13.2" class="anchored" data-anchor-id="type-inference-of-expressions"><span class="header-section-number">13.2</span> Type inference of expressions</h2>
-<p>The first task of the type inferer is to infer the runtime type of any expression that appears in a HULK program. This process is performed bottom-up, starting from atomic sub-expressions (e.g., literals) and working up the AST. The exact rules for type inference of expressions is given in the section a`bout <a href="../guide/type_semantics">type semantics</a>, but an intuitive introduction can be given at this point.</p>
-<p>Literals are the easiest to type-infer, because their type comes directly from the parser. Arithmetic expressions are also easy, because their type is always <code>Number</code>. Likewise, string and boolean operators are straightforward.</p>
-<p>The type of complex expressions that have an expression body is determined by the type of the body. This is the case of <code>let</code>, <code>while</code>, and <code>for</code>. The type of an expression block is the type of the last expresion of the block. The type of a function or method invocation is the type of its body. The type of expressions that have more than one branch (<code>if</code>) is the lowest common ancestor of the types of each branch, or ultimately <code>Object</code>.</p>
-</section>
-<section id="type-inference-of-symbols" class="level2" data-number="13.3">
-<h2 data-number="13.3" class="anchored" data-anchor-id="type-inference-of-symbols"><span class="header-section-number">13.3</span> Type inference of symbols</h2>
-<p>Once all expressions have been type-inferred, the type inferer will attempt to assing a type to each symbol declaration that is not explicitly annotated. Instead of providing an exact algorithm, we will define a set of constraints that the type inferer must satisfy whenever it succeeds in assigning a type.</p>
-<p>Specific implementations of HULK can choose different methods to attempt the type inference of symbols. According to the order in which symbols are processed, and the sophistication of each method, some implementations may succed where others fail. However, if two type inference algorithms are correct, they most agree on all types for which both succeed in the inference.</p>
-<p>These are the constraints a type inference algorithm must satisfy to be correct, or otherwise it must report a failed inference.</p>
+<p>The <code>if</code> expression allows evaluating different expressions based on a condition.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="cf">if</span> (a <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">"Even"</span>) <span class="cf">else</span> <span class="fu">print</span>(<span class="st">"odd"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since <code>if</code> is itself an expression, returning the value of the branch that evaluated true, the previous program can be rewritten as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="fu">print</span>(<span class="cf">if</span> (a <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) <span class="st">"even"</span> <span class="cf">else</span> <span class="st">"odd"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Conditions are just expressions of boolean type. The following are the valid boolean expressions:</p>
 <ul>
-<li>In a <code>let</code> expression, whenever a variable is not type-annotated, the type inferer must asign a type for the variable that is equivalent to the type infered for its initialization expression.</li>
-<li>Similarly, in an attribute declaration that is not type-annotated, the type inferer must assign a type that is equivalent to the type inferred for its initialization expression.</li>
-<li>In a function or method, whenever an argument is not type-annotated, the type inferer must assign the lowest (most specific) type that would be consistent with the use of that argument in the method or function body. If more than one type in different branches of the type hierarchy would be consistent, the type inferer must fail.</li>
-<li>Similarly, in a type argument, the type inferer must assign the lowest type that is consistent with the use of that argument in all attribute initialization expressions where it is referenced.</li>
+<li>Boolean literals: <code>true</code> and <code>false</code>.</li>
+<li>Arithmetic comparison operators: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>==</code>, <code>!=</code>, with their usual semantics.</li>
+<li>Boolean operators: <code>&amp;</code> (and), <code>|</code> (or), and <code>!</code> (not) with their usual semantics.</li>
 </ul>
-<p>If a type inferer satisfies those constraints, we will say it is <em>sound</em>. This means that, for example, the simplest sound strategy for type inference is to infer types for all expressions and fail for all symbols. We will call this the <em>basic inference</em> strategy.</p>
+<section id="expression-blocks-in-conditionals" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="expression-blocks-in-conditionals"><span class="header-section-number">9.1</span> Expression blocks in conditionals</h2>
+<p>The body of the <code>if</code> or the <code>else</code> part of a conditional (or both) can be an expression block as well:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (a <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(a)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>(<span class="st">"Even"</span>)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> <span class="fu">print</span>(<span class="st">"Odd"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="examples-of-type-inference" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="examples-of-type-inference"><span class="header-section-number">13.4</span> Examples of type inference</h2>
-<p>These are some programs where a sufficiently sophisticated type inference strategy should work.</p>
-<p>In the following program the type of the variable <code>x</code> should be inferred to <code>Number</code> because the type of <code>42</code> is trivially <code>Number</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="fu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In the following function, the type of the argument <code>n</code> should be inferred as <code>Number</code> because it is the only possible type where arithmetic operators (i.e., <code>+</code>) are defined, as there is no operator overloading in HULK:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">fib</span>(n) <span class="kw">=&gt;</span> <span class="cf">if</span> (n <span class="op">==</span> <span class="dv">0</span> <span class="op">|</span> n <span class="op">==</span> <span class="dv">1</span>) <span class="dv">1</span> <span class="cf">else</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="dv">1</span>) <span class="op">+</span> <span class="fu">fib</span>(n<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For the same reason, in the following function, the type of the argument <code>x</code> should be inferred as <code>Number</code>. Likewise, the type of the variable <code>f</code> should be inferred as <code>Number</code> because the initialization expression is a literal <code>Number</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">fact</span>(x) <span class="kw">=&gt;</span> <span class="kw">let</span> f <span class="op">=</span> <span class="dv">1</span> <span class="kw">in</span> <span class="cf">for</span> (i <span class="kw">in</span> <span class="fu">range</span>(<span class="dv">1</span><span class="op">,</span> x<span class="op">+</span><span class="dv">1</span>)) f <span class="op">:=</span> f <span class="op">*</span> i<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<blockquote class="blockquote">
-<p><strong>TODO</strong>: Add more examples…</p>
-</blockquote>
+<section id="multiple-branches" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="multiple-branches"><span class="header-section-number">9.2</span> Multiple branches</h2>
+<p>The <code>if</code> expression supports multiple branches with the <code>elif</code> construction, which introduces another conditioned branch:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">42</span><span class="op">,</span> <span class="kw">let</span> mod <span class="op">=</span> a <span class="op">%</span> <span class="dv">3</span> <span class="kw">in</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (mod <span class="op">==</span> <span class="dv">0</span>) <span class="st">"Magic"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">elif</span> (mod <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">1</span>) <span class="st">"Woke"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">"Dumb"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -781,13 +786,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../guide/typing.html" class="pagination-link" aria-label="Type checking">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></span>
+      <a href="../guide/variables.html" class="pagination-link" aria-label="Variables">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../guide/protocols.html" class="pagination-link" aria-label="Protocols">
-        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/loops.html" class="pagination-link" aria-label="Loops">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

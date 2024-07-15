@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 10&nbsp; Loops</title>
+<title>The Hitchhiker’s Guide to Compilers - 7&nbsp; Functions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../guide/types.html" rel="next">
-<link href="../guide/conditionals.html" rel="prev">
+<link href="../guide/variables.html" rel="next">
+<link href="../guide/expressions.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/loops.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/functions.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -237,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/functions.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/functions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
   </div>
 </li>
@@ -255,7 +255,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/loops.html" class="sidebar-item-text sidebar-link active">
+  <a href="../guide/loops.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
@@ -309,6 +309,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -319,17 +336,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-while-loop" id="toc-the-while-loop" class="nav-link active" data-scroll-target="#the-while-loop"><span class="header-section-number">10.1</span> The <code>while</code> loop</a></li>
-  <li><a href="#the-for-loop" id="toc-the-for-loop" class="nav-link" data-scroll-target="#the-for-loop"><span class="header-section-number">10.2</span> The <code>for</code> loop</a></li>
+  <li><a href="#inline-functions" id="toc-inline-functions" class="nav-link active" data-scroll-target="#inline-functions"><span class="header-section-number">7.1</span> Inline functions</a></li>
+  <li><a href="#full-form-functions" id="toc-full-form-functions" class="nav-link" data-scroll-target="#full-form-functions"><span class="header-section-number">7.2</span> Full-form functions</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/loops.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/functions.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></h1>
 </div>
 
 
@@ -346,32 +363,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>HULK defines two kinds of loops, the <code>while</code> expression and the <code>for</code> expression. Both loop constructions are expressions, returing the value of the</p>
-<section id="the-while-loop" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="the-while-loop"><span class="header-section-number">10.1</span> The <code>while</code> loop</h2>
-<p>A <code>while</code> loop evaluates a condition and its body while the condition is true. The body can be a simple expression or an expression block.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> a <span class="op">=</span> <span class="dv">10</span> <span class="kw">in</span> <span class="cf">while</span> (a <span class="op">&gt;=</span> <span class="dv">0</span>) {</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(a)<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">a</span> <span class="op">:=</span> a <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Since the return value of the <code>while</code> loop is the return value of its expression body, it can often be used directly as the body of a function.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">gcd</span>(a<span class="op">,</span> b) <span class="kw">=&gt;</span> <span class="cf">while</span> (a <span class="op">&gt;</span> <span class="dv">0</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> m <span class="op">=</span> a <span class="op">%</span> b <span class="kw">in</span> {</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">b</span> <span class="op">:=</span> a<span class="op">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">a</span> <span class="op">:=</span> m<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>HULK also lets you define your own functions (of course!). A program in HULK can have an arbitrary number of functions defined before the final global expression (or expression block).</p>
+<p>A function’s body is always an expression (or expression block), hence all functions have a return value (and type), that is, the return value (and type) of its body.</p>
+<section id="inline-functions" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="inline-functions"><span class="header-section-number">7.1</span> Inline functions</h2>
+<p>The easiest way to define a function is the inline form. Here’s an example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tan</span>(x) <span class="kw">=&gt;</span> <span class="fu">sin</span>(x) <span class="op">/</span> <span class="fu">cos</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An inline function is defined by an identifier followed by arguments between parenthesis, then the <code>=&gt;</code> symbol, and then a simple expression (not an expression block) as body, ending in <code>;</code>.</p>
+<p>In HULK, all functions must be defined before the final global expression. All these functions live in a single global namespace, hence it is not allowed to repeat function names. Similarly, there are no overloads in HULK (at least in “basic” HULK).</p>
+<p>Finally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">cot</span>(x) <span class="kw">=&gt;</span> <span class="dv">1</span> <span class="op">/</span> <span class="fu">tan</span>(x)<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tan</span>(x) <span class="kw">=&gt;</span> <span class="fu">sin</span>(x) <span class="op">/</span> <span class="fu">cos</span>(x)<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">tan</span>(<span class="cn">PI</span>) <span class="op">**</span> <span class="dv">2</span> <span class="op">+</span> <span class="fu">cot</span>(<span class="cn">PI</span>) <span class="op">**</span> <span class="dv">2</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And of course, inline functions (and any other type of function) can call themselves recursively.</p>
 </section>
-<section id="the-for-loop" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="the-for-loop"><span class="header-section-number">10.2</span> The <code>for</code> loop</h2>
-<p>A <code>for</code> loop iterates over an <em>iterable</em> of elements of a certain type. We will <a href="../iterables">talk about iterables</a> later on, but for now it suffices to say that if some expression evaluates to a collection, then the <code>for</code> loop can be used to iterate it.</p>
-<p>For example, the builtin <code>range(&lt;start&gt;, &lt;end&gt;)</code> function evaluates to an iterable of numbers between <code>&lt;start&gt;</code> (inclusive) and <code>&lt;end&gt;</code> (non-inclusive).</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="kw">in</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>)) <span class="fu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The <code>for</code> loop is semantically and operationally equivalent to the following:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> iterable <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>) <span class="kw">in</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (iterable<span class="op">.</span><span class="fu">next</span>())</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> x <span class="op">=</span> iterable<span class="op">.</span><span class="fu">current</span>() <span class="kw">in</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="fu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In fact, what the reference implementation of the HULK compiler does in <code>for</code> loops is to transpile them into their <code>while</code> equivalent. This also effectively means that, just like the <code>while</code> loop, the <code>for</code> loop returns the last value of its body expression.</p>
+<section id="full-form-functions" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="full-form-functions"><span class="header-section-number">7.2</span> Full-form functions</h2>
+<p>Since inline functions only allow for a single expression as body (as complex as that may be), HULK also allows full-form functions, in which the body is an expression block.</p>
+<p>Here’s an example of a rather useless function that prints 4 times:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">operate</span>(x<span class="op">,</span> y) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x <span class="op">+</span> y)<span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x <span class="op">-</span> y)<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x <span class="op">*</span> y)<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x <span class="op">/</span> y)<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Note that the following form is discouraged for stylistic reasons:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">id</span>(<span class="op">&lt;</span>args<span class="op">&gt;</span>) <span class="kw">=&gt;</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;...&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>That is, you should either use the inline form with <code>=&gt;</code> and a simple expression, or the full form with <code>{}</code> and an expression block.</p>
 
 
 </section>
@@ -766,13 +787,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../guide/conditionals.html" class="pagination-link" aria-label="Conditionals">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></span>
+      <a href="../guide/expressions.html" class="pagination-link" aria-label="Expressions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../guide/types.html" class="pagination-link" aria-label="Types">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/variables.html" class="pagination-link" aria-label="Variables">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

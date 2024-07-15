@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 12&nbsp; Type checking</title>
+<title>The Hitchhiker’s Guide to Compilers - 15&nbsp; Iterables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../guide/inference.html" rel="next">
-<link href="../guide/types.html" rel="prev">
+<link href="../guide/vectors.html" rel="next">
+<link href="../guide/protocols.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/iterables.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -267,7 +267,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/typing.html" class="sidebar-item-text sidebar-link active">
+  <a href="../guide/typing.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></span></a>
   </div>
 </li>
@@ -285,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../guide/iterables.html" class="sidebar-item-text sidebar-link">
+  <a href="../guide/iterables.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></span></a>
   </div>
 </li>
@@ -309,6 +309,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -319,21 +336,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#typing-variables" id="toc-typing-variables" class="nav-link active" data-scroll-target="#typing-variables"><span class="header-section-number">12.1</span> Typing variables</a></li>
-  <li><a href="#typing-functions-and-methods" id="toc-typing-functions-and-methods" class="nav-link" data-scroll-target="#typing-functions-and-methods"><span class="header-section-number">12.2</span> Typing functions and methods</a></li>
-  <li><a href="#typing-attributes-and-type-arguments" id="toc-typing-attributes-and-type-arguments" class="nav-link" data-scroll-target="#typing-attributes-and-type-arguments"><span class="header-section-number">12.3</span> Typing attributes and type arguments</a></li>
-  <li><a href="#type-conforming" id="toc-type-conforming" class="nav-link" data-scroll-target="#type-conforming"><span class="header-section-number">12.4</span> Type conforming</a></li>
-  <li><a href="#testing-for-dynamic-types" id="toc-testing-for-dynamic-types" class="nav-link" data-scroll-target="#testing-for-dynamic-types"><span class="header-section-number">12.5</span> Testing for dynamic types</a></li>
-  <li><a href="#downcasting" id="toc-downcasting" class="nav-link" data-scroll-target="#downcasting"><span class="header-section-number">12.6</span> Downcasting</a></li>
+  <li><a href="#using-iterables-with-the-for-loop" id="toc-using-iterables-with-the-for-loop" class="nav-link active" data-scroll-target="#using-iterables-with-the-for-loop"><span class="header-section-number">15.1</span> Using iterables with the <code>for</code> loop</a></li>
+  <li><a href="#typing-iterables" id="toc-typing-iterables" class="nav-link" data-scroll-target="#typing-iterables"><span class="header-section-number">15.2</span> Typing iterables</a></li>
+  <li><a href="#implementing-collections" id="toc-implementing-collections" class="nav-link" data-scroll-target="#implementing-collections"><span class="header-section-number">15.3</span> Implementing collections</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/iterables.html"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></h1>
+<h1 class="title"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></h1>
 </div>
 
 
@@ -350,103 +364,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>HULK is a statically-typed language with optional type annotations. So far you haven’t seen any because HULK has a powerful <a href="../guide/inference">type inference system</a> which we will talk about later on. However, all symbols in HULK have a static type, and all programs in HULK are statically checked during compilation.</p>
-<p>Tye annotations can be added anywhere a symbol is defined, that is:</p>
-<ul>
-<li>in variable declarations with <code>let</code> expressions;</li>
-<li>in function or method arguments and return type;</li>
-<li>in type attributes; and,</li>
-<li>in type arguments.</li>
-</ul>
-<p>Let’s see an example of each case.</p>
-<section id="typing-variables" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="typing-variables"><span class="header-section-number">12.1</span> Typing variables</h2>
-<p>Variables can be explicitely type-annotated in <code>let</code> expressions with the following syntax:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x<span class="op">:</span> <span class="bu">Number</span> <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="fu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The type checker will verify that the type inferred for the initialization expression is compatible with (formally, <a href="../#type-conforming">conforms to</a>) the annotated type.</p>
+<p>An iterable in HULK is any object that follows the iterable protocol, which is defined as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>protocol Iterable {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">next</span>() <span class="op">:</span> <span class="bu">Boolean</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">current</span>() <span class="op">:</span> <span class="bu">Object</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>An example of iterable is the builtin <code>range</code> function, which returns an instance of the builtin <code>Range</code> type, defined as follows:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>type <span class="bu">Range</span>(min<span class="op">:</span><span class="bu">Number</span><span class="op">,</span> max<span class="op">:</span><span class="bu">Number</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    min <span class="op">=</span> min<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    max <span class="op">=</span> max<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    current <span class="op">=</span> min <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">next</span>()<span class="op">:</span> <span class="bu">Boolean</span> <span class="kw">=&gt;</span> (self<span class="op">.</span><span class="at">current</span> <span class="op">:=</span> self<span class="op">.</span><span class="at">current</span> <span class="op">+</span> <span class="dv">1</span>) <span class="op">&lt;</span> max<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">current</span>()<span class="op">:</span> <span class="bu">Number</span> <span class="kw">=&gt;</span> self<span class="op">.</span><span class="at">current</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Notice that since protocols are covariant in the return types of the methods, the <code>Range</code> type correctly implements the <code>Iterable</code> protocol.</p>
+<section id="using-iterables-with-the-for-loop" class="level2" data-number="15.1">
+<h2 data-number="15.1" class="anchored" data-anchor-id="using-iterables-with-the-for-loop"><span class="header-section-number">15.1</span> Using iterables with the <code>for</code> loop</h2>
+<p>As explained in <a href="../guide/loops">the loops section</a>, the <code>for</code> loop works with the <code>Iterable</code> protocol, which means you can apply <code>for</code> on any instance of a type that implements the protocol.</p>
+<p>In compile-time, <code>for</code> is transpiled to a code that is equivalent, but explicitely uses the <code>Iterable</code> protocol members.</p>
+<p>For example, the code:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="kw">in</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span><span class="dv">10</span>)) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// code that uses `x`</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Is transpiled to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> iterable <span class="op">=</span> <span class="fu">range</span>(<span class="dv">0</span><span class="op">,</span> <span class="dv">10</span>) <span class="kw">in</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (iterable<span class="op">.</span><span class="fu">next</span>())</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> x <span class="op">=</span> iterable<span class="op">.</span><span class="fu">current</span>() <span class="kw">in</span> {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">// code that uses `x`</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This transpilation guarantees that even though the <code>Iterable</code> protocol defines the <code>current</code> method with return type <code>Object</code>, when you use a <code>for</code> loop you will get the exact covariant type inferred in <code>x</code>.</p>
+<p>As a matter of fact, due to the transpilation process, the <code>Iterable</code> protocol itself is not even necessary, since nowhere is a symbol annotated as <code>Iterable</code>. However, the protocol is explicitely defined as a builtin type so that you can explicitly use it if you need to annotate a method to receive a black-box iterable.</p>
+<p>Keep in mind, thought, that when you annotate something explicitely as <code>Iterable</code>, you are effectively forcing the type inferrer to assign <code>Object</code> as the type of the iteration variable (<code>x</code> in this example). This is one of the reasons it is often better to let HULK infer types than annotating them yourself.</p>
 </section>
-<section id="typing-functions-and-methods" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="typing-functions-and-methods"><span class="header-section-number">12.2</span> Typing functions and methods</h2>
-<p>All or a subset of a function’s or method’s arguments, and its return value, can be type-annotated with a similar syntax:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tan</span>(x<span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Number</span> <span class="kw">=&gt;</span> <span class="fu">sin</span>(x) <span class="op">/</span> <span class="fu">cos</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>On the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about <a href="../guide/type_semantics">type semantics</a>. The type checker will also verify that the return type of the body conforms to the annotated return type.</p>
-<p>On the invocation side, the type checker will verify that the values passed as parameters conform to the annotated types.</p>
-<p>Inside methods of a type <code>T</code>, the implicitly defined <code>self</code> symbol is always assumed as if annotated with type <code>T</code>.</p>
+<section id="typing-iterables" class="level2" data-number="15.2">
+<h2 data-number="15.2" class="anchored" data-anchor-id="typing-iterables"><span class="header-section-number">15.2</span> Typing iterables</h2>
+<p>Since in the <code>Iterable</code> protocol we can only define (at this point) the return value of <code>current()</code> as <code>Object</code>, it is cumbersome to type arguments of a function or method as <code>Iterable</code>, because doing so will force you to downcast the elements to a desired type.</p>
+<p>For this reason, HULK allows a special syntax for typing iterables of a specific type <code>T</code> using the format <code>T*</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">sum</span>(numbers<span class="op">:</span> <span class="bu">Number</span><span class="op">*</span>)<span class="op">:</span> <span class="bu">Number</span> <span class="kw">=&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> total <span class="op">=</span> <span class="dv">0</span> <span class="kw">in</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> (x <span class="kw">in</span> numbers)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            total <span class="op">:=</span> total <span class="op">+</span> x<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What happens under the hood is that when you use of <code>T*</code> anywhere in a HULK program, the compiler will insert an implicit protocol definition that looks like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>protocol Iterable_T <span class="kw">extends</span> Iterable {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">current</span>()<span class="op">:</span> T<span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Since protocols can be extended by <a href="../guide/protocols">overriding some methods with the correct variance constraints</a>, the previous code will compile correctly.</p>
 </section>
-<section id="typing-attributes-and-type-arguments" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="typing-attributes-and-type-arguments"><span class="header-section-number">12.3</span> Typing attributes and type arguments</h2>
-<p>In type definitions, attributes and type arguments can be type-annotated as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>type <span class="bu">Point</span>(x<span class="op">:</span> <span class="bu">Number</span><span class="op">,</span> y<span class="op">:</span> <span class="bu">Number</span>) {</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> <span class="bu">Number</span> <span class="op">=</span> x<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> <span class="bu">Number</span> <span class="op">=</span> y<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The type checker will verify that type arguments are used consistently inside attribute initialization expressions, and that the inferred type for each attribute initialization expression conforms to the attribute annotation.</p>
-</section>
-<section id="type-conforming" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="type-conforming"><span class="header-section-number">12.4</span> Type conforming</h2>
-<p>The basic type relation in HULK is called <em>conforming</em> (<code>&lt;=</code>). A type <code>T1</code> is said to <em>conform to</em> to another type <code>T2</code> (writen as <code>T1 &lt;= T2</code>) if a variable of type <code>T2</code> can hold a value of type <code>T1</code> such that every possible operation that is semantically valid with <code>T2</code> is guaranteed to be semantically valid with <code>T1</code>.</p>
-<p>In general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).</p>
-<p>The following rules provide an initial definition for the <em>conforming</em> relationship. The formal definition is given in the section about <a href="../guide/type_semantics">type semantics</a>.</p>
-<ul>
-<li>Every type conforms to <code>Object</code>.</li>
-<li>Every type conforms to itself.</li>
-<li>If <code>T1</code> inherits <code>T2</code> then <code>T1</code> conforms to <code>T2</code>.</li>
-<li>If <code>T1</code> conforms to <code>T2</code> and <code>T2</code> conforms to <code>T3</code> then <code>T1</code> conforms to <code>T3</code>.</li>
-<li>The only types that conform to <code>Number</code>, <code>String</code>, and <code>Boolean</code>, are respectively those same types.</li>
-</ul>
-<p>Types in HULK form a single hierarchy rooted at <code>Object</code>. In this hierarchy the <em>conforming</em> relationship is equivalent to the <em>descendant</em> relationship. Thus, if <code>T1</code> conforms to <code>T2</code> that means that <code>T1</code> is a descendant of <code>T2</code> (or trivially the same type). Thus, we can talk of the lowest common ancestor of a set of types <code>T1</code>, <code>T2</code>, …, <code>Tn</code>, which is the most specific type <code>T</code> such that all <code>Ti</code> conform to <code>T</code>. When two types are in different branches of the type hierarchy, they are effectively incomparable.</p>
-<blockquote class="blockquote">
-<p><strong>NOTE</strong>: this conforming relationship is extended when we add <a href="../guide/protocols">protocols</a>.</p>
-</blockquote>
-</section>
-<section id="testing-for-dynamic-types" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="testing-for-dynamic-types"><span class="header-section-number">12.5</span> Testing for dynamic types</h2>
-<p>The <code>is</code> operator allows to test an object to check whether its dynamic type conforms to a specific static type.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>type Bird {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>type Plane {</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>type Superman {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">=</span> <span class="kw">new</span> <span class="fu">Superman</span>() <span class="kw">in</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (x is Bird) <span class="st">"It's bird!"</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="fu">elif</span> (x is Plane) <span class="st">"It's a plane!"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="st">"No, it's Superman!"</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>In general, before the <code>is</code> operator you can put any expression, not just a variable.</p>
-</section>
-<section id="downcasting" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="downcasting"><span class="header-section-number">12.6</span> Downcasting</h2>
-<p>You can use the <code>as</code> operator to downcast an expression to a given static type. The result is a runtime error if the expression is not a suitable dynamic type, which means you should always test if you’re unsure:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>type A {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>type B inherits A {</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>type C inherits A {</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">:</span> A <span class="op">=</span> <span class="cf">if</span> (<span class="fu">rand</span>() <span class="op">&lt;</span> <span class="fl">0.5</span>) <span class="kw">new</span> <span class="fu">B</span>() <span class="cf">else</span> <span class="kw">new</span> <span class="fu">C</span>() <span class="kw">in</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (x is B)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> y <span class="op">:</span> B <span class="op">=</span> x <span class="im">as</span> B <span class="kw">in</span> {</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>            <span class="co">// you can use y with static type B</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>        }</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>        <span class="co">// x cannot be downcasted to B</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="implementing-collections" class="level2" data-number="15.3">
+<h2 data-number="15.3" class="anchored" data-anchor-id="implementing-collections"><span class="header-section-number">15.3</span> Implementing collections</h2>
+<p>The iterable protocols defined so far encapsulates the concept of making <em>a single iteration</em> over the sequence of elements. In contrast, most collection types you will define allow for multiple iterations, even simultaneously, over the same sequence of elements.</p>
+<p>To accomodate for this kind of behaviour, we can define an <em>enumerable</em> protocol that simply provides one method to create an iterable for one specific iteration everytime that is needed:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>protocol Enumerable {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">iter</span>()<span class="op">:</span> Iterable<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With this protocol defined, the <code>for</code> loop is extended such that, when used with an enumerable instead of directly an iterable, it will transpile to a slightly different code:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> iterable <span class="op">=</span> enumerable<span class="op">.</span><span class="fu">iter</span>() <span class="kw">in</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> (iterable<span class="op">.</span><span class="fu">next</span>())</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">let</span> x <span class="op">=</span> iterable<span class="op">.</span><span class="fu">current</span>() <span class="kw">in</span> {</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>            <span class="co">// ..</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
@@ -841,13 +818,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../guide/types.html" class="pagination-link" aria-label="Types">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span>
+      <a href="../guide/protocols.html" class="pagination-link" aria-label="Protocols">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../guide/inference.html" class="pagination-link" aria-label="Type inference">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../guide/vectors.html" class="pagination-link" aria-label="Vectors">
+        <span class="nav-page-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vectors</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
