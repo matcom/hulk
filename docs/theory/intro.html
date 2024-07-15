@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -333,6 +367,8 @@ window.Quarto = {
   <ul>
   <li><a href="#what-is-a-language" id="toc-what-is-a-language" class="nav-link active" data-scroll-target="#what-is-a-language"><span class="header-section-number">1.1</span> What is a language</a></li>
   <li><a href="#examples-of-languages" id="toc-examples-of-languages" class="nav-link" data-scroll-target="#examples-of-languages"><span class="header-section-number">1.2</span> Examples of languages</a></li>
+  <li><a href="#recognizing-a-language" id="toc-recognizing-a-language" class="nav-link" data-scroll-target="#recognizing-a-language"><span class="header-section-number">1.3</span> Recognizing a language</a></li>
+  <li><a href="#generating-a-language" id="toc-generating-a-language" class="nav-link" data-scroll-target="#generating-a-language"><span class="header-section-number">1.4</span> Generating a language</a></li>
   </ul>
 </nav>
     </div>
@@ -373,12 +409,28 @@ window.Quarto = {
 </div>
 <p>Examples of symbols in abstract languages might be single letters like <code>a</code>, <code>b</code> or <code>c</code>. In programming languages, a symbol might be a variable name, a number, or a keyword like <code>for</code> or <code>class</code>. The next step is to define sentences:</p>
 <div id="def-sentence" class="theorem definition">
-<p><span class="theorem-title"><strong>Definition 1.2 (Sentence)</strong></span> A sentence is a finite sequence of symbols.</p>
+<p><span class="theorem-title"><strong>Definition 1.2 (Sentence)</strong></span> A sentence (alternatively called a <em>string</em>) is a finite sequence of symbols.</p>
 </div>
 <p>An example of a sentence formed with the symbols <code>a</code> and <code>b</code> is <code>abba</code>. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.</p>
+<p>One special string is the <em>empty string</em>, which has zero symbols, and will often bite us in proofs. It is often denoted as <span class="math inline">\(\epsilon\)</span>.</p>
 <p>We are almost ready to define a language. But before, we need to define a “vocabulary”, which is just a collection of valid symbols.</p>
 <div id="def-vocabulary" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 1.3 (Vocabulary)</strong></span> A vocabulary <span class="math inline">\(V\)</span> is a finite set of symbols.</p>
+</div>
+<p>An example of a vocabulary is <span class="math inline">\(\{ a,b,c \}\)</span>, which contains three symbols. In a programming language like Python, a sensible vocabulary would be something like <span class="math inline">\(\{ \mathrm{for}, \mathrm{while}, \mathrm{def}, \mathrm{class}, ... \}\)</span> containing all keywords, but also symbols like <code>+</code>, <code>.</code>, etc.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What about identifiers?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you think about our definition of vocabulary for a little bit, you’ll notice we defined it as <em>finite</em> set of symbols. At the same time, I’m claiming that things like variable and function names, and all identifiers in general, will end up being part of the vocabulary in programming languages. However, there are infinitely many valid identifiers, so… how does that work?</p>
+<p>The solution to this problem is that we will actually deal with <em>two</em> different languages, on two different levels. We will define a first language for the <em>tokens</em>, which just determines what types of identifiers, numbers, etc., are valid. Then the actual programming language will be defined based on the <em>types</em> of tokens available. So, all numbers are the same token, and all identifiers as well.</p>
+</div>
 </div>
 <p>Given a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.</p>
 <div id="def-language" class="theorem definition">
@@ -388,6 +440,67 @@ window.Quarto = {
 </section>
 <section id="examples-of-languages" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="examples-of-languages"><span class="header-section-number">1.2</span> Examples of languages</h2>
+<p>To illustrate how rich languages can be, let’s define a simple vocabulary with just two symbols, <span class="math inline">\(V = \{a,b\}\)</span>, and see how many interesting languages we can come up with.</p>
+<p>The simplest possible language in any vocabulary is the singleton language whose only sentence is formed by a single symbol from the vocabulary. For example, <span class="math inline">\(L_a=\{a\}\)</span> or <span class="math inline">\(L_b = \{b\}\)</span>. This is, of course, rather useless, so let’s keep up.</p>
+<p>We can also define what’s called a <em>finite</em> language, which is just a collection a few (or perhaps many) specific strings. For example, <span class="math display">\[L_1 = \{bab, abba, ababa, babba\}\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Since languages are sets, there is no intrinsic order to the sentences in a language. For visualization purposes, we will often sort sentences in a language in shortest-to-largest, and then lexicographic order, assuming there is a natural order for the symbols. But this is just one arbitrary way of doing it.</p>
+</div>
+</div>
+<p>Now we can enter the realm of <em>infinite</em> languages. Even when the vocabulary is finite, and each sentence itself is also as finite sequence of symbols, we can have infinitely many different sentences in a language. If you need to convince yourself of this claim, think about the language of natural numbers: every natural number is a finite sequence of, at most, 10 different digits, and yet, we have infinitely many natural numbers because we always take a number and add a digit at the end to make a new one.</p>
+<p>In the same sense, we can have infinite languages simply by concatenating symbols from the vocabulary <em>ad infinitum</em>. The most straightforward infinite language we can make from an arbitrary vocabulary <span class="math inline">\(V\)</span> is called the <em>universe</em> language, and it’s just the collection of all possible strings one can form with symbols from <span class="math inline">\(V\)</span>.</p>
+<div id="def-universe" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.5 (Universe language)</strong></span> Given a vocabulary <span class="math inline">\(V\)</span>, the universe language, denoted <span class="math inline">\(V^*\)</span> is the set of all possible strings that can be formed with symbols from <span class="math inline">\(V\)</span>.</p>
+</div>
+<p>An extensional representation of a finite portion of <span class="math inline">\(V^*\)</span> would be:</p>
+<p><span class="math display">\[V^* = \{\epsilon,a,b,aa,ab,ba,bb,aaa,aab,aba,abb,baa,bab,bba,bbb,...\}\]</span></p>
+<p>We can now easily see that an alternative definition of language could be any subset of the universe language of a given vocabulary <span class="math inline">\(V\)</span>.</p>
+<p>Now let’s take it up a notch. We can come up with a gazillion languages just involving <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, by concocting different relationships between the symbols. For this, we will need some way to describe the languages that doesn’t require listing all the elements–as they are infinitely many. We can do it with natural language, of course, but in the long run it will pay to be a slightly more formal when describing infinite languages.</p>
+<p>For example, let <span class="math inline">\(L_2\)</span> be the language of strings over the alphabet <span class="math inline">\(V=\{a,b\}\)</span> that has the exact same number of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
+<p><span class="math display">\[L_2 = \{\epsilon, ab, aabb, abab, baba, baab, abba, ...\}\]</span></p>
+<p>We can define it with a bit of math syntax sugar as follows:</p>
+<p><span class="math display">\[L_2 = \{ \omega \in \{a,b\}^* | \#(a,\omega) = \#(b,\omega) \}\]</span></p>
+<p>Let’s unpack this definition. We start by saying, <span class="math inline">\(\omega in \{a,b\}^*\)</span>, which literaly parses to “strings <span class="math inline">\(\omega\)</span> in the universe language of the vocabulary <span class="math inline">\(\{a,b\}\)</span>”. This is just standard notation to say “string made out of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. Then we add the conditional part <span class="math inline">\(\#(a,\omega) = \#(b,\omega)\)</span> which should be pretty straightforward: we are using the <span class="math inline">\(\#(\mathrm{&lt;symbol&gt;},\mathrm{&lt;string&gt;})\)</span> notation to denote the function that counts a given symbol in a string.</p>
+<p><span class="math inline">\(L_2\)</span> is slightly more interesting than <span class="math inline">\(V^*\)</span> because it introduces the notion that <em>a formal language is equivalent to a computation</em>. This insight is the fundamental idea that links formal language and computability theories, and we will formalize this idea in the next section. But first, let’s see other, even more interesting languages, to solidify this intuition that <em>languages equal computation</em>.</p>
+<p>Let’s define <span class="math inline">\(L_3\)</span> as the language of all strings in <span class="math inline">\(V^*\)</span> where the number <span class="math inline">\(a\)</span> is a prime factor of the number of <span class="math inline">\(b\)</span>. Intuitively, working with this language–e.g., finding valid strings–will require us to solve prime factoring, as any question about <span class="math inline">\(L\)</span> that has different answers for string in <span class="math inline">\(L\)</span> than for strings not in <span class="math inline">\(L\)</span> will necessarily go through what it means for a number to be a prime factor of another.</p>
+<p>But it gets better. We can define the language of all strings made out of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> such that, when interpreting <span class="math inline">\(a\)</span> as <span class="math inline">\(0\)</span> and <span class="math inline">\(b\)</span> as <span class="math inline">\(1\)</span>, the resulting binary number has any property we want. We can thus codify all problems in number theory as problems in formal language theory.</p>
+<p>And, as you can probably understand already, we can easily codify <em>any</em> mathematical problem, not just about number theory. Ultimately, we can define a language as the set of strings that are valid input/ouput pairs for any specific problem we can come up with. Let’s make this intuition formal.</p>
+</section>
+<section id="recognizing-a-language" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="recognizing-a-language"><span class="header-section-number">1.3</span> Recognizing a language</h2>
+<p>The central problem is formal language theory is called <em>the word problem</em>. Intuitively, it is about determining whether a given string is part of a language, or not. Formally:</p>
+<div id="def-word-problem" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.6 (The Word Problem)</strong></span> Given a language <span class="math inline">\(L\)</span> on some vocabulary <span class="math inline">\(V\)</span>, the word problem is defined as devising a procedure that, for any string <span class="math inline">\(\omega \in V^*\)</span>, determines where <span class="math inline">\(\omega \in L\)</span>.</p>
+</div>
+<p>Notice that we didn’t define the word problem simply as “given a language <span class="math inline">\(L\)</span> and a string <span class="math inline">\(\omega\)</span>, is $omega L$”. Why? Because we might be able to answer that question correctly <em>only</em> for some <span class="math inline">\(\omega\)</span>, but not all. Instead, the word problem is coming up with an algorithm that answers for <em>all</em> possible strings <span class="math inline">\(\omega\)</span>–technically, a <em>procedure</em>, which is not exactly the same, we will see the details in <span class="quarto-unresolved-ref">?sec-computability</span>.</p>
+<p>The word problem is the most important question in formal language theory, and one of the central problems in computer science in general. So much so, that we actually classify languages (and by extension, all computer science problems) according to how easy or hard it is to solve their related word problem.</p>
+<p>In the next few chapters, we will review different <em>classes</em> of languages that have certain common characterists which make them, in a sense, equally complex. But first, let’s see what it would take to solve the word problem in our example languages.</p>
+<p>Solving the word problem in any finite language is trivial. You only need to iterate through all of the strings in the language. The word problem becomes way more interesting when we have infinite languages. In these cases, we need to define a <em>recognizer mechanism</em>, that is, some sort of computational algorithm or procedure to determine whether any particular string is part of the language.</p>
+<p>For example, language <span class="math inline">\(L_2\)</span> has a very simple solution to the word problem. The following Python program gets the job done:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> l2(s):</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    a,b <span class="op">=</span> <span class="dv">0</span>,<span class="dv">0</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> s:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> c <span class="op">==</span> <span class="st">"a"</span>:</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            a <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>            b <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> a <span class="op">==</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>One fundamental question in formal language theory is not only coming up with a solution to the word problem for a given language but, actually, coming up with the <em>simplest</em> solution–for a very specific definition of <em>simple</em>: how much do you need to remember.</p>
+<p>For example, we can solve <span class="math inline">\(L_2\)</span> with <span class="math inline">\(O(n)\)</span> memory. That is, we need to remember something that is proportional to how many <span class="math inline">\(a\)</span>’s or <span class="math inline">\(b\)</span>’s are in the string. And we cannot do it with less, as we will prove a couple chapters down the road.</p>
+<p>Now, let’s turn to the opposite problem, that of generating strings from a given language, and wonder what, if any, is the connection between these two.</p>
+</section>
+<section id="generating-a-language" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="generating-a-language"><span class="header-section-number">1.4</span> Generating a language</h2>
 
 
 </section>

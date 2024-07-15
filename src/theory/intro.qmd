@@ -29,10 +29,12 @@ Examples of symbols in abstract languages might be single letters like `a`, `b` 
 ::: {#def-sentence}
 ### Sentence
 
-A sentence is a finite sequence of symbols.
+A sentence (alternatively called a _string_) is a finite sequence of symbols.
 :::
 
 An example of a sentence formed with the symbols `a` and `b` is `abba`. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.
+
+One special string is the _empty string_, which has zero symbols, and will often bite us in proofs. It is often denoted as $\epsilon$.
 
 We are almost ready to define a language. But before, we need to define a "vocabulary", which is just a collection of valid symbols.
 
@@ -40,6 +42,16 @@ We are almost ready to define a language. But before, we need to define a "vocab
 ### Vocabulary
 
 A vocabulary $V$ is a finite set of symbols.
+:::
+
+An example of a vocabulary is $\{ a,b,c \}$, which contains three symbols. In a programming language like Python, a sensible vocabulary would be something like $\{ \mathrm{for}, \mathrm{while}, \mathrm{def}, \mathrm{class}, ... \}$ containing all keywords, but also symbols like `+`, `.`, etc.
+
+::: {.callout-note}
+# What about identifiers?
+
+If you think about our definition of vocabulary for a little bit, you'll notice we defined it as _finite_ set of symbols. At the same time, I'm claiming that things like variable and function names, and all identifiers in general, will end up being part of the vocabulary in programming languages. However, there are infinitely many valid identifiers, so... how does that work?
+
+The solution to this problem is that we will actually deal with _two_ different languages, on two different levels. We will define a first language for the _tokens_, which just determines what types of identifiers, numbers, etc., are valid. Then the actual programming language will be defined based on the _types_ of tokens available. So, all numbers are the same token, and all identifiers as well.
 :::
 
 Given a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.
@@ -53,3 +65,91 @@ Given a vocabulary $V$, a language $L$ is a set of sentences with symbols taken 
 Let's see some examples.
 
 ## Examples of languages
+
+To illustrate how rich languages can be, let's define a simple vocabulary with just two symbols, $V = \{a,b\}$, and see how many interesting languages we can come up with.
+
+The simplest possible language in any vocabulary is the singleton language whose only sentence is formed by a single symbol from the vocabulary. For example, $L_a=\{a\}$ or $L_b = \{b\}$. This is, of course, rather useless, so let's keep up.
+
+We can also define what's called a _finite_ language, which is just a collection a few (or perhaps many) specific strings. For example,
+$$L_1 = \{bab, abba, ababa, babba\}$$
+
+::: {.callout-note}
+Since languages are sets, there is no intrinsic order to the sentences in a language. For visualization purposes, we will often sort sentences in a language in shortest-to-largest, and then lexicographic order, assuming there is a natural order for the symbols. But this is just one arbitrary way of doing it.
+:::
+
+Now we can enter the realm of _infinite_ languages. Even when the vocabulary is finite, and each sentence itself is also as finite sequence of symbols, we can have infinitely many different sentences in a language. If you need to convince yourself of this claim, think about the language of natural numbers: every natural number is a finite sequence of, at most, 10 different digits, and yet, we have infinitely many natural numbers because we always take a number and add a digit at the end to make a new one.
+
+In the same sense, we can have infinite languages simply by concatenating symbols from the vocabulary _ad infinitum_. The most straightforward infinite language we can make from an arbitrary vocabulary $V$ is called the _universe_ language, and it's just the collection of all possible strings one can form with symbols from $V$.
+
+::: {#def-universe}
+### Universe language
+
+Given a vocabulary $V$, the universe language, denoted $V^*$ is the set of all possible strings that can be formed with symbols from $V$.
+:::
+
+An extensional representation of a finite portion of $V^*$ would be:
+
+$$V^* = \{\epsilon,a,b,aa,ab,ba,bb,aaa,aab,aba,abb,baa,bab,bba,bbb,...\}$$
+
+We can now easily see that an alternative definition of language could be any subset of the universe language of a given vocabulary $V$.
+
+Now let's take it up a notch. We can come up with a gazillion languages just involving $a$ and $b$, by concocting different relationships between the symbols.
+For this, we will need some way to describe the languages that doesn't require listing all the elements--as they are infinitely many. We can do it with natural language, of course, but in the long run it will pay to be a slightly more formal when describing infinite languages.
+
+For example, let $L_2$ be the language of strings over the alphabet $V=\{a,b\}$ that has the exact same number of $a$ and $b$.
+
+$$L_2 = \{\epsilon, ab, aabb, abab, baba, baab, abba, ...\}$$
+
+We can define it with a bit of math syntax sugar as follows:
+
+$$L_2 = \{ \omega \in \{a,b\}^* | \#(a,\omega) = \#(b,\omega) \}$$
+
+Let's unpack this definition. We start by saying, $\omega in \{a,b\}^*$, which literaly parses to "strings $\omega$ in the universe language of the vocabulary $\{a,b\}$". This is just standard notation to say "string made out of $a$ and $b$. Then we add the conditional part $\#(a,\omega) = \#(b,\omega)$ which should be pretty straightforward: we are using the $\#(\mathrm{<symbol>},\mathrm{<string>})$ notation to denote the function that counts a given symbol in a string.
+
+$L_2$ is slightly more interesting than $V^*$ because it introduces the notion that _a formal language is equivalent to a computation_. This insight is the fundamental idea that links formal language and computability theories, and we will formalize this idea in the next section. But first, let's see other, even more interesting languages, to solidify this intuition that _languages equal computation_.
+
+Let's define $L_3$ as the language of all strings in $V^*$ where the number $a$ is a prime factor of the number of $b$. Intuitively, working with this language--e.g., finding valid strings--will require us to solve prime factoring, as any question about $L$ that has different answers for string in $L$ than for strings not in $L$ will necessarily go through what it means for a number to be a prime factor of another.
+
+But it gets better. We can define the language of all strings made out of $a$ and $b$ such that, when interpreting $a$ as $0$ and $b$ as $1$, the resulting binary number has any property we want. We can thus codify all problems in number theory as problems in formal language theory.
+
+And, as you can probably understand already, we can easily codify _any_ mathematical problem, not just about number theory. Ultimately, we can define a language as the set of strings that are valid input/ouput pairs for any specific problem we can come up with. Let's make this intuition formal.
+
+## Recognizing a language
+
+The central problem is formal language theory is called _the word problem_. Intuitively, it is about determining whether a given string is part of a language, or not. Formally:
+
+::: {#def-word-problem}
+### The Word Problem
+
+Given a language $L$ on some vocabulary $V$, the word problem is defined as devising a procedure that, for any string $\omega \in V^*$, determines where $\omega \in L$.
+:::
+
+Notice that we didn't define the word problem simply as "given a language $L$ and a string $\omega$, is \$omega \in L$". Why? Because we might be able to answer that question correctly _only_ for some $\omega$, but not all. Instead, the word problem is coming up with an algorithm that answers for _all_ possible strings $\omega$--technically, a _procedure_, which is not exactly the same, we will see the details in @sec-computability.
+
+The word problem is the most important question in formal language theory, and one of the central problems in computer science in general. So much so, that we actually classify languages (and by extension, all computer science problems) according to how easy or hard it is to solve their related word problem.
+
+In the next few chapters, we will review different _classes_ of languages that have certain common characterists which make them, in a sense, equally complex. But first, let's see what it would take to solve the word problem in our example languages.
+
+Solving the word problem in any finite language is trivial. You only need to iterate through all of the strings in the language. The word problem becomes way more interesting when we have infinite languages. In these cases, we need to define a _recognizer mechanism_, that is, some sort of computational algorithm or procedure to determine whether any particular string is part of the language.
+
+For example, language $L_2$ has a very simple solution to the word problem. The following Python program gets the job done:
+
+```python
+def l2(s):
+    a,b = 0,0
+
+    for c in s:
+        if c == "a":
+            a += 1
+        else:
+            b += 1
+    return a == b
+```
+
+One fundamental question in formal language theory is not only coming up with a solution to the word problem for a given language but, actually, coming up with the _simplest_ solution--for a very specific definition of _simple_: how much do you need to remember.
+
+For example, we can solve $L_2$ with $O(n)$ memory. That is, we need to remember something that is proportional to how many $a$'s or $b$'s are in the string. And we cannot do it with less, as we will prove a couple chapters down the road.
+
+Now, let's turn to the opposite problem, that of generating strings from a given language, and wonder what, if any, is the connection between these two.
+
+## Generating a language
