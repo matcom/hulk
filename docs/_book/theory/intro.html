@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -132,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
- <span class="menu-text">Parsing</span></a>
+ <span class="menu-text">Lexers and Parsers</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -275,13 +304,37 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../instructors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#what-is-a-language" id="toc-what-is-a-language" class="nav-link active" data-scroll-target="#what-is-a-language"><span class="header-section-number">1.1</span> What is a language</a></li>
+  <li><a href="#examples-of-languages" id="toc-examples-of-languages" class="nav-link" data-scroll-target="#examples-of-languages"><span class="header-section-number">1.2</span> Examples of languages</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -305,8 +358,39 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>At its core, a compiler is a translator between two languages: the source language (Python, C#, Java, HULK, etc) and the target language (Assembly, C, LLVM, MIPS, etc). Thus, it will pay of to study languages from a computational perspective.</p>
+<p>In this first part of the book, we introduce Formal Language Theory, a major field in Computer Science that deals with an abstract notion of language. Formal Language Theory is one of the foundational fields in CS, and its early development during the 60s and 70s laid the grounds for many of the most important theoretical results in Computer Science.</p>
+<p>So, although our focus in this book is on building compilers, in the next few chapters we will forget about them for a while, and just look at languages as mathematical constructions. We will prove a bunch of surprising theorems and discover a breadth of theory that touches upon all parts of Computer Science. Towards the end of this part, we will peek outside formal languages and look at some of the most interesting connections with computability theory, computational complexity, artificial intelligence, and everything else.</p>
+<p>But let’s start at the basics.</p>
+<section id="what-is-a-language" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-a-language"><span class="header-section-number">1.1</span> What is a language</h2>
+<p>Intuitively, a language is just a collection of correct sentences. In natural languages (Spanish, English, etc,), each sentence is made up of words, which have some intrinsic meaning, and there are rules that describe which sequences of words are valid.</p>
+<p>Some of these rules, which we often call “syntactic” are just about the structure of words and sentences, and not their meaning–like how nouns and adjectives must match in gender and number or how verbs connect to adverbs and other modifiers. Other rules, which we call “semantic”, deal with the valid meanings of collections of words–the reason why the sentence “the salad was happy” is perfectly valid syntactically but makes no sense. In linguistics, the set of rules that determine which sentences are valid is called a “grammar”.</p>
+<p>In formal language theory, we want to make all these notions as precise as possible in mathematical terms. To achieve so, we will have to make some simplifications which, ultimately, will imply that natural languages fall outside the scope of what formal language theory can fully study. But these simplifications will enable us to define a very robust notion of language for which we can make pretty strong theoretical claims.</p>
+<p>So let’s build this definition from the ground up, starting with our notion of words, or, formally, symbols:</p>
+<div id="def-symbol" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.1 (Symbol)</strong></span> A symbol is an atomic element that has an intrinsic meaning.</p>
+</div>
+<p>Examples of symbols in abstract languages might be single letters like <code>a</code>, <code>b</code> or <code>c</code>. In programming languages, a symbol might be a variable name, a number, or a keyword like <code>for</code> or <code>class</code>. The next step is to define sentences:</p>
+<div id="def-sentence" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.2 (Sentence)</strong></span> A sentence is a finite sequence of symbols.</p>
+</div>
+<p>An example of a sentence formed with the symbols <code>a</code> and <code>b</code> is <code>abba</code>. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.</p>
+<p>We are almost ready to define a language. But before, we need to define a “vocabulary”, which is just a collection of valid symbols.</p>
+<div id="def-vocabulary" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.3 (Vocabulary)</strong></span> A vocabulary <span class="math inline">\(V\)</span> is a finite set of symbols.</p>
+</div>
+<p>Given a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.</p>
+<div id="def-language" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 1.4 (Language)</strong></span> Given a vocabulary <span class="math inline">\(V\)</span>, a language <span class="math inline">\(L\)</span> is a set of sentences with symbols taken from <span class="math inline">\(V\)</span>.</p>
+</div>
+<p>Let’s see some examples.</p>
+</section>
+<section id="examples-of-languages" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="examples-of-languages"><span class="header-section-number">1.2</span> Examples of languages</h2>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

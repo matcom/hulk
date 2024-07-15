@@ -5,12 +5,13 @@ book:
   title: "The Hitchhiker's Guide to Compilers"
   author: "Alejandro Piad Morffis"
   date: "7/12/2024"
+  cover-image: cover.png
   chapters:
     - index.qmd
     - part: Formal Language Theory
       chapters:
         - "theory/intro.qmd"
-    - part: Parsing
+    - part: Lexers and Parsers
       chapters:
         - "parsing/intro.qmd"
     - part: Programing Languages
@@ -35,6 +36,8 @@ book:
         - guide/vectors.md
         - guide/functors.md
         - guide/macros.md
+  appendices:
+    - instructors.qmd
 
 bibliography: references.bib
 
@@ -43,3 +46,5 @@ format:
     theme: cosmo
   pdf:
     documentclass: scrreprt
+  epub:
+    epub-cover-image: cover.png

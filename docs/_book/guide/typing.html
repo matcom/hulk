@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 8&nbsp; Type checking</title>
+<title>The Hitchhiker’s Guide to Compilers - 12&nbsp; Type checking</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -149,7 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">The HULK Programming Language</span></a>
+ <span class="menu-text">Formal Language Theory</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -157,86 +157,154 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../theory/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Formal Languages</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Lexers and Parsers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../parsing/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Parsing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programing Languages</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../semantics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Runtime Environments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../runtime/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code Generation and Execution</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">The HULK Programming Language</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to HULK</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/expressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/typing.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Type checking</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Type inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/protocols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/iterables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Iterables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/functors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Functors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/macros.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
   </div>
 </li>
       </ul>
@@ -251,21 +319,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#typing-variables" id="toc-typing-variables" class="nav-link active" data-scroll-target="#typing-variables"><span class="header-section-number">8.1</span> Typing variables</a></li>
-  <li><a href="#typing-functions-and-methods" id="toc-typing-functions-and-methods" class="nav-link" data-scroll-target="#typing-functions-and-methods"><span class="header-section-number">8.2</span> Typing functions and methods</a></li>
-  <li><a href="#typing-attributes-and-type-arguments" id="toc-typing-attributes-and-type-arguments" class="nav-link" data-scroll-target="#typing-attributes-and-type-arguments"><span class="header-section-number">8.3</span> Typing attributes and type arguments</a></li>
-  <li><a href="#type-conforming" id="toc-type-conforming" class="nav-link" data-scroll-target="#type-conforming"><span class="header-section-number">8.4</span> Type conforming</a></li>
-  <li><a href="#testing-for-dynamic-types" id="toc-testing-for-dynamic-types" class="nav-link" data-scroll-target="#testing-for-dynamic-types"><span class="header-section-number">8.5</span> Testing for dynamic types</a></li>
-  <li><a href="#downcasting" id="toc-downcasting" class="nav-link" data-scroll-target="#downcasting"><span class="header-section-number">8.6</span> Downcasting</a></li>
+  <li><a href="#typing-variables" id="toc-typing-variables" class="nav-link active" data-scroll-target="#typing-variables"><span class="header-section-number">12.1</span> Typing variables</a></li>
+  <li><a href="#typing-functions-and-methods" id="toc-typing-functions-and-methods" class="nav-link" data-scroll-target="#typing-functions-and-methods"><span class="header-section-number">12.2</span> Typing functions and methods</a></li>
+  <li><a href="#typing-attributes-and-type-arguments" id="toc-typing-attributes-and-type-arguments" class="nav-link" data-scroll-target="#typing-attributes-and-type-arguments"><span class="header-section-number">12.3</span> Typing attributes and type arguments</a></li>
+  <li><a href="#type-conforming" id="toc-type-conforming" class="nav-link" data-scroll-target="#type-conforming"><span class="header-section-number">12.4</span> Type conforming</a></li>
+  <li><a href="#testing-for-dynamic-types" id="toc-testing-for-dynamic-types" class="nav-link" data-scroll-target="#testing-for-dynamic-types"><span class="header-section-number">12.5</span> Testing for dynamic types</a></li>
+  <li><a href="#downcasting" id="toc-downcasting" class="nav-link" data-scroll-target="#downcasting"><span class="header-section-number">12.6</span> Downcasting</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/typing.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Type checking</span></h1>
+<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></h1>
 </div>
 
 
@@ -291,22 +359,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>in type arguments.</li>
 </ul>
 <p>Let’s see an example of each case.</p>
-<section id="typing-variables" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="typing-variables"><span class="header-section-number">8.1</span> Typing variables</h2>
+<section id="typing-variables" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="typing-variables"><span class="header-section-number">12.1</span> Typing variables</h2>
 <p>Variables can be explicitely type-annotated in <code>let</code> expressions with the following syntax:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x<span class="op">:</span> <span class="bu">Number</span> <span class="op">=</span> <span class="dv">42</span> <span class="kw">in</span> <span class="fu">print</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The type checker will verify that the type inferred for the initialization expression is compatible with (formally, <a href="../#type-conforming">conforms to</a>) the annotated type.</p>
 </section>
-<section id="typing-functions-and-methods" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="typing-functions-and-methods"><span class="header-section-number">8.2</span> Typing functions and methods</h2>
+<section id="typing-functions-and-methods" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="typing-functions-and-methods"><span class="header-section-number">12.2</span> Typing functions and methods</h2>
 <p>All or a subset of a function’s or method’s arguments, and its return value, can be type-annotated with a similar syntax:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">tan</span>(x<span class="op">:</span> <span class="bu">Number</span>)<span class="op">:</span> <span class="bu">Number</span> <span class="kw">=&gt;</span> <span class="fu">sin</span>(x) <span class="op">/</span> <span class="fu">cos</span>(x)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>On the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about <a href="../guide/type_semantics">type semantics</a>. The type checker will also verify that the return type of the body conforms to the annotated return type.</p>
 <p>On the invocation side, the type checker will verify that the values passed as parameters conform to the annotated types.</p>
 <p>Inside methods of a type <code>T</code>, the implicitly defined <code>self</code> symbol is always assumed as if annotated with type <code>T</code>.</p>
 </section>
-<section id="typing-attributes-and-type-arguments" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="typing-attributes-and-type-arguments"><span class="header-section-number">8.3</span> Typing attributes and type arguments</h2>
+<section id="typing-attributes-and-type-arguments" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="typing-attributes-and-type-arguments"><span class="header-section-number">12.3</span> Typing attributes and type arguments</h2>
 <p>In type definitions, attributes and type arguments can be type-annotated as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>type <span class="bu">Point</span>(x<span class="op">:</span> <span class="bu">Number</span><span class="op">,</span> y<span class="op">:</span> <span class="bu">Number</span>) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> <span class="bu">Number</span> <span class="op">=</span> x<span class="op">;</span></span>
@@ -316,8 +384,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The type checker will verify that type arguments are used consistently inside attribute initialization expressions, and that the inferred type for each attribute initialization expression conforms to the attribute annotation.</p>
 </section>
-<section id="type-conforming" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="type-conforming"><span class="header-section-number">8.4</span> Type conforming</h2>
+<section id="type-conforming" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="type-conforming"><span class="header-section-number">12.4</span> Type conforming</h2>
 <p>The basic type relation in HULK is called <em>conforming</em> (<code>&lt;=</code>). A type <code>T1</code> is said to <em>conform to</em> to another type <code>T2</code> (writen as <code>T1 &lt;= T2</code>) if a variable of type <code>T2</code> can hold a value of type <code>T1</code> such that every possible operation that is semantically valid with <code>T2</code> is guaranteed to be semantically valid with <code>T1</code>.</p>
 <p>In general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).</p>
 <p>The following rules provide an initial definition for the <em>conforming</em> relationship. The formal definition is given in the section about <a href="../guide/type_semantics">type semantics</a>.</p>
@@ -333,8 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>NOTE</strong>: this conforming relationship is extended when we add <a href="../guide/protocols">protocols</a>.</p>
 </blockquote>
 </section>
-<section id="testing-for-dynamic-types" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="testing-for-dynamic-types"><span class="header-section-number">8.5</span> Testing for dynamic types</h2>
+<section id="testing-for-dynamic-types" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="testing-for-dynamic-types"><span class="header-section-number">12.5</span> Testing for dynamic types</h2>
 <p>The <code>is</code> operator allows to test an object to check whether its dynamic type conforms to a specific static type.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>type Bird {</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
@@ -356,8 +424,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    )<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In general, before the <code>is</code> operator you can put any expression, not just a variable.</p>
 </section>
-<section id="downcasting" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="downcasting"><span class="header-section-number">8.6</span> Downcasting</h2>
+<section id="downcasting" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="downcasting"><span class="header-section-number">12.6</span> Downcasting</h2>
 <p>You can use the <code>as</code> operator to downcast an expression to a given static type. The result is a runtime error if the expression is not a suitable dynamic type, which means you should always test if you’re unsure:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>type A {</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
@@ -774,12 +842,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../guide/types.html" class="pagination-link" aria-label="Types">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Types</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../guide/inference.html" class="pagination-link" aria-label="Type inference">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Type inference</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

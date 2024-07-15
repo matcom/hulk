@@ -4,796 +4,757 @@
     "href": "index.html",
     "title": "The Hitchhiker’s Guide to Compilers",
     "section": "",
-    "text": "Preface",
+    "text": "Preface\nThis book is about making compilers. A compiler is one of the most exciting (and complex) software projects you could get into.",
     "crumbs": [
       "Preface"
-    ]
-  },
-  {
-    "objectID": "intro.html",
-    "href": "intro.html",
-    "title": "1  Introduction to HULK",
-    "section": "",
-    "text": "1.1 A didactic language\nThe HULK language has been designed as a mechanism for learning and evaluating a college course about compilers. For this reason, certain language design decisions respond more to didactic questions than to theoretical or pragmatic questions. An illustrative example is the inclusion of a single basic numerical type. In practice, programming languages have several numeric types (int, float, double, decimal) to cover the wide range of trade-off between efficiency and expressivity. However, from the didactic point of view, it is enough complexity to have to deal with a numerical type, and the inclusion of others does not bring anything new from our point of view.\nAnother important decision is the static typing with type inference, which will be explained later in detail. The motivation behind this feature is to allow students to first implement an evaluator for the language, and then worry about type verification. Likewise, the decision to have global expressions, global functions, and classes, responds to the need to introduce the various elements of language little by little. By having global expressions, it is possible to implement an expression interpreter without the need to solve context-sensitive problems. Later, students can implement functions and finally the object-oriented features. In this way students can learn on the fly as they add characteristics to the language, always having a valid subset of the language implemented.",
-    "crumbs": [
-      "The HULK Programming Language",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to HULK</span>"
-    ]
-  },
-  {
-    "objectID": "summary.html",
-    "href": "summary.html",
-    "title": "2  Summary",
-    "section": "",
-    "text": "In summary, this book has no content whatsoever.",
-    "crumbs": [
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Summary</span>"
-    ]
-  },
-  {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
-    ]
-  },
-  {
-    "objectID": "index.html#a-didactic-language",
-    "href": "index.html#a-didactic-language",
-    "title": "The Hitchhiker’s Guide to Compilers",
-    "section": "A didactic language",
-    "text": "A didactic language\nThe HULK language has been designed as a mechanism for learning and evaluating a college course about compilers. For this reason, certain language design decisions respond more to didactic questions than to theoretical or pragmatic questions. An illustrative example is the inclusion of a single basic numerical type. In practice, programming languages have several numeric types (int, float, double, decimal) to cover the wide range of trade-off between efficiency and expressivity. However, from the didactic point of view, it is enough complexity to have to deal with a numerical type, and the inclusion of others does not bring anything new from our point of view.\nAnother important decision is the static typing with type inference, which will be explained later in detail. The motivation behind this feature is to allow students to first implement an evaluator for the language, and then worry about type verification. Likewise, the decision to have global expressions, global functions, and classes, responds to the need to introduce the various elements of language little by little. By having global expressions, it is possible to implement an expression interpreter without the need to solve context-sensitive problems. Later, students can implement functions and finally the object-oriented features. In this way students can learn on the fly as they add characteristics to the language, always having a valid subset of the language implemented.",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
-    "objectID": "index.html#an-incremental-language",
-    "href": "index.html#an-incremental-language",
-    "title": "The Hitchhiker’s Guide to Compilers",
-    "section": "An incremental language",
-    "text": "An incremental language\nAs its name indicates, HULK is a huge language. Actually, the HULK language really is not really a single programming language, but a set of programming languages. That is, HULK is designed as a set of layers, each with a new language feature that add increasingly more complex functionalities on top of the previous layers. It starts with a basic syntax for expressions, then global functions, and then a unified type system with simple inheritance. Afterwards, HULK grows to contain arrays, delegates, type inference, iterators, among other characteristics. All these language features have been designed to be compatible with each other. Furthermore, each language feature clearly describes on which other language features it depends.\nThis design has been conceived to allow the use of HULK at a wide range of learning levels. As a language of expressions and functions, it is useful for introductory courses on parsing and basic compilation techniques. Object orientation introduces a whole universe of semantic complexities; however, the HULK type system is simple enough to illustrate the most common problems in semantic type verification. Vectors introduce problems related to memory management, while anonymous functions and iterators are fundamentally problems of transpilation and code generation. The inference of types and the verification of null-safety is an exercise in logical inference, which can be used in advanced courses. The idea is that each course defines its objectives of interest, and can use an appropriate subset of HULK to illustrate and evaluate them.",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
-    "objectID": "index.html#banner-intermediate-representation",
-    "href": "index.html#banner-intermediate-representation",
-    "title": "The Hitchhiker’s Guide to Compilers",
-    "section": "BANNER: Intermediate Representation",
-    "text": "BANNER: Intermediate Representation\nEven though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it’s called BANNER – Basic 3-Adress liNear iNtEmediate Representation.",
-    "crumbs": [
-      "Preface"
-    ]
-  },
-  {
-    "objectID": "intro.html#an-incremental-language",
-    "href": "intro.html#an-incremental-language",
-    "title": "1  Introduction to HULK",
-    "section": "1.2 An incremental language",
-    "text": "1.2 An incremental language\nAs its name indicates, HULK is a huge language. Actually, the HULK language really is not really a single programming language, but a set of programming languages. That is, HULK is designed as a set of layers, each with a new language feature that add increasingly more complex functionalities on top of the previous layers. It starts with a basic syntax for expressions, then global functions, and then a unified type system with simple inheritance. Afterwards, HULK grows to contain arrays, delegates, type inference, iterators, among other characteristics. All these language features have been designed to be compatible with each other. Furthermore, each language feature clearly describes on which other language features it depends.\nThis design has been conceived to allow the use of HULK at a wide range of learning levels. As a language of expressions and functions, it is useful for introductory courses on parsing and basic compilation techniques. Object orientation introduces a whole universe of semantic complexities; however, the HULK type system is simple enough to illustrate the most common problems in semantic type verification. Vectors introduce problems related to memory management, while anonymous functions and iterators are fundamentally problems of transpilation and code generation. The inference of types and the verification of null-safety is an exercise in logical inference, which can be used in advanced courses. The idea is that each course defines its objectives of interest, and can use an appropriate subset of HULK to illustrate and evaluate them.",
-    "crumbs": [
-      "The HULK Programming Language",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to HULK</span>"
-    ]
-  },
-  {
-    "objectID": "intro.html#banner-intermediate-representation",
-    "href": "intro.html#banner-intermediate-representation",
-    "title": "1  Introduction to HULK",
-    "section": "1.3 BANNER: Intermediate Representation",
-    "text": "1.3 BANNER: Intermediate Representation\nEven though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it’s called BANNER – Basic 3-Adress liNear iNtEmediate Representation.",
-    "crumbs": [
-      "The HULK Programming Language",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to HULK</span>"
     ]
   },
   {
     "objectID": "guide/intro.html",
     "href": "guide/intro.html",
-    "title": "2  Introduction",
+    "title": "5  Introduction",
     "section": "",
-    "text": "2.1 A didactic language\nThe HULK language has been designed as a mechanism for learning and evaluating a college course about compilers. For this reason, certain language design decisions respond more to didactic questions than to theoretical or pragmatic questions. An illustrative example is the inclusion of a single basic numerical type. In practice, programming languages have several numeric types (int, float, double, decimal) to cover the wide range of trade-off between efficiency and expressivity. However, from the didactic point of view, it is enough complexity to have to deal with a numerical type, and the inclusion of others does not bring anything new from our point of view.\nAnother important decision is the static typing with type inference, which will be explained later in detail. The motivation behind this feature is to allow students to first implement an evaluator for the language, and then worry about type verification. Likewise, the decision to have global expressions, global functions, and classes, responds to the need to introduce the various elements of language little by little. By having global expressions, it is possible to implement an expression interpreter without the need to solve context-sensitive problems. Later, students can implement functions and finally the object-oriented features. In this way students can learn on the fly as they add characteristics to the language, always having a valid subset of the language implemented.",
+    "text": "5.1 A didactic language\nThe HULK language has been designed as a mechanism for learning and evaluating a college course about compilers. For this reason, certain language design decisions respond more to didactic questions than to theoretical or pragmatic questions. An illustrative example is the inclusion of a single basic numerical type. In practice, programming languages have several numeric types (int, float, double, decimal) to cover the wide range of trade-off between efficiency and expressivity. However, from the didactic point of view, it is enough complexity to have to deal with a numerical type, and the inclusion of others does not bring anything new from our point of view.\nAnother important decision is the static typing with type inference, which will be explained later in detail. The motivation behind this feature is to allow students to first implement an evaluator for the language, and then worry about type verification. Likewise, the decision to have global expressions, global functions, and classes, responds to the need to introduce the various elements of language little by little. By having global expressions, it is possible to implement an expression interpreter without the need to solve context-sensitive problems. Later, students can implement functions and finally the object-oriented features. In this way students can learn on the fly as they add characteristics to the language, always having a valid subset of the language implemented.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
     "objectID": "guide/intro.html#an-incremental-language",
     "href": "guide/intro.html#an-incremental-language",
-    "title": "2  Introduction",
-    "section": "2.2 An incremental language",
-    "text": "2.2 An incremental language\nAs its name indicates, HULK is a huge language. Actually, the HULK language really is not really a single programming language, but a set of programming languages. That is, HULK is designed as a set of layers, each with a new language feature that add increasingly more complex functionalities on top of the previous layers. It starts with a basic syntax for expressions, then global functions, and then a unified type system with simple inheritance. Afterwards, HULK grows to contain arrays, delegates, type inference, iterators, among other characteristics. All these language features have been designed to be compatible with each other. Furthermore, each language feature clearly describes on which other language features it depends.\nThis design has been conceived to allow the use of HULK at a wide range of learning levels. As a language of expressions and functions, it is useful for introductory courses on parsing and basic compilation techniques. Object orientation introduces a whole universe of semantic complexities; however, the HULK type system is simple enough to illustrate the most common problems in semantic type verification. Vectors introduce problems related to memory management, while anonymous functions and iterators are fundamentally problems of transpilation and code generation. The inference of types and the verification of null-safety is an exercise in logical inference, which can be used in advanced courses. The idea is that each course defines its objectives of interest, and can use an appropriate subset of HULK to illustrate and evaluate them.",
+    "title": "5  Introduction",
+    "section": "5.2 An incremental language",
+    "text": "5.2 An incremental language\nAs its name indicates, HULK is a huge language. Actually, the HULK language really is not really a single programming language, but a set of programming languages. That is, HULK is designed as a set of layers, each with a new language feature that add increasingly more complex functionalities on top of the previous layers. It starts with a basic syntax for expressions, then global functions, and then a unified type system with simple inheritance. Afterwards, HULK grows to contain arrays, delegates, type inference, iterators, among other characteristics. All these language features have been designed to be compatible with each other. Furthermore, each language feature clearly describes on which other language features it depends.\nThis design has been conceived to allow the use of HULK at a wide range of learning levels. As a language of expressions and functions, it is useful for introductory courses on parsing and basic compilation techniques. Object orientation introduces a whole universe of semantic complexities; however, the HULK type system is simple enough to illustrate the most common problems in semantic type verification. Vectors introduce problems related to memory management, while anonymous functions and iterators are fundamentally problems of transpilation and code generation. The inference of types and the verification of null-safety is an exercise in logical inference, which can be used in advanced courses. The idea is that each course defines its objectives of interest, and can use an appropriate subset of HULK to illustrate and evaluate them.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
     "objectID": "guide/intro.html#banner-intermediate-representation",
     "href": "guide/intro.html#banner-intermediate-representation",
-    "title": "2  Introduction",
-    "section": "2.3 BANNER: Intermediate Representation",
-    "text": "2.3 BANNER: Intermediate Representation\nEven though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it’s called BANNER – Basic 3-Adress liNear iNtEmediate Representation.",
+    "title": "5  Introduction",
+    "section": "5.3 BANNER: Intermediate Representation",
+    "text": "5.3 BANNER: Intermediate Representation\nEven though HULK can be defined without specific compilation details, we also provide a didactic 3-address code for intermediate representation that is convenient to use with HULK. For obvious reasons, it’s called BANNER – Basic 3-Adress liNear iNtEmediate Representation.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Introduction</span>"
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Introduction</span>"
     ]
   },
   {
     "objectID": "guide/expressions.html",
     "href": "guide/expressions.html",
-    "title": "2  Expressions",
+    "title": "6  Expressions",
     "section": "",
-    "text": "2.1 Arithmetic expressions\nHULK defines three types of literal values: numbers, strings, and booleans. We will leave strings and booleans for later.\nNumbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: + (addition), - (subtraction), * (multiplication), \\ (floating-point division), ^ (power), and parenthesized sub-expressions.\nThe following is a valid HULK program that computes and prints the result of a rather useless arithmetic expression:\nAll usual syntactic and precedence rules apply.",
+    "text": "6.1 Arithmetic expressions\nHULK defines three types of literal values: numbers, strings, and booleans. We will leave strings and booleans for later.\nNumbers are 32-bit floating-point and support all basic arithmetic operations with the usual semantics: + (addition), - (subtraction), * (multiplication), \\ (floating-point division), ^ (power), and parenthesized sub-expressions.\nThe following is a valid HULK program that computes and prints the result of a rather useless arithmetic expression:\nAll usual syntactic and precedence rules apply.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Expressions</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expressions</span>"
     ]
   },
   {
     "objectID": "guide/expressions.html#arithmetic-expressions",
     "href": "guide/expressions.html#arithmetic-expressions",
-    "title": "2  Expressions",
+    "title": "6  Expressions",
     "section": "",
     "text": "print((((1 + 2) ^ 3) * 4) / 5);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Expressions</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expressions</span>"
     ]
   },
   {
     "objectID": "guide/expressions.html#strings",
     "href": "guide/expressions.html#strings",
-    "title": "2  Expressions",
-    "section": "2.2 Strings",
-    "text": "2.2 Strings\nString literals in HULK are defined within enclosed double-quotes (\"), such as in:\nprint(\"Hello World\");\nA double-quote can be included literally by escaping it:\nprint(\"The message is \\\"Hello World\\\"\");\nOther escaped characters are \\n for line endings, and \\t for tabs.\nStrings can be concatenated with other strings (or the string representation of numbers) using the @ operator:\nprint(\"The meaning of life is \" @ 42);",
+    "title": "6  Expressions",
+    "section": "6.2 Strings",
+    "text": "6.2 Strings\nString literals in HULK are defined within enclosed double-quotes (\"), such as in:\nprint(\"Hello World\");\nA double-quote can be included literally by escaping it:\nprint(\"The message is \\\"Hello World\\\"\");\nOther escaped characters are \\n for line endings, and \\t for tabs.\nStrings can be concatenated with other strings (or the string representation of numbers) using the @ operator:\nprint(\"The meaning of life is \" @ 42);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Expressions</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expressions</span>"
     ]
   },
   {
     "objectID": "guide/expressions.html#builtin-math-functions-and-constants",
     "href": "guide/expressions.html#builtin-math-functions-and-constants",
-    "title": "2  Expressions",
-    "section": "2.3 Builtin math functions and constants",
-    "text": "2.3 Builtin math functions and constants\nBesides print, HULK also provides some common mathematical operations encapsulated as builtin functions with their usual semantics. The list of builtin math functions is the following:\n\nsqrt(&lt;value&gt;) computes the square root if a value.\nsin(&lt;angle&gt;) computes the sine of an angle in radians.\ncos(&lt;angle&gt;) computes the cosine of an angle in radians.\nexp(&lt;value&gt;) computes the value of e raised to a value.\nlog(&lt;base&gt;, &lt;value&gt;) computes the logarithm of a value in a given base.\nrand() returns a random uniform number between 0 and 1 (both inclusive).\n\nBesides these functions, HULK also ships with two global constants: PI and E which represent the floating-point value of these mathematical constants.\nAs expected, functions can be nested in HULK (provided the use of types is consistent, but so far all we care about is functions from numbers to numbers, so we can forget about types until later on). Hence, the following is a valid HULK program.\nprint(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));\nMore formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function, and you can freely mix arithmetic expressions and mathematical functions, as you would expect in any programming language.",
+    "title": "6  Expressions",
+    "section": "6.3 Builtin math functions and constants",
+    "text": "6.3 Builtin math functions and constants\nBesides print, HULK also provides some common mathematical operations encapsulated as builtin functions with their usual semantics. The list of builtin math functions is the following:\n\nsqrt(&lt;value&gt;) computes the square root if a value.\nsin(&lt;angle&gt;) computes the sine of an angle in radians.\ncos(&lt;angle&gt;) computes the cosine of an angle in radians.\nexp(&lt;value&gt;) computes the value of e raised to a value.\nlog(&lt;base&gt;, &lt;value&gt;) computes the logarithm of a value in a given base.\nrand() returns a random uniform number between 0 and 1 (both inclusive).\n\nBesides these functions, HULK also ships with two global constants: PI and E which represent the floating-point value of these mathematical constants.\nAs expected, functions can be nested in HULK (provided the use of types is consistent, but so far all we care about is functions from numbers to numbers, so we can forget about types until later on). Hence, the following is a valid HULK program.\nprint(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));\nMore formally, function invocation is also an expression in HULK, so everywhere you expect an expression you can also put a call to builtin function, and you can freely mix arithmetic expressions and mathematical functions, as you would expect in any programming language.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Expressions</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expressions</span>"
     ]
   },
   {
     "objectID": "guide/expressions.html#expression-blocks",
     "href": "guide/expressions.html#expression-blocks",
-    "title": "2  Expressions",
-    "section": "2.4 Expression blocks",
-    "text": "2.4 Expression blocks\nAnywhere an expression is allowed (or almost), you can also use an expression block, which is nothing but a series of expressions between curly braces ({ and }), and separated by ;.\nThe most trivial usage of expression blocks is to allow multiple print statements as the body of a program. For example, the following is a valid HULK program:\n{\n    print(42);\n    print(sin(PI/2));\n    print(\"Hello World\");\n}\nWhen you use an expression block instead of a single expression, it is often not necessary to end with a semicolon (;), but it is not erroneous to do so either.",
+    "title": "6  Expressions",
+    "section": "6.4 Expression blocks",
+    "text": "6.4 Expression blocks\nAnywhere an expression is allowed (or almost), you can also use an expression block, which is nothing but a series of expressions between curly braces ({ and }), and separated by ;.\nThe most trivial usage of expression blocks is to allow multiple print statements as the body of a program. For example, the following is a valid HULK program:\n{\n    print(42);\n    print(sin(PI/2));\n    print(\"Hello World\");\n}\nWhen you use an expression block instead of a single expression, it is often not necessary to end with a semicolon (;), but it is not erroneous to do so either.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Expressions</span>"
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Expressions</span>"
     ]
   },
   {
     "objectID": "guide/functions.html",
     "href": "guide/functions.html",
-    "title": "3  Functions",
+    "title": "7  Functions",
     "section": "",
-    "text": "3.1 Inline functions\nThe easiest way to define a function is the inline form. Here’s an example:\nAn inline function is defined by an identifier followed by arguments between parenthesis, then the =&gt; symbol, and then a simple expression (not an expression block) as body, ending in ;.\nIn HULK, all functions must be defined before the final global expression. All these functions live in a single global namespace, hence it is not allowed to repeat function names. Similarly, there are no overloads in HULK (at least in “basic” HULK).\nFinally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:\nAnd of course, inline functions (and any other type of function) can call themselves recursively.",
+    "text": "7.1 Inline functions\nThe easiest way to define a function is the inline form. Here’s an example:\nAn inline function is defined by an identifier followed by arguments between parenthesis, then the =&gt; symbol, and then a simple expression (not an expression block) as body, ending in ;.\nIn HULK, all functions must be defined before the final global expression. All these functions live in a single global namespace, hence it is not allowed to repeat function names. Similarly, there are no overloads in HULK (at least in “basic” HULK).\nFinally, the body of any function can use other functions, regardless of whether they are defined before or after the corresponding function. Thus, the following is a valid HULK program:\nAnd of course, inline functions (and any other type of function) can call themselves recursively.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Functions</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Functions</span>"
     ]
   },
   {
     "objectID": "guide/functions.html#inline-functions",
     "href": "guide/functions.html#inline-functions",
-    "title": "3  Functions",
+    "title": "7  Functions",
     "section": "",
     "text": "function tan(x) =&gt; sin(x) / cos(x);\n\n\n\nfunction cot(x) =&gt; 1 / tan(x);\nfunction tan(x) =&gt; sin(x) / cos(x);\n\nprint(tan(PI) ** 2 + cot(PI) ** 2);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Functions</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Functions</span>"
     ]
   },
   {
     "objectID": "guide/functions.html#full-form-functions",
     "href": "guide/functions.html#full-form-functions",
-    "title": "3  Functions",
-    "section": "3.2 Full-form functions",
-    "text": "3.2 Full-form functions\nSince inline functions only allow for a single expression as body (as complex as that may be), HULK also allows full-form functions, in which the body is an expression block.\nHere’s an example of a rather useless function that prints 4 times:\nfunction operate(x, y) {\n    print(x + y);\n    print(x - y);\n    print(x * y);\n    print(x / y);\n}\nNote that the following form is discouraged for stylistic reasons:\nfunction id(&lt;args&gt;) =&gt; {\n    &lt;...&gt;\n}\nThat is, you should either use the inline form with =&gt; and a simple expression, or the full form with {} and an expression block.",
+    "title": "7  Functions",
+    "section": "7.2 Full-form functions",
+    "text": "7.2 Full-form functions\nSince inline functions only allow for a single expression as body (as complex as that may be), HULK also allows full-form functions, in which the body is an expression block.\nHere’s an example of a rather useless function that prints 4 times:\nfunction operate(x, y) {\n    print(x + y);\n    print(x - y);\n    print(x * y);\n    print(x / y);\n}\nNote that the following form is discouraged for stylistic reasons:\nfunction id(&lt;args&gt;) =&gt; {\n    &lt;...&gt;\n}\nThat is, you should either use the inline form with =&gt; and a simple expression, or the full form with {} and an expression block.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Functions</span>"
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Functions</span>"
     ]
   },
   {
     "objectID": "guide/variables.html",
     "href": "guide/variables.html",
-    "title": "4  Variables",
+    "title": "8  Variables",
     "section": "",
-    "text": "4.1 Multiple variables\nThe let expression admits defining multiple variables at once like this:\nThis is semantically equivalent to the following long form:\nAs you can notice, let associates to the right, so the previous is also equivalent to:",
+    "text": "8.1 Multiple variables\nThe let expression admits defining multiple variables at once like this:\nThis is semantically equivalent to the following long form:\nAs you can notice, let associates to the right, so the previous is also equivalent to:",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#multiple-variables",
     "href": "guide/variables.html#multiple-variables",
-    "title": "4  Variables",
+    "title": "8  Variables",
     "section": "",
     "text": "let number = 42, text = \"The meaning of life is\" in\n    print(text @ number);\n\nlet number = 42 in\n    let text = \"The meaning of life is\" in\n        print(text @ number);\n\nlet number = 42 in (\n    let text = \"The meaning of life is\" in (\n            print(text @ number)\n        )\n    );",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#scoping-rules",
     "href": "guide/variables.html#scoping-rules",
-    "title": "4  Variables",
-    "section": "4.2 Scoping rules",
-    "text": "4.2 Scoping rules\nSince the binding is performed left-to-right (or equivalently starting from the outer let), and every variable is effectively bound in a new scope, you can safely use one variable when defining another:\nlet a = 6, b = a * 7 in print(b);\nWhich is equivalent to (and thus valid):\nlet a = 6 in\n    let b = a * 7 in\n        print(b);",
+    "title": "8  Variables",
+    "section": "8.2 Scoping rules",
+    "text": "8.2 Scoping rules\nSince the binding is performed left-to-right (or equivalently starting from the outer let), and every variable is effectively bound in a new scope, you can safely use one variable when defining another:\nlet a = 6, b = a * 7 in print(b);\nWhich is equivalent to (and thus valid):\nlet a = 6 in\n    let b = a * 7 in\n        print(b);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#expression-block-body",
     "href": "guide/variables.html#expression-block-body",
-    "title": "4  Variables",
-    "section": "4.3 Expression block body",
-    "text": "4.3 Expression block body\nYou can also use an expression block as the body of a let expression:\nlet a = 5, b = 10, c = 20 in {\n    print(a+b);\n    print(b*c);\n    print(c/a);\n}\nAs we said before, semicolons (;) are seldom necessary after an expression block, but they are never wrong.",
+    "title": "8  Variables",
+    "section": "8.3 Expression block body",
+    "text": "8.3 Expression block body\nYou can also use an expression block as the body of a let expression:\nlet a = 5, b = 10, c = 20 in {\n    print(a+b);\n    print(b*c);\n    print(c/a);\n}\nAs we said before, semicolons (;) are seldom necessary after an expression block, but they are never wrong.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#the-let-return-value",
     "href": "guide/variables.html#the-let-return-value",
-    "title": "4  Variables",
-    "section": "4.4 The let return value",
-    "text": "4.4 The let return value\nAs with almost everything in HULK, let is an expression, so it has a return value, which is obviously the return value of its body. This means the following is a valid HULK program:\nlet a = (let b = 6 in b * 7) in print(a);\nOr more directly:\nprint(let b = 6 in b * 7);\nThis can be of course nested ad infinitum.",
+    "title": "8  Variables",
+    "section": "8.4 The let return value",
+    "text": "8.4 The let return value\nAs with almost everything in HULK, let is an expression, so it has a return value, which is obviously the return value of its body. This means the following is a valid HULK program:\nlet a = (let b = 6 in b * 7) in print(a);\nOr more directly:\nprint(let b = 6 in b * 7);\nThis can be of course nested ad infinitum.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#redefining-symbols",
     "href": "guide/variables.html#redefining-symbols",
-    "title": "4  Variables",
-    "section": "4.5 Redefining symbols",
-    "text": "4.5 Redefining symbols\nIn HULK every new scope hides the symbols from the parent scope, which means you can redefine a variable name in an inner let expression:\nlet a = 20 in {\n    let a = 42 in print(a);\n    print(a);\n}\nThe previous code prints 42 then 20, since the inner let redefines the value of a inside its scope, but the value outside is still the one defined by the outer let.\nAnd because of the scoping rules, the following is also valid:\nlet a = 7, a = 7 * 6 in print(a);\nWhich is equivalent to:\nlet a = 7 in\n    let a = 7 * 6 in\n        print(a);",
+    "title": "8  Variables",
+    "section": "8.5 Redefining symbols",
+    "text": "8.5 Redefining symbols\nIn HULK every new scope hides the symbols from the parent scope, which means you can redefine a variable name in an inner let expression:\nlet a = 20 in {\n    let a = 42 in print(a);\n    print(a);\n}\nThe previous code prints 42 then 20, since the inner let redefines the value of a inside its scope, but the value outside is still the one defined by the outer let.\nAnd because of the scoping rules, the following is also valid:\nlet a = 7, a = 7 * 6 in print(a);\nWhich is equivalent to:\nlet a = 7 in\n    let a = 7 * 6 in\n        print(a);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#destructive-assignment",
     "href": "guide/variables.html#destructive-assignment",
-    "title": "4  Variables",
-    "section": "4.6 Destructive assignment",
-    "text": "4.6 Destructive assignment\nMost of the time in HULK you won’t need to overwrite a variable, but there are cases where you do. In those cases, you can use the destructive assignment operator :=, like this:\nlet a = 0 in {\n    print(a);\n    a := 1;\n    print(a);\n}\nThe previous program prints 0 and then 1, since the value of a is overwritten before the second print. This is the only way in which a variable can be written to outside of a let.\nAs you would expect, the := operator defines an expression too, which returns the value just assigned, so you can do the following:\nlet a = 0 in\n    let b = a := 1 in {\n        print(a);\n        print(b);\n    };\nThis is useful if you want to evaluate a complex expression to both test it (e.g, to se if its greater than zero) and store it for later use.",
+    "title": "8  Variables",
+    "section": "8.6 Destructive assignment",
+    "text": "8.6 Destructive assignment\nMost of the time in HULK you won’t need to overwrite a variable, but there are cases where you do. In those cases, you can use the destructive assignment operator :=, like this:\nlet a = 0 in {\n    print(a);\n    a := 1;\n    print(a);\n}\nThe previous program prints 0 and then 1, since the value of a is overwritten before the second print. This is the only way in which a variable can be written to outside of a let.\nAs you would expect, the := operator defines an expression too, which returns the value just assigned, so you can do the following:\nlet a = 0 in\n    let b = a := 1 in {\n        print(a);\n        print(b);\n    };\nThis is useful if you want to evaluate a complex expression to both test it (e.g, to se if its greater than zero) and store it for later use.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/variables.html#rules-for-naming-identifiers",
     "href": "guide/variables.html#rules-for-naming-identifiers",
-    "title": "4  Variables",
-    "section": "4.7 Rules for naming identifiers",
-    "text": "4.7 Rules for naming identifiers\nVariables (and identifiers in general) in HULK can be named with any sequence of alphanumeric characters, plus underscore _, but must always begin with a letter (not a digit or _), hence the following are all valid identifiers:\n\nx\nx0\nx_0\nlowercase\nTitleCase\nsnake_case\ncamelCase\n\nThe following are invalid HULK identifiers:\n\n_x\nx+y\nsome method\n8ball\n\nAnd many others of course!\nSince starting with an underscore _ is invalid in HULK, you will notice that when we talk about transpilation in HULK, variables and identifiers in transpiled code always start with _.",
+    "title": "8  Variables",
+    "section": "8.7 Rules for naming identifiers",
+    "text": "8.7 Rules for naming identifiers\nVariables (and identifiers in general) in HULK can be named with any sequence of alphanumeric characters, plus underscore _, but must always begin with a letter (not a digit or _), hence the following are all valid identifiers:\n\nx\nx0\nx_0\nlowercase\nTitleCase\nsnake_case\ncamelCase\n\nThe following are invalid HULK identifiers:\n\n_x\nx+y\nsome method\n8ball\n\nAnd many others of course!\nSince starting with an underscore _ is invalid in HULK, you will notice that when we talk about transpilation in HULK, variables and identifiers in transpiled code always start with _.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Variables</span>"
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Variables</span>"
     ]
   },
   {
     "objectID": "guide/conditionals.html",
     "href": "guide/conditionals.html",
-    "title": "5  Conditionals",
+    "title": "9  Conditionals",
     "section": "",
-    "text": "5.1 Expression blocks in conditionals\nThe body of the if or the else part of a conditional (or both) can be an expression block as well:",
+    "text": "9.1 Expression blocks in conditionals\nThe body of the if or the else part of a conditional (or both) can be an expression block as well:",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Conditionals</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conditionals</span>"
     ]
   },
   {
     "objectID": "guide/conditionals.html#expression-blocks-in-conditionals",
     "href": "guide/conditionals.html#expression-blocks-in-conditionals",
-    "title": "5  Conditionals",
+    "title": "9  Conditionals",
     "section": "",
     "text": "let a = 42 in\n    if (a % 2 == 0) {\n        print(a);\n        print(\"Even\");\n    }\n    else print(\"Odd\");",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Conditionals</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conditionals</span>"
     ]
   },
   {
     "objectID": "guide/conditionals.html#multiple-branches",
     "href": "guide/conditionals.html#multiple-branches",
-    "title": "5  Conditionals",
-    "section": "5.2 Multiple branches",
-    "text": "5.2 Multiple branches\nThe if expression supports multiple branches with the elif construction, which introduces another conditioned branch:\nlet a = 42, let mod = a % 3 in\n    print(\n        if (mod == 0) \"Magic\"\n        elif (mod % 3 == 1) \"Woke\"\n        else \"Dumb\"\n    );",
+    "title": "9  Conditionals",
+    "section": "9.2 Multiple branches",
+    "text": "9.2 Multiple branches\nThe if expression supports multiple branches with the elif construction, which introduces another conditioned branch:\nlet a = 42, let mod = a % 3 in\n    print(\n        if (mod == 0) \"Magic\"\n        elif (mod % 3 == 1) \"Woke\"\n        else \"Dumb\"\n    );",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Conditionals</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conditionals</span>"
     ]
   },
   {
     "objectID": "guide/loops.html",
     "href": "guide/loops.html",
-    "title": "6  Loops",
+    "title": "10  Loops",
     "section": "",
-    "text": "6.1 The while loop\nA while loop evaluates a condition and its body while the condition is true. The body can be a simple expression or an expression block.\nSince the return value of the while loop is the return value of its expression body, it can often be used directly as the body of a function.",
+    "text": "10.1 The while loop\nA while loop evaluates a condition and its body while the condition is true. The body can be a simple expression or an expression block.\nSince the return value of the while loop is the return value of its expression body, it can often be used directly as the body of a function.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Loops</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Loops</span>"
     ]
   },
   {
     "objectID": "guide/loops.html#the-while-loop",
     "href": "guide/loops.html#the-while-loop",
-    "title": "6  Loops",
+    "title": "10  Loops",
     "section": "",
     "text": "let a = 10 in while (a &gt;= 0) {\n    print(a);\n    a := a - 1;\n}\n\nfunction gcd(a, b) =&gt; while (a &gt; 0)\n    let m = a % b in {\n        b := a;\n        a := m;\n    };",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Loops</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Loops</span>"
     ]
   },
   {
     "objectID": "guide/loops.html#the-for-loop",
     "href": "guide/loops.html#the-for-loop",
-    "title": "6  Loops",
-    "section": "6.2 The for loop",
-    "text": "6.2 The for loop\nA for loop iterates over an iterable of elements of a certain type. We will talk about iterables later on, but for now it suffices to say that if some expression evaluates to a collection, then the for loop can be used to iterate it.\nFor example, the builtin range(&lt;start&gt;, &lt;end&gt;) function evaluates to an iterable of numbers between &lt;start&gt; (inclusive) and &lt;end&gt; (non-inclusive).\nfor (x in range(0, 10)) print(x);\nThe for loop is semantically and operationally equivalent to the following:\nlet iterable = range(0, 10) in\n    while (iterable.next())\n        let x = iterable.current() in\n            print(x);\nIn fact, what the reference implementation of the HULK compiler does in for loops is to transpile them into their while equivalent. This also effectively means that, just like the while loop, the for loop returns the last value of its body expression.",
+    "title": "10  Loops",
+    "section": "10.2 The for loop",
+    "text": "10.2 The for loop\nA for loop iterates over an iterable of elements of a certain type. We will talk about iterables later on, but for now it suffices to say that if some expression evaluates to a collection, then the for loop can be used to iterate it.\nFor example, the builtin range(&lt;start&gt;, &lt;end&gt;) function evaluates to an iterable of numbers between &lt;start&gt; (inclusive) and &lt;end&gt; (non-inclusive).\nfor (x in range(0, 10)) print(x);\nThe for loop is semantically and operationally equivalent to the following:\nlet iterable = range(0, 10) in\n    while (iterable.next())\n        let x = iterable.current() in\n            print(x);\nIn fact, what the reference implementation of the HULK compiler does in for loops is to transpile them into their while equivalent. This also effectively means that, just like the while loop, the for loop returns the last value of its body expression.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Loops</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Loops</span>"
     ]
   },
   {
     "objectID": "guide/types.html",
     "href": "guide/types.html",
-    "title": "7  Types",
+    "title": "11  Types",
     "section": "",
-    "text": "7.1 Declaring types\nA new type is declared using the type keyword followed by a name, and a body composed of attribute definitions and method definitions. All attributes must be given an initialization expression. Methods, like functions, can have a single expression or an expression block as body;\nThe body of every method is evaluated in a namespace that contains global symbols plus an especial symbol named self that references the current instance. The self symbol is not a keyword, which means it can be hidden by a let expression, or by a method argument.\nHowever, when referring to the current instance, self is not a valid assignment target, so the following code should fail with a semantic error:",
+    "text": "11.1 Declaring types\nA new type is declared using the type keyword followed by a name, and a body composed of attribute definitions and method definitions. All attributes must be given an initialization expression. Methods, like functions, can have a single expression or an expression block as body;\nThe body of every method is evaluated in a namespace that contains global symbols plus an especial symbol named self that references the current instance. The self symbol is not a keyword, which means it can be hidden by a let expression, or by a method argument.\nHowever, when referring to the current instance, self is not a valid assignment target, so the following code should fail with a semantic error:",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Types</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Types</span>"
     ]
   },
   {
     "objectID": "guide/types.html#declaring-types",
     "href": "guide/types.html#declaring-types",
-    "title": "7  Types",
+    "title": "11  Types",
     "section": "",
     "text": "type Point {\n    x = 0;\n    y = 0;\n\n    getX() =&gt; self.x;\n    getY() =&gt; self.y;\n\n    setX(x) =&gt; self.x := x;\n    setY(y) =&gt; self.y := y;\n}\n\n\ntype A {\n    // ...\n    f() {\n        self := new A(); // &lt;-- Semantic error, `self` is not a valid assignment target\n    }\n}",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Types</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Types</span>"
     ]
   },
   {
     "objectID": "guide/types.html#instantiating-types",
     "href": "guide/types.html#instantiating-types",
-    "title": "7  Types",
-    "section": "7.2 Instantiating types",
-    "text": "7.2 Instantiating types\nTo instantiate a type you use the keyword new followed by the type name:\nlet pt = new Point() in\n    print(\"x: \" @ pt.getX() @ \"; y: \" @ pt.getY());\nAs you can see, type members are accessed by dot notation (instance.member).\nYou can pass arguments to a type, that you can use in the initialization expressions. This achieves an effect similar to having a single constructor.\ntype Point(x, y) {\n    x = x;\n    y = y;\n\n    // ...\n}\nThen, at instantiation time, you can pass specific values:\nlet pt = new Point(3,4) in\n    print(\"x: \" @ pt.getX() @ \"; y: \" @ pt.getY());\nEach attribute initialization expression is evaluated in a namespace that contains the global symbols and the type arguments, but no the self symbol. This means you cannot use other attributes of the same instance in an attribute initialization expression. This also means that you cannot assume any specifc order of initialization of attributes.",
+    "title": "11  Types",
+    "section": "11.2 Instantiating types",
+    "text": "11.2 Instantiating types\nTo instantiate a type you use the keyword new followed by the type name:\nlet pt = new Point() in\n    print(\"x: \" @ pt.getX() @ \"; y: \" @ pt.getY());\nAs you can see, type members are accessed by dot notation (instance.member).\nYou can pass arguments to a type, that you can use in the initialization expressions. This achieves an effect similar to having a single constructor.\ntype Point(x, y) {\n    x = x;\n    y = y;\n\n    // ...\n}\nThen, at instantiation time, you can pass specific values:\nlet pt = new Point(3,4) in\n    print(\"x: \" @ pt.getX() @ \"; y: \" @ pt.getY());\nEach attribute initialization expression is evaluated in a namespace that contains the global symbols and the type arguments, but no the self symbol. This means you cannot use other attributes of the same instance in an attribute initialization expression. This also means that you cannot assume any specifc order of initialization of attributes.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Types</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Types</span>"
     ]
   },
   {
     "objectID": "guide/types.html#inheritance",
     "href": "guide/types.html#inheritance",
-    "title": "7  Types",
-    "section": "7.3 Inheritance",
-    "text": "7.3 Inheritance\nTypes in HULK can inherit from other types. The base of the type hierarchy is a type named Object which has no public members, which is the type you implicitely inherit from by default. To inherit from a specific type, you use the inherits keyword followed by the type name:\ntype PolarPoint inherits Point {\n    rho() =&gt; sqrt(self.getX() ^ 2 + self.getY() ^ 2);\n    // ...\n}\nBy default, a type inherits its parent type arguments, which means that to construct a PolarPoint you have to pass the x and y that Point is expecting:\nlet pt = new PolarPoint(3,4) in\n    print(\"rho: \" @ pt.rho());\nIf you want to define a different set of type arguments, then you have to provide initialization expressions for the parent type at the declaration:\ntype PolarPoint(phi, rho) inherits Point(rho * sin(phi), rho * cos(phi)) {\n    // ...\n}\nDuring construction, the expressions for type arguments of the parent are evaluated in a namespace that contains global symbols plus the type arguments of the inheritor. Like before, you cannot assume a specific order of evaluation.\nIn HULK, the three builtin types (Number, String, and Boolean) implicitely inherit from Object, but it is a semantic error to inherit from these types.",
+    "title": "11  Types",
+    "section": "11.3 Inheritance",
+    "text": "11.3 Inheritance\nTypes in HULK can inherit from other types. The base of the type hierarchy is a type named Object which has no public members, which is the type you implicitely inherit from by default. To inherit from a specific type, you use the inherits keyword followed by the type name:\ntype PolarPoint inherits Point {\n    rho() =&gt; sqrt(self.getX() ^ 2 + self.getY() ^ 2);\n    // ...\n}\nBy default, a type inherits its parent type arguments, which means that to construct a PolarPoint you have to pass the x and y that Point is expecting:\nlet pt = new PolarPoint(3,4) in\n    print(\"rho: \" @ pt.rho());\nIf you want to define a different set of type arguments, then you have to provide initialization expressions for the parent type at the declaration:\ntype PolarPoint(phi, rho) inherits Point(rho * sin(phi), rho * cos(phi)) {\n    // ...\n}\nDuring construction, the expressions for type arguments of the parent are evaluated in a namespace that contains global symbols plus the type arguments of the inheritor. Like before, you cannot assume a specific order of evaluation.\nIn HULK, the three builtin types (Number, String, and Boolean) implicitely inherit from Object, but it is a semantic error to inherit from these types.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Types</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Types</span>"
     ]
   },
   {
     "objectID": "guide/types.html#polymorphism",
     "href": "guide/types.html#polymorphism",
-    "title": "7  Types",
-    "section": "7.4 Polymorphism",
-    "text": "7.4 Polymorphism\nAll type methods in HULK are virtual by definition, and can be redefined by an inheritor provided the exact same signature is used:\ntype Person(firstname, lastname) {\n    firstname = firstname;\n    lastname = lastname;\n\n    name() =&gt; self.firstname @@ self.lastname;\n}\n\nNOTE: @@ is equivalent to @ \"  \" @. It is a shorthand to insert a whitespace between two concatenated strings. There is no @@@ or beyond, we’re not savages.\n\ntype Knight inherits Person {\n    name() =&gt; \"Sir\" @@ base();\n}\n\nlet p = new Knight(\"Phil\", \"Collins\") in\n    print(p.name()); // prints 'Sir Phil Collins'\nThe base symbol in every method refers to the implementation of the parent (or the closest ancestor that has an implementation).",
+    "title": "11  Types",
+    "section": "11.4 Polymorphism",
+    "text": "11.4 Polymorphism\nAll type methods in HULK are virtual by definition, and can be redefined by an inheritor provided the exact same signature is used:\ntype Person(firstname, lastname) {\n    firstname = firstname;\n    lastname = lastname;\n\n    name() =&gt; self.firstname @@ self.lastname;\n}\n\nNOTE: @@ is equivalent to @ \"  \" @. It is a shorthand to insert a whitespace between two concatenated strings. There is no @@@ or beyond, we’re not savages.\n\ntype Knight inherits Person {\n    name() =&gt; \"Sir\" @@ base();\n}\n\nlet p = new Knight(\"Phil\", \"Collins\") in\n    print(p.name()); // prints 'Sir Phil Collins'\nThe base symbol in every method refers to the implementation of the parent (or the closest ancestor that has an implementation).",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Types</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Types</span>"
     ]
   },
   {
     "objectID": "guide/typing.html",
     "href": "guide/typing.html",
-    "title": "8  Type checking",
+    "title": "12  Type checking",
     "section": "",
-    "text": "8.1 Typing variables\nVariables can be explicitely type-annotated in let expressions with the following syntax:\nThe type checker will verify that the type inferred for the initialization expression is compatible with (formally, conforms to) the annotated type.",
+    "text": "12.1 Typing variables\nVariables can be explicitely type-annotated in let expressions with the following syntax:\nThe type checker will verify that the type inferred for the initialization expression is compatible with (formally, conforms to) the annotated type.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#typing-variables",
     "href": "guide/typing.html#typing-variables",
-    "title": "8  Type checking",
+    "title": "12  Type checking",
     "section": "",
     "text": "let x: Number = 42 in print(x);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#typing-functions-and-methods",
     "href": "guide/typing.html#typing-functions-and-methods",
-    "title": "8  Type checking",
-    "section": "8.2 Typing functions and methods",
-    "text": "8.2 Typing functions and methods\nAll or a subset of a function’s or method’s arguments, and its return value, can be type-annotated with a similar syntax:\nfunction tan(x: Number): Number =&gt; sin(x) / cos(x);\nOn the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about type semantics. The type checker will also verify that the return type of the body conforms to the annotated return type.\nOn the invocation side, the type checker will verify that the values passed as parameters conform to the annotated types.\nInside methods of a type T, the implicitly defined self symbol is always assumed as if annotated with type T.",
+    "title": "12  Type checking",
+    "section": "12.2 Typing functions and methods",
+    "text": "12.2 Typing functions and methods\nAll or a subset of a function’s or method’s arguments, and its return value, can be type-annotated with a similar syntax:\nfunction tan(x: Number): Number =&gt; sin(x) / cos(x);\nOn the declaration side, the type checker will verify that the body of the method uses the types in a way that is consistent with their declaration. The exact meaning of this consistency is defined in the section about type semantics. The type checker will also verify that the return type of the body conforms to the annotated return type.\nOn the invocation side, the type checker will verify that the values passed as parameters conform to the annotated types.\nInside methods of a type T, the implicitly defined self symbol is always assumed as if annotated with type T.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#typing-attributes-and-type-arguments",
     "href": "guide/typing.html#typing-attributes-and-type-arguments",
-    "title": "8  Type checking",
-    "section": "8.3 Typing attributes and type arguments",
-    "text": "8.3 Typing attributes and type arguments\nIn type definitions, attributes and type arguments can be type-annotated as follows:\ntype Point(x: Number, y: Number) {\n    x: Number = x;\n    y: Number = y;\n\n    // ...\n}\nThe type checker will verify that type arguments are used consistently inside attribute initialization expressions, and that the inferred type for each attribute initialization expression conforms to the attribute annotation.",
+    "title": "12  Type checking",
+    "section": "12.3 Typing attributes and type arguments",
+    "text": "12.3 Typing attributes and type arguments\nIn type definitions, attributes and type arguments can be type-annotated as follows:\ntype Point(x: Number, y: Number) {\n    x: Number = x;\n    y: Number = y;\n\n    // ...\n}\nThe type checker will verify that type arguments are used consistently inside attribute initialization expressions, and that the inferred type for each attribute initialization expression conforms to the attribute annotation.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#type-conforming",
     "href": "guide/typing.html#type-conforming",
-    "title": "8  Type checking",
-    "section": "8.4 Type conforming",
-    "text": "8.4 Type conforming\nThe basic type relation in HULK is called conforming (&lt;=). A type T1 is said to conform to to another type T2 (writen as T1 &lt;= T2) if a variable of type T2 can hold a value of type T1 such that every possible operation that is semantically valid with T2 is guaranteed to be semantically valid with T1.\nIn general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).\nThe following rules provide an initial definition for the conforming relationship. The formal definition is given in the section about type semantics.\n\nEvery type conforms to Object.\nEvery type conforms to itself.\nIf T1 inherits T2 then T1 conforms to T2.\nIf T1 conforms to T2 and T2 conforms to T3 then T1 conforms to T3.\nThe only types that conform to Number, String, and Boolean, are respectively those same types.\n\nTypes in HULK form a single hierarchy rooted at Object. In this hierarchy the conforming relationship is equivalent to the descendant relationship. Thus, if T1 conforms to T2 that means that T1 is a descendant of T2 (or trivially the same type). Thus, we can talk of the lowest common ancestor of a set of types T1, T2, …, Tn, which is the most specific type T such that all Ti conform to T. When two types are in different branches of the type hierarchy, they are effectively incomparable.\n\nNOTE: this conforming relationship is extended when we add protocols.",
+    "title": "12  Type checking",
+    "section": "12.4 Type conforming",
+    "text": "12.4 Type conforming\nThe basic type relation in HULK is called conforming (&lt;=). A type T1 is said to conform to to another type T2 (writen as T1 &lt;= T2) if a variable of type T2 can hold a value of type T1 such that every possible operation that is semantically valid with T2 is guaranteed to be semantically valid with T1.\nIn general, this means that the type checker will verify that the inferred type for any expression conforms to the corresponding type declared for that expression (e.g., the type of a variable, or the return type of a function).\nThe following rules provide an initial definition for the conforming relationship. The formal definition is given in the section about type semantics.\n\nEvery type conforms to Object.\nEvery type conforms to itself.\nIf T1 inherits T2 then T1 conforms to T2.\nIf T1 conforms to T2 and T2 conforms to T3 then T1 conforms to T3.\nThe only types that conform to Number, String, and Boolean, are respectively those same types.\n\nTypes in HULK form a single hierarchy rooted at Object. In this hierarchy the conforming relationship is equivalent to the descendant relationship. Thus, if T1 conforms to T2 that means that T1 is a descendant of T2 (or trivially the same type). Thus, we can talk of the lowest common ancestor of a set of types T1, T2, …, Tn, which is the most specific type T such that all Ti conform to T. When two types are in different branches of the type hierarchy, they are effectively incomparable.\n\nNOTE: this conforming relationship is extended when we add protocols.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#testing-for-dynamic-types",
     "href": "guide/typing.html#testing-for-dynamic-types",
-    "title": "8  Type checking",
-    "section": "8.5 Testing for dynamic types",
-    "text": "8.5 Testing for dynamic types\nThe is operator allows to test an object to check whether its dynamic type conforms to a specific static type.\ntype Bird {\n    // ...\n}\n\ntype Plane {\n    // ...\n}\n\ntype Superman {\n    // ...\n}\n\nlet x = new Superman() in\n    print(\n        if (x is Bird) \"It's bird!\"\n        elif (x is Plane) \"It's a plane!\"\n        else \"No, it's Superman!\"\n    );\nIn general, before the is operator you can put any expression, not just a variable.",
+    "title": "12  Type checking",
+    "section": "12.5 Testing for dynamic types",
+    "text": "12.5 Testing for dynamic types\nThe is operator allows to test an object to check whether its dynamic type conforms to a specific static type.\ntype Bird {\n    // ...\n}\n\ntype Plane {\n    // ...\n}\n\ntype Superman {\n    // ...\n}\n\nlet x = new Superman() in\n    print(\n        if (x is Bird) \"It's bird!\"\n        elif (x is Plane) \"It's a plane!\"\n        else \"No, it's Superman!\"\n    );\nIn general, before the is operator you can put any expression, not just a variable.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/typing.html#downcasting",
     "href": "guide/typing.html#downcasting",
-    "title": "8  Type checking",
-    "section": "8.6 Downcasting",
-    "text": "8.6 Downcasting\nYou can use the as operator to downcast an expression to a given static type. The result is a runtime error if the expression is not a suitable dynamic type, which means you should always test if you’re unsure:\ntype A {\n    // ...\n}\n\ntype B inherits A {\n    // ...\n}\n\ntype C inherits A {\n    // ...\n}\n\nlet x : A = if (rand() &lt; 0.5) new B() else new C() in\n    if (x is B)\n        let y : B = x as B in {\n            // you can use y with static type B\n        }\n    else {\n        // x cannot be downcasted to B\n    }",
+    "title": "12  Type checking",
+    "section": "12.6 Downcasting",
+    "text": "12.6 Downcasting\nYou can use the as operator to downcast an expression to a given static type. The result is a runtime error if the expression is not a suitable dynamic type, which means you should always test if you’re unsure:\ntype A {\n    // ...\n}\n\ntype B inherits A {\n    // ...\n}\n\ntype C inherits A {\n    // ...\n}\n\nlet x : A = if (rand() &lt; 0.5) new B() else new C() in\n    if (x is B)\n        let y : B = x as B in {\n            // you can use y with static type B\n        }\n    else {\n        // x cannot be downcasted to B\n    }",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Type checking</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Type checking</span>"
     ]
   },
   {
     "objectID": "guide/inference.html",
     "href": "guide/inference.html",
-    "title": "9  Type inference",
+    "title": "13  Type inference",
     "section": "",
-    "text": "9.1 Type inference vs type checking\nThe type inferer works before the type checker, and assigns type annotations to all symbols that are not explicitly annotated, and to all the expressions. Afterwards, the type checker verifies that all semantic rules are valid.\nThus, even if a program is fully annotated, the type inferer still needs to work, since it needs to infer the type of all expressions. When some symbols are not explicitly annotated, the type inferer must also assign types for them.\nHence, there are two different moments when a semantic error can be reported. First, if the type inferer cannot infer the type of some symbol, a semantic error will be thrown to indicate the programmer that some symbol must be explicitly typed. Second, if the type inferer finished without errors, the type checker will verify that all types are consistent, and will report a semantic error if there is some incompatibilty.",
+    "text": "13.1 Type inference vs type checking\nThe type inferer works before the type checker, and assigns type annotations to all symbols that are not explicitly annotated, and to all the expressions. Afterwards, the type checker verifies that all semantic rules are valid.\nThus, even if a program is fully annotated, the type inferer still needs to work, since it needs to infer the type of all expressions. When some symbols are not explicitly annotated, the type inferer must also assign types for them.\nHence, there are two different moments when a semantic error can be reported. First, if the type inferer cannot infer the type of some symbol, a semantic error will be thrown to indicate the programmer that some symbol must be explicitly typed. Second, if the type inferer finished without errors, the type checker will verify that all types are consistent, and will report a semantic error if there is some incompatibilty.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Type inference</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Type inference</span>"
     ]
   },
   {
     "objectID": "guide/inference.html#type-inference-of-expressions",
     "href": "guide/inference.html#type-inference-of-expressions",
-    "title": "9  Type inference",
-    "section": "9.2 Type inference of expressions",
-    "text": "9.2 Type inference of expressions\nThe first task of the type inferer is to infer the runtime type of any expression that appears in a HULK program. This process is performed bottom-up, starting from atomic sub-expressions (e.g., literals) and working up the AST. The exact rules for type inference of expressions is given in the section a`bout type semantics, but an intuitive introduction can be given at this point.\nLiterals are the easiest to type-infer, because their type comes directly from the parser. Arithmetic expressions are also easy, because their type is always Number. Likewise, string and boolean operators are straightforward.\nThe type of complex expressions that have an expression body is determined by the type of the body. This is the case of let, while, and for. The type of an expression block is the type of the last expresion of the block. The type of a function or method invocation is the type of its body. The type of expressions that have more than one branch (if) is the lowest common ancestor of the types of each branch, or ultimately Object.",
+    "title": "13  Type inference",
+    "section": "13.2 Type inference of expressions",
+    "text": "13.2 Type inference of expressions\nThe first task of the type inferer is to infer the runtime type of any expression that appears in a HULK program. This process is performed bottom-up, starting from atomic sub-expressions (e.g., literals) and working up the AST. The exact rules for type inference of expressions is given in the section a`bout type semantics, but an intuitive introduction can be given at this point.\nLiterals are the easiest to type-infer, because their type comes directly from the parser. Arithmetic expressions are also easy, because their type is always Number. Likewise, string and boolean operators are straightforward.\nThe type of complex expressions that have an expression body is determined by the type of the body. This is the case of let, while, and for. The type of an expression block is the type of the last expresion of the block. The type of a function or method invocation is the type of its body. The type of expressions that have more than one branch (if) is the lowest common ancestor of the types of each branch, or ultimately Object.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Type inference</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Type inference</span>"
     ]
   },
   {
     "objectID": "guide/inference.html#type-inference-of-symbols",
     "href": "guide/inference.html#type-inference-of-symbols",
-    "title": "9  Type inference",
-    "section": "9.3 Type inference of symbols",
-    "text": "9.3 Type inference of symbols\nOnce all expressions have been type-inferred, the type inferer will attempt to assing a type to each symbol declaration that is not explicitly annotated. Instead of providing an exact algorithm, we will define a set of constraints that the type inferer must satisfy whenever it succeeds in assigning a type.\nSpecific implementations of HULK can choose different methods to attempt the type inference of symbols. According to the order in which symbols are processed, and the sophistication of each method, some implementations may succed where others fail. However, if two type inference algorithms are correct, they most agree on all types for which both succeed in the inference.\nThese are the constraints a type inference algorithm must satisfy to be correct, or otherwise it must report a failed inference.\n\nIn a let expression, whenever a variable is not type-annotated, the type inferer must asign a type for the variable that is equivalent to the type infered for its initialization expression.\nSimilarly, in an attribute declaration that is not type-annotated, the type inferer must assign a type that is equivalent to the type inferred for its initialization expression.\nIn a function or method, whenever an argument is not type-annotated, the type inferer must assign the lowest (most specific) type that would be consistent with the use of that argument in the method or function body. If more than one type in different branches of the type hierarchy would be consistent, the type inferer must fail.\nSimilarly, in a type argument, the type inferer must assign the lowest type that is consistent with the use of that argument in all attribute initialization expressions where it is referenced.\n\nIf a type inferer satisfies those constraints, we will say it is sound. This means that, for example, the simplest sound strategy for type inference is to infer types for all expressions and fail for all symbols. We will call this the basic inference strategy.",
+    "title": "13  Type inference",
+    "section": "13.3 Type inference of symbols",
+    "text": "13.3 Type inference of symbols\nOnce all expressions have been type-inferred, the type inferer will attempt to assing a type to each symbol declaration that is not explicitly annotated. Instead of providing an exact algorithm, we will define a set of constraints that the type inferer must satisfy whenever it succeeds in assigning a type.\nSpecific implementations of HULK can choose different methods to attempt the type inference of symbols. According to the order in which symbols are processed, and the sophistication of each method, some implementations may succed where others fail. However, if two type inference algorithms are correct, they most agree on all types for which both succeed in the inference.\nThese are the constraints a type inference algorithm must satisfy to be correct, or otherwise it must report a failed inference.\n\nIn a let expression, whenever a variable is not type-annotated, the type inferer must asign a type for the variable that is equivalent to the type infered for its initialization expression.\nSimilarly, in an attribute declaration that is not type-annotated, the type inferer must assign a type that is equivalent to the type inferred for its initialization expression.\nIn a function or method, whenever an argument is not type-annotated, the type inferer must assign the lowest (most specific) type that would be consistent with the use of that argument in the method or function body. If more than one type in different branches of the type hierarchy would be consistent, the type inferer must fail.\nSimilarly, in a type argument, the type inferer must assign the lowest type that is consistent with the use of that argument in all attribute initialization expressions where it is referenced.\n\nIf a type inferer satisfies those constraints, we will say it is sound. This means that, for example, the simplest sound strategy for type inference is to infer types for all expressions and fail for all symbols. We will call this the basic inference strategy.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Type inference</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Type inference</span>"
     ]
   },
   {
     "objectID": "guide/inference.html#examples-of-type-inference",
     "href": "guide/inference.html#examples-of-type-inference",
-    "title": "9  Type inference",
-    "section": "9.4 Examples of type inference",
-    "text": "9.4 Examples of type inference\nThese are some programs where a sufficiently sophisticated type inference strategy should work.\nIn the following program the type of the variable x should be inferred to Number because the type of 42 is trivially Number:\nlet x = 42 in print(x);\nIn the following function, the type of the argument n should be inferred as Number because it is the only possible type where arithmetic operators (i.e., +) are defined, as there is no operator overloading in HULK:\nfunction fib(n) =&gt; if (n == 0 | n == 1) 1 else fib(n-1) + fib(n-2);\nFor the same reason, in the following function, the type of the argument x should be inferred as Number. Likewise, the type of the variable f should be inferred as Number because the initialization expression is a literal Number.\nfunction fact(x) =&gt; let f = 1 in for (i in range(1, x+1)) f := f * i;\n\nTODO: Add more examples…",
+    "title": "13  Type inference",
+    "section": "13.4 Examples of type inference",
+    "text": "13.4 Examples of type inference\nThese are some programs where a sufficiently sophisticated type inference strategy should work.\nIn the following program the type of the variable x should be inferred to Number because the type of 42 is trivially Number:\nlet x = 42 in print(x);\nIn the following function, the type of the argument n should be inferred as Number because it is the only possible type where arithmetic operators (i.e., +) are defined, as there is no operator overloading in HULK:\nfunction fib(n) =&gt; if (n == 0 | n == 1) 1 else fib(n-1) + fib(n-2);\nFor the same reason, in the following function, the type of the argument x should be inferred as Number. Likewise, the type of the variable f should be inferred as Number because the initialization expression is a literal Number.\nfunction fact(x) =&gt; let f = 1 in for (i in range(1, x+1)) f := f * i;\n\nTODO: Add more examples…",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Type inference</span>"
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Type inference</span>"
     ]
   },
   {
     "objectID": "guide/protocols.html",
     "href": "guide/protocols.html",
-    "title": "10  Protocols",
+    "title": "14  Protocols",
     "section": "",
-    "text": "10.1 Defining protocols\nA protocol is defined with the keyword protocol followed by a collection of method declarations:\nA protocol can have any number of method declarations. For obvious reasons, all method declarations in protocol definitions must be fully typed, as it is impossible to infer any types since they have no body.\nA protocol can extend anoter protocol by adding new methods, but never overriding (since there is no actual body) or removing any method (althought you can override the types of some method arguments or return types provided with some restrictions explained below).",
+    "text": "14.1 Defining protocols\nA protocol is defined with the keyword protocol followed by a collection of method declarations:\nA protocol can have any number of method declarations. For obvious reasons, all method declarations in protocol definitions must be fully typed, as it is impossible to infer any types since they have no body.\nA protocol can extend anoter protocol by adding new methods, but never overriding (since there is no actual body) or removing any method (althought you can override the types of some method arguments or return types provided with some restrictions explained below).",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Protocols</span>"
     ]
   },
   {
     "objectID": "guide/protocols.html#defining-protocols",
     "href": "guide/protocols.html#defining-protocols",
-    "title": "10  Protocols",
+    "title": "14  Protocols",
     "section": "",
     "text": "protocol Hashable {\n    hash(): Number;\n}\n\n\nprotocol Equatable extends Hashable {\n    equals(other: Object): Boolean;\n}",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Protocols</span>"
     ]
   },
   {
     "objectID": "guide/protocols.html#implementing-protocols",
     "href": "guide/protocols.html#implementing-protocols",
-    "title": "10  Protocols",
-    "section": "10.2 Implementing protocols",
-    "text": "10.2 Implementing protocols\nA type implements a protocol implicitely, simply by having methods with the right signature. There is no need to explicitely declare which types implement which protocols.\nThus, you can annotated a variable or argument with a protocol type, and the type checker will correctly verify the consistency of both the method body and the invocation.\ntype Person {\n    // ...\n\n    hash() : Number {\n        // ...\n    }\n}\n\nlet x : Hashable = new Person() in print(x.hash());\nAnywhere you can annotate a symbol with a type (variables, attributes, function, method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.",
+    "title": "14  Protocols",
+    "section": "14.2 Implementing protocols",
+    "text": "14.2 Implementing protocols\nA type implements a protocol implicitely, simply by having methods with the right signature. There is no need to explicitely declare which types implement which protocols.\nThus, you can annotated a variable or argument with a protocol type, and the type checker will correctly verify the consistency of both the method body and the invocation.\ntype Person {\n    // ...\n\n    hash() : Number {\n        // ...\n    }\n}\n\nlet x : Hashable = new Person() in print(x.hash());\nAnywhere you can annotate a symbol with a type (variables, attributes, function, method and type arguments, and return values), you can also use a protocol. For the purpose of type inference, protocols are treated as types.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Protocols</span>"
     ]
   },
   {
     "objectID": "guide/protocols.html#variance-in-protocol-implementation",
     "href": "guide/protocols.html#variance-in-protocol-implementation",
-    "title": "10  Protocols",
-    "section": "10.3 Variance in protocol implementation",
-    "text": "10.3 Variance in protocol implementation\nIn order to implementing a protocol, a type doesn’t necessarily have to match the exact signature of the protocol. Instead, method and type arguments are considered contravariant, and return values covariant. This means that arguments can be of the same type or higher, and the return values of the same type or lower than as defined in the protocol.\nSimilarly, when you extend a protocol, you can override some of the methods as long as you respect the variance constraints.",
+    "title": "14  Protocols",
+    "section": "14.3 Variance in protocol implementation",
+    "text": "14.3 Variance in protocol implementation\nIn order to implementing a protocol, a type doesn’t necessarily have to match the exact signature of the protocol. Instead, method and type arguments are considered contravariant, and return values covariant. This means that arguments can be of the same type or higher, and the return values of the same type or lower than as defined in the protocol.\nSimilarly, when you extend a protocol, you can override some of the methods as long as you respect the variance constraints.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Protocols</span>"
     ]
   },
   {
     "objectID": "guide/protocols.html#conforming-with-protocols",
     "href": "guide/protocols.html#conforming-with-protocols",
-    "title": "10  Protocols",
-    "section": "10.4 Conforming with protocols",
-    "text": "10.4 Conforming with protocols\nMore formally, protocols extend the notion of type conforming by adding the following rules:\n\nA type T conforms to a protocol P if T has all the method defined in P with the appropriate types (respecting the variance constraints explained before).\nIf a protocol P1 extends a protocol P2, then trivially P1 &lt;= P2.\nA protocol P1 also conforms to another protocol P2 if any type that conforms to P1 would also conform to P2, even if there is no explicit extension declared.",
+    "title": "14  Protocols",
+    "section": "14.4 Conforming with protocols",
+    "text": "14.4 Conforming with protocols\nMore formally, protocols extend the notion of type conforming by adding the following rules:\n\nA type T conforms to a protocol P if T has all the method defined in P with the appropriate types (respecting the variance constraints explained before).\nIf a protocol P1 extends a protocol P2, then trivially P1 &lt;= P2.\nA protocol P1 also conforms to another protocol P2 if any type that conforms to P1 would also conform to P2, even if there is no explicit extension declared.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Protocols</span>"
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Protocols</span>"
     ]
   },
   {
     "objectID": "guide/iterables.html",
     "href": "guide/iterables.html",
-    "title": "11  Iterables",
+    "title": "15  Iterables",
     "section": "",
-    "text": "11.1 Using iterables with the for loop\nAs explained in the loops section, the for loop works with the Iterable protocol, which means you can apply for on any instance of a type that implements the protocol.\nIn compile-time, for is transpiled to a code that is equivalent, but explicitely uses the Iterable protocol members.\nFor example, the code:\nIs transpiled to:\nThis transpilation guarantees that even though the Iterable protocol defines the current method with return type Object, when you use a for loop you will get the exact covariant type inferred in x.\nAs a matter of fact, due to the transpilation process, the Iterable protocol itself is not even necessary, since nowhere is a symbol annotated as Iterable. However, the protocol is explicitely defined as a builtin type so that you can explicitly use it if you need to annotate a method to receive a black-box iterable.\nKeep in mind, thought, that when you annotate something explicitely as Iterable, you are effectively forcing the type inferrer to assign Object as the type of the iteration variable (x in this example). This is one of the reasons it is often better to let HULK infer types than annotating them yourself.",
+    "text": "15.1 Using iterables with the for loop\nAs explained in the loops section, the for loop works with the Iterable protocol, which means you can apply for on any instance of a type that implements the protocol.\nIn compile-time, for is transpiled to a code that is equivalent, but explicitely uses the Iterable protocol members.\nFor example, the code:\nIs transpiled to:\nThis transpilation guarantees that even though the Iterable protocol defines the current method with return type Object, when you use a for loop you will get the exact covariant type inferred in x.\nAs a matter of fact, due to the transpilation process, the Iterable protocol itself is not even necessary, since nowhere is a symbol annotated as Iterable. However, the protocol is explicitely defined as a builtin type so that you can explicitly use it if you need to annotate a method to receive a black-box iterable.\nKeep in mind, thought, that when you annotate something explicitely as Iterable, you are effectively forcing the type inferrer to assign Object as the type of the iteration variable (x in this example). This is one of the reasons it is often better to let HULK infer types than annotating them yourself.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Iterables</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Iterables</span>"
     ]
   },
   {
     "objectID": "guide/iterables.html#using-iterables-with-the-for-loop",
     "href": "guide/iterables.html#using-iterables-with-the-for-loop",
-    "title": "11  Iterables",
+    "title": "15  Iterables",
     "section": "",
     "text": "for (x in range(0,10)) {\n    // code that uses `x`\n}\n\nlet iterable = range(0, 10) in\n    while (iterable.next())\n        let x = iterable.current() in {\n            // code that uses `x`\n        }",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Iterables</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Iterables</span>"
     ]
   },
   {
     "objectID": "guide/iterables.html#typing-iterables",
     "href": "guide/iterables.html#typing-iterables",
-    "title": "11  Iterables",
-    "section": "11.2 Typing iterables",
-    "text": "11.2 Typing iterables\nSince in the Iterable protocol we can only define (at this point) the return value of current() as Object, it is cumbersome to type arguments of a function or method as Iterable, because doing so will force you to downcast the elements to a desired type.\nFor this reason, HULK allows a special syntax for typing iterables of a specific type T using the format T*:\nfunction sum(numbers: Number*): Number =&gt;\n    let total = 0 in\n        for (x in numbers)\n            total := total + x;\nWhat happens under the hood is that when you use of T* anywhere in a HULK program, the compiler will insert an implicit protocol definition that looks like this:\nprotocol Iterable_T extends Iterable {\n    current(): T;\n}\nSince protocols can be extended by overriding some methods with the correct variance constraints, the previous code will compile correctly.",
+    "title": "15  Iterables",
+    "section": "15.2 Typing iterables",
+    "text": "15.2 Typing iterables\nSince in the Iterable protocol we can only define (at this point) the return value of current() as Object, it is cumbersome to type arguments of a function or method as Iterable, because doing so will force you to downcast the elements to a desired type.\nFor this reason, HULK allows a special syntax for typing iterables of a specific type T using the format T*:\nfunction sum(numbers: Number*): Number =&gt;\n    let total = 0 in\n        for (x in numbers)\n            total := total + x;\nWhat happens under the hood is that when you use of T* anywhere in a HULK program, the compiler will insert an implicit protocol definition that looks like this:\nprotocol Iterable_T extends Iterable {\n    current(): T;\n}\nSince protocols can be extended by overriding some methods with the correct variance constraints, the previous code will compile correctly.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Iterables</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Iterables</span>"
     ]
   },
   {
     "objectID": "guide/iterables.html#implementing-collections",
     "href": "guide/iterables.html#implementing-collections",
-    "title": "11  Iterables",
-    "section": "11.3 Implementing collections",
-    "text": "11.3 Implementing collections\nThe iterable protocols defined so far encapsulates the concept of making a single iteration over the sequence of elements. In contrast, most collection types you will define allow for multiple iterations, even simultaneously, over the same sequence of elements.\nTo accomodate for this kind of behaviour, we can define an enumerable protocol that simply provides one method to create an iterable for one specific iteration everytime that is needed:\nprotocol Enumerable {\n    iter(): Iterable;\n}\nWith this protocol defined, the for loop is extended such that, when used with an enumerable instead of directly an iterable, it will transpile to a slightly different code:\nlet iterable = enumerable.iter() in\n    while (iterable.next())\n        let x = iterable.current() in {\n            // ..\n        }",
+    "title": "15  Iterables",
+    "section": "15.3 Implementing collections",
+    "text": "15.3 Implementing collections\nThe iterable protocols defined so far encapsulates the concept of making a single iteration over the sequence of elements. In contrast, most collection types you will define allow for multiple iterations, even simultaneously, over the same sequence of elements.\nTo accomodate for this kind of behaviour, we can define an enumerable protocol that simply provides one method to create an iterable for one specific iteration everytime that is needed:\nprotocol Enumerable {\n    iter(): Iterable;\n}\nWith this protocol defined, the for loop is extended such that, when used with an enumerable instead of directly an iterable, it will transpile to a slightly different code:\nlet iterable = enumerable.iter() in\n    while (iterable.next())\n        let x = iterable.current() in {\n            // ..\n        }",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Iterables</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Iterables</span>"
     ]
   },
   {
     "objectID": "guide/vectors.html",
     "href": "guide/vectors.html",
-    "title": "12  Vectors",
+    "title": "16  Vectors",
     "section": "",
-    "text": "12.1 Explicit syntax\nAn explicit vector of Number, for example, can be defined as follows:\nBecause vectors implement the iterable protocol, you can explicitely find a next and current methods in case you ever need them. Besides that, vectors also have a size(): Number method that returns the number of items in the vector.\nVectors also support an indexing syntax using square brackets [], as in the following example:",
+    "text": "16.1 Explicit syntax\nAn explicit vector of Number, for example, can be defined as follows:\nBecause vectors implement the iterable protocol, you can explicitely find a next and current methods in case you ever need them. Besides that, vectors also have a size(): Number method that returns the number of items in the vector.\nVectors also support an indexing syntax using square brackets [], as in the following example:",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Vectors</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Vectors</span>"
     ]
   },
   {
     "objectID": "guide/vectors.html#explicit-syntax",
     "href": "guide/vectors.html#explicit-syntax",
-    "title": "12  Vectors",
+    "title": "16  Vectors",
     "section": "",
     "text": "let numbers = [1,2,3,4,5,6,7,8,9] in\n    for (x in numbers)\n        print(x);\n\n\nlet numbers = [1,2,3,4,5,6,7,8,9] in print(numbers[7]);",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Vectors</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Vectors</span>"
     ]
   },
   {
     "objectID": "guide/vectors.html#implicit-syntax",
     "href": "guide/vectors.html#implicit-syntax",
-    "title": "12  Vectors",
-    "section": "12.2 Implicit syntax",
-    "text": "12.2 Implicit syntax\nAn implicit vector can be created using what we call a generator pattern, which is always an expression.\nHere’s one example:\nlet squares = [x^2 | x in range(1,10)] in print(x);\n// prints 2, 4, 6, 8, 10, ...\nIn general, the syntax has the form [&lt;expr&gt; | &lt;symbol&gt; in &lt;iterable&gt;], where &lt;expr&gt; is run in a new scope where symbol is iteratively bound to each element in the vector.",
+    "title": "16  Vectors",
+    "section": "16.2 Implicit syntax",
+    "text": "16.2 Implicit syntax\nAn implicit vector can be created using what we call a generator pattern, which is always an expression.\nHere’s one example:\nlet squares = [x^2 | x in range(1,10)] in print(x);\n// prints 2, 4, 6, 8, 10, ...\nIn general, the syntax has the form [&lt;expr&gt; | &lt;symbol&gt; in &lt;iterable&gt;], where &lt;expr&gt; is run in a new scope where symbol is iteratively bound to each element in the vector.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Vectors</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Vectors</span>"
     ]
   },
   {
     "objectID": "guide/vectors.html#typing-vectors",
     "href": "guide/vectors.html#typing-vectors",
-    "title": "12  Vectors",
-    "section": "12.3 Typing vectors",
-    "text": "12.3 Typing vectors\nSince vectors are iterables, you can safely pass a vector as argument to method that expects an iterable:\nfunction sum(numbers: Number*): Number =&gt;\n    let total = 0 in\n        for (x in numbers)\n            total := total + x;\n\nlet numbers = [1,2,3,4,5] in\n    print(sum(numbers));\nHowever, inside sum you cannot use the indexing operator [] or the size method, because the argument is typed as an iterable, and not explicitly as a vector. To fix this, HULK provides another special syntax for vectors, using the T[] notation:\nfunction mean(numbers: Number[]): Number =&gt;\n    let total = 0 in {\n        for (x in numbers)\n            total := total + x;\n\n        // here `numbers` is known to be vector\n        total / numbers.size();\n    };\n\nlet numbers = [1,2,3,4,5] in\n    print(mean(numbers));\nLike with iterables, what happens under the hood is that the compiler implicitely defines a type with the following structure:\ntype Vector_T {\n    size() {\n        // impementation of size ...\n    }\n\n    iter(): Iterable_T {\n        // implementation of iter\n    }\n}",
+    "title": "16  Vectors",
+    "section": "16.3 Typing vectors",
+    "text": "16.3 Typing vectors\nSince vectors are iterables, you can safely pass a vector as argument to method that expects an iterable:\nfunction sum(numbers: Number*): Number =&gt;\n    let total = 0 in\n        for (x in numbers)\n            total := total + x;\n\nlet numbers = [1,2,3,4,5] in\n    print(sum(numbers));\nHowever, inside sum you cannot use the indexing operator [] or the size method, because the argument is typed as an iterable, and not explicitly as a vector. To fix this, HULK provides another special syntax for vectors, using the T[] notation:\nfunction mean(numbers: Number[]): Number =&gt;\n    let total = 0 in {\n        for (x in numbers)\n            total := total + x;\n\n        // here `numbers` is known to be vector\n        total / numbers.size();\n    };\n\nlet numbers = [1,2,3,4,5] in\n    print(mean(numbers));\nLike with iterables, what happens under the hood is that the compiler implicitely defines a type with the following structure:\ntype Vector_T {\n    size() {\n        // impementation of size ...\n    }\n\n    iter(): Iterable_T {\n        // implementation of iter\n    }\n}",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Vectors</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Vectors</span>"
     ]
   },
   {
     "objectID": "guide/functors.html",
     "href": "guide/functors.html",
-    "title": "13  Functors",
+    "title": "17  Functors",
     "section": "",
-    "text": "13.1 Implicit functor implementation\nThe first aid that HULK provides is by implicitely implementing wrapping functions as functor types upong usage. For example, instead of defining the IsOdd type like before, you can simply define an is_odd function like the following, and pass it directly to the count_when function:\nAnd then HULK will automatically create an appropriate functor type that implements the desired protocol, which means the previous code is transpiled to something like the following:\nNaturally, this syntax sugar extends to variable assignment as well, which means the following is valid:",
+    "text": "17.1 Implicit functor implementation\nThe first aid that HULK provides is by implicitely implementing wrapping functions as functor types upong usage. For example, instead of defining the IsOdd type like before, you can simply define an is_odd function like the following, and pass it directly to the count_when function:\nAnd then HULK will automatically create an appropriate functor type that implements the desired protocol, which means the previous code is transpiled to something like the following:\nNaturally, this syntax sugar extends to variable assignment as well, which means the following is valid:",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Functors</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Functors</span>"
     ]
   },
   {
     "objectID": "guide/functors.html#implicit-functor-implementation",
     "href": "guide/functors.html#implicit-functor-implementation",
-    "title": "13  Functors",
+    "title": "17  Functors",
     "section": "",
     "text": "function is_odd(x: Number) =&gt; x % 2 == 0;\n\nlet numbers = range(0, 100) in\n    print(count_when(numbers, is_odd));\n\nfunction is_odd(x: Number) =&gt; x % 2 == 0;\n\ntype _IsOddWrapper {\n    invoke(x: Number): Boolean =&gt; is_odd(x);\n}\n\nlet numbers = range(0, 100) in\n    print(count_when(numbers, _IsOddWrapper()));\n\nlet numbers = range(0, 100), filter: NumberFilter = is_odd in\n    print(count_when(numbers, filter));",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Functors</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Functors</span>"
     ]
   },
   {
     "objectID": "guide/functors.html#lambda-expressions",
     "href": "guide/functors.html#lambda-expressions",
-    "title": "13  Functors",
-    "section": "13.2 Lambda expressions",
-    "text": "13.2 Lambda expressions\nKeeping up with the previous example, we can eliminate the explicit is_odd definition and pass a lambda expression, which is an anonymous function defined directly in the place when the functor is needed:\nlet numbers = range(0, 100) in\n    print(count_when(numbers, (x: Number): Boolean =&gt; x % 2 == 0));\nThe general syntax for lambda expressions is very similar to the syntax for inline functions, except that you don’t need to name the function.\nAlso, if the type inferrer is good enough, you can almost always drop the explicit type annotations:\nlet numbers = range(0, 100) in\n    print(count_when(numbers, (x) =&gt; x % 2 == 0));\nAnd of course, lambda expressions can be stored in appropriately typed variables:\nlet numbers = range(0, 100), filter: NumberFilter = (x) =&gt; x % 2 = 0 in\n    print(count_when(numbers, filter));\nAnd the type inferrer is good enough, since count_when requires a NumberFilter, you can drop the explicit type annotation:\nlet numbers = range(0, 100), filter = (x) =&gt; x % 2 = 0 in\n    print(count_when(numbers, filter));",
+    "title": "17  Functors",
+    "section": "17.2 Lambda expressions",
+    "text": "17.2 Lambda expressions\nKeeping up with the previous example, we can eliminate the explicit is_odd definition and pass a lambda expression, which is an anonymous function defined directly in the place when the functor is needed:\nlet numbers = range(0, 100) in\n    print(count_when(numbers, (x: Number): Boolean =&gt; x % 2 == 0));\nThe general syntax for lambda expressions is very similar to the syntax for inline functions, except that you don’t need to name the function.\nAlso, if the type inferrer is good enough, you can almost always drop the explicit type annotations:\nlet numbers = range(0, 100) in\n    print(count_when(numbers, (x) =&gt; x % 2 == 0));\nAnd of course, lambda expressions can be stored in appropriately typed variables:\nlet numbers = range(0, 100), filter: NumberFilter = (x) =&gt; x % 2 = 0 in\n    print(count_when(numbers, filter));\nAnd the type inferrer is good enough, since count_when requires a NumberFilter, you can drop the explicit type annotation:\nlet numbers = range(0, 100), filter = (x) =&gt; x % 2 = 0 in\n    print(count_when(numbers, filter));",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Functors</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Functors</span>"
     ]
   },
   {
     "objectID": "guide/functors.html#typing-functors",
     "href": "guide/functors.html#typing-functors",
-    "title": "13  Functors",
-    "section": "13.3 Typing functors",
-    "text": "13.3 Typing functors\nAnd finally, we can also skip the protocol definition and use a special syntax for typing functors directly in the type annotaion:\nfunction count_when(numbers: Number*, filter: (Number) -&gt; Boolean) {\n    // same code\n}\nThe syntax (Number) -&gt; Boolean indicates that we expect a functor with a single input of type Number and an output of type Boolean. Upon finding this definition, HULK will transpile that into something that is very similar to our explicit protocol definition:\nprotocol _Functor0 {\n    invoke(_arg0: Number) : Boolean;\n}\n\nfunction count_when(numbers: Number*, filter: _Functor0) {\n    // same code\n}",
+    "title": "17  Functors",
+    "section": "17.3 Typing functors",
+    "text": "17.3 Typing functors\nAnd finally, we can also skip the protocol definition and use a special syntax for typing functors directly in the type annotaion:\nfunction count_when(numbers: Number*, filter: (Number) -&gt; Boolean) {\n    // same code\n}\nThe syntax (Number) -&gt; Boolean indicates that we expect a functor with a single input of type Number and an output of type Boolean. Upon finding this definition, HULK will transpile that into something that is very similar to our explicit protocol definition:\nprotocol _Functor0 {\n    invoke(_arg0: Number) : Boolean;\n}\n\nfunction count_when(numbers: Number*, filter: _Functor0) {\n    // same code\n}",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Functors</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Functors</span>"
     ]
   },
   {
     "objectID": "guide/macros.html",
     "href": "guide/macros.html",
-    "title": "14  Macros",
+    "title": "18  Macros",
     "section": "",
-    "text": "14.1 Defining macros\nInstead of a function, you can use a macro, which has a very similar syntax in HULK:\nBut this change makes macros exceedingly more powerful than functions in a lot of cases, for a few reasons. First, notice the use of the *expr: Object syntax, instead of the expr: () -&gt; Object. Here the * denotes that this expr is not a regular argument, instead it is a special argument that refers to the code inside the brackets after the macro invocation. Thus, you can use the following syntax:\nThe { print(\"Hello World\"); } expression block is precisely what is passed on in the special argument *expr.\nHowever, there is much more going on under that macro invocation. Instead of calling a functor in runtime, macros are expanded in compile time and transpiled into their bodies, which means there is no real repeat function anywhere in the compiled code. Instead, the actual code that is executed is something like:\nThis is the reason why you don’t see expr(); in the macro body, but expr;. That is, the body is not executed but interpolated inside the macro. This transpilation step makes macros often faster than functions because there is no extra overhead for passing arguments, however, you must be careful when thinking about the operational semantics of a macro especially where they differ from a regular function call.",
+    "text": "18.1 Defining macros\nInstead of a function, you can use a macro, which has a very similar syntax in HULK:\nBut this change makes macros exceedingly more powerful than functions in a lot of cases, for a few reasons. First, notice the use of the *expr: Object syntax, instead of the expr: () -&gt; Object. Here the * denotes that this expr is not a regular argument, instead it is a special argument that refers to the code inside the brackets after the macro invocation. Thus, you can use the following syntax:\nThe { print(\"Hello World\"); } expression block is precisely what is passed on in the special argument *expr.\nHowever, there is much more going on under that macro invocation. Instead of calling a functor in runtime, macros are expanded in compile time and transpiled into their bodies, which means there is no real repeat function anywhere in the compiled code. Instead, the actual code that is executed is something like:\nThis is the reason why you don’t see expr(); in the macro body, but expr;. That is, the body is not executed but interpolated inside the macro. This transpilation step makes macros often faster than functions because there is no extra overhead for passing arguments, however, you must be careful when thinking about the operational semantics of a macro especially where they differ from a regular function call.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
     ]
   },
   {
     "objectID": "guide/macros.html#defining-macros",
     "href": "guide/macros.html#defining-macros",
-    "title": "14  Macros",
+    "title": "18  Macros",
     "section": "",
     "text": "def repeat(n: Number, *expr: Object): Object =&gt;\n    let total = n in\n        while (total &gt;= 0) {\n            total := total - 1;\n            expr;\n        };\n\nrepeat(10) {\n    print(\"Hello World\");\n}\n\n\nlet _total = 10 in\n    while (_total &gt;= 0) {\n        _total := _total - 1;\n        {\n            print(\"Hello World\");\n        };\n    }",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
     ]
   },
   {
     "objectID": "guide/macros.html#variable-sanitization",
     "href": "guide/macros.html#variable-sanitization",
-    "title": "14  Macros",
-    "section": "14.2 Variable sanitization",
-    "text": "14.2 Variable sanitization\nUpon macro expansion, the variables inside the body of a macro are replaced with a special unique name generated by the compiler. This ensures that no variable in the context of the macro invocation can be accidentally hidden or used in unpredictable ways.\nTake for example the following code:\nlet total = 10 in repeat(total) {\n    print(total);\n};\nIf variables inside the body of the repeat macro wheren’t sanitazed, then the print statement would print 9, 8, etc, which is kind of unexpected unless you happen to know how the repeat macro is implemented, violating the principle of encapsulation. Even worse, this would happen if your variable is named total, but not if it’s named something else, which again is surprising and inconsistent. However, since the variable total inside the body of repeat will be renamed to something completely different upon macro expansion, you can be certain that the print statement will work as expected, regardless of the name you happen to choose for your variable.",
+    "title": "18  Macros",
+    "section": "18.2 Variable sanitization",
+    "text": "18.2 Variable sanitization\nUpon macro expansion, the variables inside the body of a macro are replaced with a special unique name generated by the compiler. This ensures that no variable in the context of the macro invocation can be accidentally hidden or used in unpredictable ways.\nTake for example the following code:\nlet total = 10 in repeat(total) {\n    print(total);\n};\nIf variables inside the body of the repeat macro wheren’t sanitazed, then the print statement would print 9, 8, etc, which is kind of unexpected unless you happen to know how the repeat macro is implemented, violating the principle of encapsulation. Even worse, this would happen if your variable is named total, but not if it’s named something else, which again is surprising and inconsistent. However, since the variable total inside the body of repeat will be renamed to something completely different upon macro expansion, you can be certain that the print statement will work as expected, regardless of the name you happen to choose for your variable.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
     ]
   },
   {
     "objectID": "guide/macros.html#symbolic-arguments",
     "href": "guide/macros.html#symbolic-arguments",
-    "title": "14  Macros",
-    "section": "14.3 Symbolic arguments",
-    "text": "14.3 Symbolic arguments\nThere are times, though, when you want the macro to reuse a symbol that comes from its external context (a variable or attribute). In these cases, you can use the especial syntax @symbol to define a symbolic argument in the macro, and then bind a specific symbol upon macro expansion.\nThis is best explained with an example. Let’s suppose we want to implement a swap macro that swaps the content of two variables. This cannot be done unless the macro can actually assign to the variables we want to swap. We would define the macro as:\ndef swap(@a: Object, @b: Object) {\n    let temp: Object = a in {\n        a := b;\n        b := temp;\n    }\n}\nAnd we invoke the macro as:\nlet x: Object = 5, y: Object = \"Hello World\" in {\n    swap(@x, @y);\n    print(x);\n    print(y);\n};\nWhich will be expanded to something like (except that _temp will be a generated name):\nlet x: Object = 5, y: Object = \"Hello World\" in {\n    let _temp = x in {\n        x := y;\n        y := _temp;\n    };\n    print(x);\n    print(y);\n};\nNotice how the actual names of the x and y variables are interpolated in the macro expansion. Of course, the type checker will guarantee that on invocation the x and y symbols are variables of the corresponding type.",
+    "title": "18  Macros",
+    "section": "18.3 Symbolic arguments",
+    "text": "18.3 Symbolic arguments\nThere are times, though, when you want the macro to reuse a symbol that comes from its external context (a variable or attribute). In these cases, you can use the especial syntax @symbol to define a symbolic argument in the macro, and then bind a specific symbol upon macro expansion.\nThis is best explained with an example. Let’s suppose we want to implement a swap macro that swaps the content of two variables. This cannot be done unless the macro can actually assign to the variables we want to swap. We would define the macro as:\ndef swap(@a: Object, @b: Object) {\n    let temp: Object = a in {\n        a := b;\n        b := temp;\n    }\n}\nAnd we invoke the macro as:\nlet x: Object = 5, y: Object = \"Hello World\" in {\n    swap(@x, @y);\n    print(x);\n    print(y);\n};\nWhich will be expanded to something like (except that _temp will be a generated name):\nlet x: Object = 5, y: Object = \"Hello World\" in {\n    let _temp = x in {\n        x := y;\n        y := _temp;\n    };\n    print(x);\n    print(y);\n};\nNotice how the actual names of the x and y variables are interpolated in the macro expansion. Of course, the type checker will guarantee that on invocation the x and y symbols are variables of the corresponding type.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
     ]
   },
   {
     "objectID": "guide/macros.html#variable-placeholders",
     "href": "guide/macros.html#variable-placeholders",
-    "title": "14  Macros",
-    "section": "14.4 Variable placeholders",
-    "text": "14.4 Variable placeholders\nMacros can also introduce a new symbol into the scope in which they are expanded, which can then be used in the body argument (or the other arguments). The syntax for this is $symbol. We call this a “variable placeholder”, because it holds the name for a variable that will be introduced upon macro expansion.\nAgain, this is best explained with an example. Let’s add a variable to the repeat macro to indicates the current iteration. We would define the macro as:\ndef repeat($iter: Number, n: Number, *expr:Object) {\n    let iter: Number = 0, total:Number = n in {\n        while (total &gt;= 0) {\n            total := total - 1;\n            expr;\n            iter := iter + 1\n        };\n    }\n}\nNow when calling the macro, you can specify a name for the $iter variable placeholder:\nrepeat(current, 10) {\n    print(current);\n};\nThe effect is that upon macro expansion, the variable placeholder $iter will be renamed to current and thus the body of the macro will correctly reference it. The actual expansion looks similar to the following code:\nlet current: Number = 0, _total:Number = n in {\n    while (_total &gt;= 0) {\n        _total := _total - 1;\n        {\n            print(current);\n        };\n        current := current + 1\n    };\n};\nThe compiler ensures that the use of the new variable in the body of the macro is consistent with the type declared for the variable placeholder in the macro. However, it is entirely possible for the macro not to define the variable, or to define it conditioned on some structure of the body (we will see how that’s achieved in the pattern matching section). In any case, since macro expansion is performed at compile time, any inconsistency that may arise will be captured by the compiler.",
+    "title": "18  Macros",
+    "section": "18.4 Variable placeholders",
+    "text": "18.4 Variable placeholders\nMacros can also introduce a new symbol into the scope in which they are expanded, which can then be used in the body argument (or the other arguments). The syntax for this is $symbol. We call this a “variable placeholder”, because it holds the name for a variable that will be introduced upon macro expansion.\nAgain, this is best explained with an example. Let’s add a variable to the repeat macro to indicates the current iteration. We would define the macro as:\ndef repeat($iter: Number, n: Number, *expr:Object) {\n    let iter: Number = 0, total:Number = n in {\n        while (total &gt;= 0) {\n            total := total - 1;\n            expr;\n            iter := iter + 1\n        };\n    }\n}\nNow when calling the macro, you can specify a name for the $iter variable placeholder:\nrepeat(current, 10) {\n    print(current);\n};\nThe effect is that upon macro expansion, the variable placeholder $iter will be renamed to current and thus the body of the macro will correctly reference it. The actual expansion looks similar to the following code:\nlet current: Number = 0, _total:Number = n in {\n    while (_total &gt;= 0) {\n        _total := _total - 1;\n        {\n            print(current);\n        };\n        current := current + 1\n    };\n};\nThe compiler ensures that the use of the new variable in the body of the macro is consistent with the type declared for the variable placeholder in the macro. However, it is entirely possible for the macro not to define the variable, or to define it conditioned on some structure of the body (we will see how that’s achieved in the pattern matching section). In any case, since macro expansion is performed at compile time, any inconsistency that may arise will be captured by the compiler.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
     ]
   },
   {
     "objectID": "guide/macros.html#pattern-matching",
     "href": "guide/macros.html#pattern-matching",
-    "title": "14  Macros",
-    "section": "14.5 Pattern matching",
-    "text": "14.5 Pattern matching\nBy far the most powerful feature of macros is structural pattern matching. This feature allows to deconstruct an argument and generate a specific code depending on the argument structure. The reason this is possible is because macros run on compile time, so when you declare an argument of type Number, for example, what you’ll get in the macro body is the actual expression tree of the argument, and not just the final evaluated object.\nAs everything else with macros, this feature is much better understood with examples. Let’s suppose you want to define a macro called simplify, for no better use than to illustrate how powerful macros are compared to regular functions. This is how you would do it:\ndef simplify(expr:Number) {\n    match(expr) {\n        case (x1:Number + x2:Number) =&gt; simplify(x1) + simplify(x2);\n        case (x1:Number + 0) =&gt; simplify(x1);\n        case (x1:Number - x2:Number) =&gt; simplify(x1) + simplify(x2);\n        case (x1:Number - 0) =&gt; simplify(x1);\n        case (x1:Number * x2:Number) =&gt; simplify(x1) * simplify(x2);\n        case (x1:Number * 1) =&gt; simplify(x1);\n        // ... you get the idea\n        default =&gt; expr;\n    };\n}\nYou would use the macro as follows:\nprint(simplify((42+0)*1);\nAnd the actual generated code would be:\nprint(42);\nNotice that this transformation happens during compilation time, not execution. The actual code that gets compiled is the simplified expression.",
+    "title": "18  Macros",
+    "section": "18.5 Pattern matching",
+    "text": "18.5 Pattern matching\nBy far the most powerful feature of macros is structural pattern matching. This feature allows to deconstruct an argument and generate a specific code depending on the argument structure. The reason this is possible is because macros run on compile time, so when you declare an argument of type Number, for example, what you’ll get in the macro body is the actual expression tree of the argument, and not just the final evaluated object.\nAs everything else with macros, this feature is much better understood with examples. Let’s suppose you want to define a macro called simplify, for no better use than to illustrate how powerful macros are compared to regular functions. This is how you would do it:\ndef simplify(expr:Number) {\n    match(expr) {\n        case (x1:Number + x2:Number) =&gt; simplify(x1) + simplify(x2);\n        case (x1:Number + 0) =&gt; simplify(x1);\n        case (x1:Number - x2:Number) =&gt; simplify(x1) + simplify(x2);\n        case (x1:Number - 0) =&gt; simplify(x1);\n        case (x1:Number * x2:Number) =&gt; simplify(x1) * simplify(x2);\n        case (x1:Number * 1) =&gt; simplify(x1);\n        // ... you get the idea\n        default =&gt; expr;\n    };\n}\nYou would use the macro as follows:\nprint(simplify((42+0)*1);\nAnd the actual generated code would be:\nprint(42);\nNotice that this transformation happens during compilation time, not execution. The actual code that gets compiled is the simplified expression.",
     "crumbs": [
       "The HULK Programming Language",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Macros</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Macros</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html",
+    "href": "theory/intro.html",
+    "title": "1  Introduction to Formal Languages",
+    "section": "",
+    "text": "1.1 What is a language\nIntuitively, a language is just a collection of correct sentences. In natural languages (Spanish, English, etc,), each sentence is made up of words, which have some intrinsic meaning, and there are rules that describe which sequences of words are valid.\nSome of these rules, which we often call “syntactic” are just about the structure of words and sentences, and not their meaning–like how nouns and adjectives must match in gender and number or how verbs connect to adverbs and other modifiers. Other rules, which we call “semantic”, deal with the valid meanings of collections of words–the reason why the sentence “the salad was happy” is perfectly valid syntactically but makes no sense. In linguistics, the set of rules that determine which sentences are valid is called a “grammar”.\nIn formal language theory, we want to make all these notions as precise as possible in mathematical terms. To achieve so, we will have to make some simplifications which, ultimately, will imply that natural languages fall outside the scope of what formal language theory can fully study. But these simplifications will enable us to define a very robust notion of language for which we can make pretty strong theoretical claims.\nSo let’s build this definition from the ground up, starting with our notion of words, or, formally, symbols:\nExamples of symbols in abstract languages might be single letters like a, b or c. In programming languages, a symbol might be a variable name, a number, or a keyword like for or class. The next step is to define sentences:\nAn example of a sentence formed with the symbols a and b is abba. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.\nWe are almost ready to define a language. But before, we need to define a “vocabulary”, which is just a collection of valid symbols.\nGiven a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.\nLet’s see some examples.",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html#symbol",
+    "href": "theory/intro.html#symbol",
+    "title": "1  Introduction to Formal Languages",
+    "section": "1.2 Symbol",
+    "text": "1.2 Symbol",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html#what-is-a-language",
+    "href": "theory/intro.html#what-is-a-language",
+    "title": "1  Introduction to Formal Languages",
+    "section": "",
+    "text": "Definition 1.1 (Symbol) A symbol is an atomic element that has an intrinsic meaning.\n\n\n\nDefinition 1.2 (Sentence) A sentence is a finite sequence of symbols.\n\n\n\n\nDefinition 1.3 (Vocabulary) A vocabulary \\(V\\) is a finite set of symbols.\n\n\n\nDefinition 1.4 (Language) Given a vocabulary \\(V\\), a language \\(L\\) is a set of sentences with symbols taken from \\(V\\).",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
+    ]
+  },
+  {
+    "objectID": "theory/intro.html#examples-of-languages",
+    "href": "theory/intro.html#examples-of-languages",
+    "title": "1  Introduction to Formal Languages",
+    "section": "1.2 Examples of languages",
+    "text": "1.2 Examples of languages",
+    "crumbs": [
+      "Formal Language Theory",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction to Formal Languages</span>"
     ]
   }
 ]

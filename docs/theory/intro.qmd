@@ -1,1 +1,55 @@
 # Introduction to Formal Languages
+
+At its core, a compiler is a translator between two languages: the source language (Python, C#, Java, HULK, etc) and the target language (Assembly, C, LLVM, MIPS, etc). Thus, it will pay of to study languages from a computational perspective.
+
+In this first part of the book, we introduce Formal Language Theory, a major field in Computer Science that deals with an abstract notion of language. Formal Language Theory is one of the foundational fields in CS, and its early development during the 60s and 70s laid the grounds for many of the most important theoretical results in Computer Science.
+
+So, although our focus in this book is on building compilers, in the next few chapters we will forget about them for a while, and just look at languages as mathematical constructions. We will prove a bunch of surprising theorems and discover a breadth of theory that touches upon all parts of Computer Science. Towards the end of this part, we will peek outside formal languages and look at some of the most interesting connections with computability theory, computational complexity, artificial intelligence, and everything else.
+
+But let's start at the basics.
+
+## What is a language
+
+Intuitively, a language is just a collection of correct sentences. In natural languages (Spanish, English, etc,), each sentence is made up of words, which have some intrinsic meaning, and there are rules that describe which sequences of words are valid.
+
+Some of these rules, which we often call "syntactic" are just about the structure of words and sentences, and not their meaning--like how nouns and adjectives must match in gender and number or how verbs connect to adverbs and other modifiers. Other rules, which we call "semantic", deal with the valid meanings of collections of words--the reason why the sentence "the salad was happy" is perfectly valid syntactically but makes no sense. In linguistics, the set of rules that determine which sentences are valid is called a "grammar".
+
+In formal language theory, we want to make all these notions as precise as possible in mathematical terms. To achieve so, we will have to make some simplifications which, ultimately, will imply that natural languages fall outside the scope of what formal language theory can fully study. But these simplifications will enable us to define a very robust notion of language for which we can make pretty strong theoretical claims.
+
+So let's build this definition from the ground up, starting with our notion of words, or, formally, symbols:
+
+::: {#def-symbol}
+### Symbol
+
+A symbol is an atomic element that has an intrinsic meaning.
+:::
+
+Examples of symbols in abstract languages might be single letters like `a`, `b` or `c`. In programming languages, a symbol might be a variable name, a number, or a keyword like `for` or `class`. The next step is to define sentences:
+
+::: {#def-sentence}
+### Sentence
+
+A sentence is a finite sequence of symbols.
+:::
+
+An example of a sentence formed with the symbols `a` and `b` is `abba`. In a programming language like C# or Python, a sentence can be anything from a single expression to a full program.
+
+We are almost ready to define a language. But before, we need to define a "vocabulary", which is just a collection of valid symbols.
+
+::: {#def-vocabulary}
+### Vocabulary
+
+A vocabulary $V$ is a finite set of symbols.
+:::
+
+Given a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.
+
+::: {#def-language}
+### Language
+
+Given a vocabulary $V$, a language $L$ is a set of sentences with symbols taken from $V$.
+:::
+
+Let's see some examples.
+
+## Examples of languages

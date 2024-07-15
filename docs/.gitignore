@@ -1,1 +1,3 @@
 /.quarto/
+_book/*.pdf
+_book/*.epub

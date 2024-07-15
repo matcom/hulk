@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>The Hitchhiker’s Guide to Compilers - 14&nbsp; Macros</title>
+<title>The Hitchhiker’s Guide to Compilers - 18&nbsp; Macros</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/macros.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Macros</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/macros.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">The HULK Programming Language</span></a>
+ <span class="menu-text">Formal Language Theory</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -156,86 +156,154 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../theory/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Formal Languages</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Lexers and Parsers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../parsing/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Parsing</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Programing Languages</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../semantics/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Introduction to Semantic Analysis</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Runtime Environments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../runtime/intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Code Generation and Execution</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">The HULK Programming Language</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../guide/intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to HULK</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/expressions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Expressions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Functions</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/variables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Variables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/conditionals.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conditionals</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/loops.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Loops</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/types.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Types</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Types</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/typing.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Type checking</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Type checking</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/inference.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Type inference</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Type inference</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/protocols.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Protocols</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/iterables.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Iterables</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Iterables</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/vectors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Vectors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/functors.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Functors</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../guide/macros.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></span></a>
   </div>
 </li>
       </ul>
@@ -250,20 +318,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#defining-macros" id="toc-defining-macros" class="nav-link active" data-scroll-target="#defining-macros"><span class="header-section-number">14.1</span> Defining macros</a></li>
-  <li><a href="#variable-sanitization" id="toc-variable-sanitization" class="nav-link" data-scroll-target="#variable-sanitization"><span class="header-section-number">14.2</span> Variable sanitization</a></li>
-  <li><a href="#symbolic-arguments" id="toc-symbolic-arguments" class="nav-link" data-scroll-target="#symbolic-arguments"><span class="header-section-number">14.3</span> Symbolic arguments</a></li>
-  <li><a href="#variable-placeholders" id="toc-variable-placeholders" class="nav-link" data-scroll-target="#variable-placeholders"><span class="header-section-number">14.4</span> Variable placeholders</a></li>
-  <li><a href="#pattern-matching" id="toc-pattern-matching" class="nav-link" data-scroll-target="#pattern-matching"><span class="header-section-number">14.5</span> Pattern matching</a></li>
+  <li><a href="#defining-macros" id="toc-defining-macros" class="nav-link active" data-scroll-target="#defining-macros"><span class="header-section-number">18.1</span> Defining macros</a></li>
+  <li><a href="#variable-sanitization" id="toc-variable-sanitization" class="nav-link" data-scroll-target="#variable-sanitization"><span class="header-section-number">18.2</span> Variable sanitization</a></li>
+  <li><a href="#symbolic-arguments" id="toc-symbolic-arguments" class="nav-link" data-scroll-target="#symbolic-arguments"><span class="header-section-number">18.3</span> Symbolic arguments</a></li>
+  <li><a href="#variable-placeholders" id="toc-variable-placeholders" class="nav-link" data-scroll-target="#variable-placeholders"><span class="header-section-number">18.4</span> Variable placeholders</a></li>
+  <li><a href="#pattern-matching" id="toc-pattern-matching" class="nav-link" data-scroll-target="#pattern-matching"><span class="header-section-number">18.5</span> Pattern matching</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/macros.html"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Macros</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../guide/intro.html">The HULK Programming Language</a></li><li class="breadcrumb-item"><a href="../guide/macros.html"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Macros</span></h1>
+<h1 class="title"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Macros</span></h1>
 </div>
 
 
@@ -309,8 +377,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// expressions</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The second, and most important one, is that the <code>expr</code> here encapsulates a computation that, from the point of view of the <code>repeat</code> function, is a black box. We will focus on why this matters later on.</p>
-<section id="defining-macros" class="level2" data-number="14.1">
-<h2 data-number="14.1" class="anchored" data-anchor-id="defining-macros"><span class="header-section-number">14.1</span> Defining macros</h2>
+<section id="defining-macros" class="level2" data-number="18.1">
+<h2 data-number="18.1" class="anchored" data-anchor-id="defining-macros"><span class="header-section-number">18.1</span> Defining macros</h2>
 <p>Instead of a function, you can use a <em>macro</em>, which has a very similar syntax in HULK:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">repeat</span>(n<span class="op">:</span> <span class="bu">Number</span><span class="op">,</span> <span class="op">*</span>expr<span class="op">:</span> <span class="bu">Object</span>)<span class="op">:</span> <span class="bu">Object</span> <span class="kw">=&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> total <span class="op">=</span> n <span class="kw">in</span></span>
@@ -333,8 +401,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This is the reason why you don’t see <code>expr();</code> in the macro body, but <code>expr;</code>. That is, the body is not <em>executed</em> but <em>interpolated</em> inside the macro. This transpilation step makes macros often faster than functions because there is no extra overhead for passing arguments, however, you must be careful when thinking about the operational semantics of a macro especially where they differ from a regular function call.</p>
 </section>
-<section id="variable-sanitization" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="variable-sanitization"><span class="header-section-number">14.2</span> Variable sanitization</h2>
+<section id="variable-sanitization" class="level2" data-number="18.2">
+<h2 data-number="18.2" class="anchored" data-anchor-id="variable-sanitization"><span class="header-section-number">18.2</span> Variable sanitization</h2>
 <p>Upon macro expansion, the variables inside the body of a macro are replaced with a special unique name generated by the compiler. This ensures that no variable in the context of the macro invocation can be accidentally hidden or used in unpredictable ways.</p>
 <p>Take for example the following code:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> total <span class="op">=</span> <span class="dv">10</span> <span class="kw">in</span> <span class="fu">repeat</span>(total) {</span>
@@ -342,8 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>If variables inside the body of the <code>repeat</code> macro wheren’t sanitazed, then the <code>print</code> statement would print <code>9</code>, <code>8</code>, etc, which is kind of unexpected unless you happen to know how the <code>repeat</code> macro is implemented, violating the principle of encapsulation. Even worse, this would happen if your variable is named <code>total</code>, but not if it’s named something else, which again is surprising and inconsistent. However, since the variable <code>total</code> inside the body of <code>repeat</code> will be renamed to something completely different upon macro expansion, you can be certain that the <code>print</code> statement will work as expected, regardless of the name you happen to choose for your variable.</p>
 </section>
-<section id="symbolic-arguments" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="symbolic-arguments"><span class="header-section-number">14.3</span> Symbolic arguments</h2>
+<section id="symbolic-arguments" class="level2" data-number="18.3">
+<h2 data-number="18.3" class="anchored" data-anchor-id="symbolic-arguments"><span class="header-section-number">18.3</span> Symbolic arguments</h2>
 <p>There are times, though, when you want the macro to reuse a symbol that comes from its external context (a variable or attribute). In these cases, you can use the especial syntax <code>@symbol</code> to define a <em>symbolic argument</em> in the macro, and then bind a specific symbol upon macro expansion.</p>
 <p>This is best explained with an example. Let’s suppose we want to implement a <code>swap</code> macro that swaps the content of two variables. This cannot be done unless the macro can actually assign to the variables we want to swap. We would define the macro as:</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">swap</span>(@a<span class="op">:</span> <span class="bu">Object</span><span class="op">,</span> @b<span class="op">:</span> <span class="bu">Object</span>) {</span>
@@ -369,8 +437,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Notice how the actual names of the <code>x</code> and <code>y</code> variables are interpolated in the macro expansion. Of course, the type checker will guarantee that on invocation the <code>x</code> and <code>y</code> symbols are variables of the corresponding type.</p>
 </section>
-<section id="variable-placeholders" class="level2" data-number="14.4">
-<h2 data-number="14.4" class="anchored" data-anchor-id="variable-placeholders"><span class="header-section-number">14.4</span> Variable placeholders</h2>
+<section id="variable-placeholders" class="level2" data-number="18.4">
+<h2 data-number="18.4" class="anchored" data-anchor-id="variable-placeholders"><span class="header-section-number">18.4</span> Variable placeholders</h2>
 <p>Macros can also introduce a new symbol into the scope in which they are expanded, which can then be used in the body argument (or the other arguments). The syntax for this is <code>$symbol</code>. We call this a “variable placeholder”, because it holds the name for a variable that will be introduced upon macro expansion.</p>
 <p>Again, this is best explained with an example. Let’s add a variable to the <code>repeat</code> macro to indicates the current iteration. We would define the macro as:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">repeat</span>($iter<span class="op">:</span> <span class="bu">Number</span><span class="op">,</span> n<span class="op">:</span> <span class="bu">Number</span><span class="op">,</span> <span class="op">*</span>expr<span class="op">:</span><span class="bu">Object</span>) {</span>
@@ -398,8 +466,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>}<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The compiler ensures that the use of the new variable in the body of the macro is consistent with the type declared for the variable placeholder in the macro. However, it is entirely possible for the macro not to define the variable, or to define it conditioned on some structure of the body (we will see how that’s achieved in the <a href="#pattern-matching">pattern matching section</a>). In any case, since macro expansion is performed at compile time, any inconsistency that may arise will be captured by the compiler.</p>
 </section>
-<section id="pattern-matching" class="level2" data-number="14.5">
-<h2 data-number="14.5" class="anchored" data-anchor-id="pattern-matching"><span class="header-section-number">14.5</span> Pattern matching</h2>
+<section id="pattern-matching" class="level2" data-number="18.5">
+<h2 data-number="18.5" class="anchored" data-anchor-id="pattern-matching"><span class="header-section-number">18.5</span> Pattern matching</h2>
 <p>By far the most powerful feature of macros is structural pattern matching. This feature allows to deconstruct an argument and generate a specific code depending on the argument <em>structure</em>. The reason this is possible is because macros run on compile time, so when you declare an argument of type <code>Number</code>, for example, what you’ll get in the macro body is the actual expression tree of the argument, and not just the final evaluated object.</p>
 <p>As everything else with macros, this feature is much better understood with examples. Let’s suppose you want to define a macro called <code>simplify</code>, for no better use than to illustrate how powerful macros are compared to regular functions. This is how you would do it:</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>def <span class="fu">simplify</span>(expr<span class="op">:</span><span class="bu">Number</span>) {</span>
@@ -814,7 +882,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../guide/functors.html" class="pagination-link" aria-label="Functors">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Functors</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Functors</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
