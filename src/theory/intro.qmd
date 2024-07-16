@@ -51,7 +51,7 @@ An example of a vocabulary is $\{ a,b,c \}$, which contains three symbols. In a 
 
 If you think about our definition of vocabulary for a little bit, you'll notice we defined it as _finite_ set of symbols. At the same time, I'm claiming that things like variable and function names, and all identifiers in general, will end up being part of the vocabulary in programming languages. However, there are infinitely many valid identifiers, so... how does that work?
 
-The solution to this problem is that we will actually deal with _two_ different languages, on two different levels. We will define a first language for the _tokens_, which just determines what types of identifiers, numbers, etc., are valid. Then the actual programming language will be defined based on the _types_ of tokens available. So, all numbers are the same token, and all identifiers as well.
+The solution to this problem is that we will actually deal with _two_ different languages, on two different levels. We will define a first language for the _tokens_, which just determines what types of identifiers, numbers, etc., are valid. Then the actual programming language will be defined based on the _types_ of tokens available. So, all numbers are the same token, all identifiers are another token, and so on.
 :::
 
 Given a concrete vocabulary, we can then define a language as a (posibly infinite) subset of all the sentences that can be formed with the symbols from that vocabulary.
@@ -104,9 +104,9 @@ We can define it with a bit of math syntax sugar as follows:
 
 $$L_2 = \{ \omega \in \{a,b\}^* | \#(a,\omega) = \#(b,\omega) \}$$
 
-Let's unpack this definition. We start by saying, $\omega in \{a,b\}^*$, which literaly parses to "strings $\omega$ in the universe language of the vocabulary $\{a,b\}$". This is just standard notation to say "string made out of $a$ and $b$. Then we add the conditional part $\#(a,\omega) = \#(b,\omega)$ which should be pretty straightforward: we are using the $\#(\mathrm{<symbol>},\mathrm{<string>})$ notation to denote the function that counts a given symbol in a string.
+Let's unpack this definition. We start by saying, $\omega \in \{a,b\}^*$, which literaly parses as "strings $\omega$ in the universe language of the vocabulary $\{a,b\}$", but is just standard jargon to say "string made out of $a$ and $b$. Then we add the conditional part $\#(a,\omega) = \#(b,\omega)$ which should be pretty straightforward: we are using the $\#(\mathrm{<symbol>},\mathrm{<string>})$ notation to denote the function that counts a given symbol in a string.
 
-$L_2$ is slightly more interesting than $V^*$ because it introduces the notion that _a formal language is equivalent to a computation_. This insight is the fundamental idea that links formal language and computability theories, and we will formalize this idea in the next section. But first, let's see other, even more interesting languages, to solidify this intuition that _languages equal computation_.
+$L_2$ is slightly more interesting than $V^*$ because it introduces the notion that _a formal language is equivalent to some computation_. This insight is the fundamental idea that links formal languages and computability theory, and we will formalize this idea in the next section. But first, let's see other, even more interesting languages, to solidify this intuition that _languages equal computation_.
 
 Let's define $L_3$ as the language of all strings in $V^*$ where the number $a$ is a prime factor of the number of $b$. Intuitively, working with this language--e.g., finding valid strings--will require us to solve prime factoring, as any question about $L$ that has different answers for string in $L$ than for strings not in $L$ will necessarily go through what it means for a number to be a prime factor of another.
 
@@ -146,10 +146,60 @@ def l2(s):
     return a == b
 ```
 
-One fundamental question in formal language theory is not only coming up with a solution to the word problem for a given language but, actually, coming up with the _simplest_ solution--for a very specific definition of _simple_: how much do you need to remember.
+A fundamental question in formal language theory is not only coming up with a solution to the word problem for a given language but, actually, coming up with the _simplest_ solution--for a very specific definition of _simple_: how much do you need to remember. In other words: _what kind of algorithms can solve the word problem for what kind of languages?_
 
-For example, we can solve $L_2$ with $O(n)$ memory. That is, we need to remember something that is proportional to how many $a$'s or $b$'s are in the string. And we cannot do it with less, as we will prove a couple chapters down the road.
+For example, we can solve $L_2$ with $O(n)$ memory. That is, we need to remember something that is proportional to how many $a$'s and $b$'s are in the string. And we cannot solve it with anything less than that, as we will prove a couple chapters down the road.
 
 Now, let's turn to the opposite problem, that of generating strings from a given language, and wonder what, if any, is the connection between these two.
 
 ## Generating a language
+
+Suppose you want to generate all strings from a language like $L_2$. To make things simpler, let's redefine it as $L_2'$, the language of strings over $\{a,b\}$ with the same number of $a$'s and $b$' but where all $a$'s come before all $b$'s. This means $aabb$ is a valid string in $L$, but not $abba$. This language is also called $a^n b^n$, that is, $n$ symbols $a$ followed by $n$ symbols $b$.
+
+Here is a simple Python method that generates infinitely many strings from $L_2'$:
+
+```python
+def generate_l2():
+    s = ""
+
+    while True:
+        yield s
+        s = "a" + s + "b"
+```
+
+Let's unpack this. We start with the empty string $\epsilon$, defined in code as `s = ""`. Then, we enter an infinite cycle where we yield the current string, and then attach an $a$ to the front and a $b$ to the back.
+Take a moment to convince yourself that _any_ string in the form $a^n b^n$ is eventually generated by this method and, furthermore, _only_ those strings are generated by the method.
+
+This method is actually pretty neat because it not only generates (eventually) all of $a^n b^n$; it does so in increasing length order. It isn't immediately obvious why this is such a good thing but here's a bold claim: if you have a generating method for any language $L$, then you have a recognizing method too.
+
+Wait, what!? Yep, you heard it right. And actually, it goes both ways. If you have a recognizing algorithm, you also have a generating one. Let's make this our first theorem in formal language theory.
+
+::: {#thm-generation-recognition}
+Let $L$ be a formal language. There exists an algorithm $A$ for generating all strings in $L$ (in increasing length order) if and only if there also exists another algorithm $A'$ for solving its word problem.
+:::
+
+::: {.proof}
+To prove this, let's first understand what the theorem is saying. If we have an algorithm $A$ that generates all strings in a language, we can also come up with another algorithm $A'$ (presumably using $A$) that solves the word problem, and viceversa.
+
+To prove this type of theorems, the most usual approach is to assume you have $A$ (or $A'$) as some kind of abstract, black-box algorithm, and try to construct the other. Let's do it from generation to recognition first, as the other way around will be fairly easy once this is done.
+
+$\Rightarrow$ Suppose we have an algorithm $A$ that generates all strings in $L$, and we are given an arbitrary string $\omega$. Let $n = |\omega|$ be the length of $\omega$. We just need to run $A$ until we either see $\omega$, in which case the answer is true ($\omega \in L$) or until we see one string with length greater than $n$, in which case the answer is false ($\omega \notin L$). Since $A$ generates strings in increasing length order, one of these must happen in a finite time for any $\omega$.
+
+Now let's do the other way around.
+
+$\Leftarrow$ Suppose we have an algorithm $A'$ that solves the word problem from $L$. Then we do the following. Define $L^*$ as the universe language associated with $L$. We can very easily code a generating algorithm $A^*$ for $L^*$ in increasing length order, simply by permuting all symbols[^1]. Now, run $A^*$ and, for each string $\omega$ generated, run $A'(\omega)$. If the output is true, then yield $\omega$. Otherwise, skip it.
+:::
+
+[^1]: this is a classic first-year programming problem left as an exercise for the reader.
+
+So there you have it. Generating (in increasing order) and recognizing are two faces of the same problem. Cool, right? But why does this matter? For starters, it gives us a tremendously powerful connection between two sub-branches of formal language theory that we will explore in the following chapters.
+
+## Moving on
+
+We are just scratching the surface of what formal language theory can do, and we have already touched upon several areas of computer science.
+
+We have defined a super general notion (language) that is ultimately as profound and powerful as the very notion of algorithm. We have identified a central problem in formal language theory (the word problem) that is as deep as the very question of what problems can be solved, _at all_, with a computer. We connected two fundamental problems in languages (recognizing and generating) and discovered they are but two sides of the same coin. And we left hanging the question of which languages can be solved with which types of algorithms, which is ultimately a question about complexity theory. Phew!
+
+In the next few chapters we will continue exploring the world of formal languages. We will dive into the different classes of languages, according to the complexity of their generating and recognizing algorithms. We will find many intringuing unsolvable problems that have deep connections with other areas in computer science, from the most practical to the most esotherical. When we finish this dive, we will have a much more solid understanding of what computers can ultimately do. And then, will turn to programming languages and apply all these ideas to solving the more practical problem of actually building a compiler.
+
+Buckle up!
