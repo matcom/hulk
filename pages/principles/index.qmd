@@ -1,0 +1,3 @@
+# Principles of Compiler Construction
+
+In this first part of the book we will lay out most of the necessary theory to understand how a compiler works. This includes a significant chunk of formal language theory, but not all of it.

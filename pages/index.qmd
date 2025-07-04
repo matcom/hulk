@@ -1,0 +1,47 @@
+# Preface {.unnumbered}
+
+This book is primarily about making compilers, but it is also so much more. A compiler is one of the most exciting (and complex) projects you could attempt, and of the most interesting pieces of software you can examine. Building a compiler requires a combination of deep theoretical foundations, robust software engineering practices, and clever algorithm design and optimization. In a way, a compiler is the quintessential Computer Science application. This is why, in the process of building a compiler from scratch, you can learn a whole lot about many interrelated areas in Computer Science.
+
+But why do we need compilers at all? You see, there is a large distance between the level of reasoning that occurs in the brain and the level of reasoning that occurs on a computer---at least, modern, traditional electronic computers like the one where you're reading this. Compilers are our best tools so far to bridge this gap. Here's why.
+
+Problems in any domain are solved by thinking at a level of abstraction with a language that describes the rules of that domain. For example, if you're sending a rocket to the moon, you will think in terms of the physics and chemistry of rocket propulsion, the differential equations that model orbital mechanics, and the logistics and scheduling involved.
+
+On the other hand, you have to explain all these things to a computer. And computers are very dumb. At their core, computers are just complex state machines that can do some basic arithmetics and move bits from one part of the memory to another. One of the most surprising insights in all of science is that, it turns out, this is all you need to be able to solve _any_ solvable problem---an idea we will revisit in some detail in later chapters.
+
+But let's go back to the core of the problem. The issue is that we have to deal with two widely different levels of abstractions: the higher level where you can talk and reason about rockets and planets and physics---the domain language---and the lower level where you have to talk and reason about bits and registers and arithmetic operations---the machine language.
+
+There was a time when these levels of abstraction---these two languages--- had to be connected by the programmer. In fact, at this time, the difference between analyst and programmer was precisely that the analyst designed the solution in his domain language, and the programmer translated it into an executable program in machine language. (This was, incidentally, also the time when women were mostly programmers and men mostly analysts, because many considered "programming" just a low-level translation task not worthy of intellectual pursuit. Oh, the irony! But I digress.)
+
+Then, 1952, Grace Hooper came up with a brilliant idea. She was working on the simulation of ballistic trajectories. To direct a projectile to its target, physical models are described in a language of differential equations and Newtonian mechanics. However, in order to implement these models in a computing device, it is necessary to speak in a language of registers, stacks and interrupts.
+
+This gap made programming extremely difficult, and slowed the development of new models extremely because at every step there could be errors in both modeling and coding. When something went wrong, whose fault was it? From the analyst or from the programmer? Or worse, the computer system?
+
+But here is the kicker. Seeing that the process of converting differential equations into concrete programs was fundamentally mechanical--Hopper thought---why not let the computer itself do this conversion? And thus, the notion of a high level _programming language_ was born!
+
+The idea seems straightforward in hindsight: let's design a language that allows analysts to express their solutions to problems---their algorithms---as close as possible to the problem domain---e.g., using standard mathematical notation, functions, collections of numbers, and other relevant abstractions. Then, let's write another program that will translate this high level program into a low level _equivalent_ program, taking care of all the complicated bits and registry manipulation, abstracting away the machine language so the analyst doesn't need to learn it at all.
+
+This genius idea would take several years to perfect to the point of becoming a reality. Grace Hooper's first compiler for the A-0 language was actually practically a linker with some basic functions. The first high-level languages ​​to have "serious" compilers are FORTRAN (1957, John Backus), ALGOL (1958, Friedrich Bauer), and COBOL (1960, Grace Hooper). An additional advantage, in addition to reducing development time, was the possibility of compiling the same program for multiple platforms. In 1960, for the first time, the same COBOL program was compiled for two different machines: UNIVAC II and RCA 501.
+
+At this point the languages ​​became sufficiently complicated, to the point that compilers could no longer be written "by hand." So it was necessary to turn to theory, and develop a science about what types of programming languages ​​could be compiled, and with what compilers. This gave birth, in 1960, to the science that we know today as Compilation.
+
+Motivated not only by a practical reason, but also based on the most solid theoretical principles, building compilers became one of the first justifications for Computer Science to question its own problems and limitations, and stop being seen as a mere calculation tool. Problems as distant as natural language processing and the nature of computable functions have fallen under the scope of the problems studied in this field. Today compilation is a solid science, founded on years of formal theory and engineering practice.
+
+Hidden beneath all this formal apparatus and the full range of theoretical and practical experiences and results of the last 60 years, we can find a more fundamental question, a question that perhaps goes back to Alan Turing himself, or even further, to Ada Lovelace and Charles Babbage with his analytical engine. The question is this:
+
+**How ​​to talk to a computer?**
+
+All attempts to design languages, all algorithms and techniques discovered, all design patterns and architectures, are ultimately tied to the desire to be able to ask a *question* to the computer, and get an *answer* in return. It doesn't matter if the question is to calculate a certain projectile trajectory, or to find the sequence of parameters that minimize a certain function. Every program is in a way a conversation with the computer, a communication channel, which we want to be powerful enough to be able to express our most complex ideas, and simple enough to be understood by a Turing machine. As we will see in this book, finding the right balance is an extremely interesting problem, and trying to answer it will take us down a path that will raise many other questions, including the following:
+
+- What types of languages ​​is a computer capable of *understanding*?
+- How much of a language must be *understood* in order to have a conversation?
+- What is *understanding* a language?
+- Is it as easy or difficult to *understand* as to *speak* a language?
+- Can we characterize languages ​​in computational terms according to their complexity to be *understood* by a computer?
+- How are these languages ​​related to human language?
+- What can we learn about the nature of computers and computable problems from the languages ​​they are able to recognize?
+- What can we learn about human language to make computers smarter?
+- What can we learn about human language, and the very nature of our intelligence, from studying languages ​​understandable by different types of machines?
+
+These questions, although not all will be directly answered in the following chapters, form the backbone of the book content, in the sense that everything presented is with the intention of, at least, shedding a little light on these topics. We hope that at the end of the book, students will be able to discuss the philosophical implications of the possible answers to these questions, and not just the technical or more practical issues that the book attacks. For this reason, we will try as far as possible, in addition to the technical content, to occasionally add some comments or more philosophical discussions regarding these and similar questions.
+
+So this book is primarily about making compilers. But it is also about some of most profound questions in Computer Science and some of the most surprising answers---including, the lack of answers for many of these questions.

@@ -1,0 +1,38 @@
+# Introduction
+
+We will begin this journey by dissecting the canonical computational system of formal language theory: a compiler. Broadly speaking, a compiler is nothing more than a program, whose input and output also happen to be programs. The input is a program in a language that we will call "high level", and the output in a "low level" language, which is equivalent to the first. Exactly what is high and low will depend on many factors, and there is no formal definition. In general, a high-level language is one that is comfortable for us as programmers to express the operations that we are interested in executing. Likewise, a low-level language is one that a computing device can execute efficiently. Perhaps the most typical examples are an object-oriented language and an assembly language respectively, but there are many other input and output language combinations of interest.
+
+![Abstract representation of the compilation process.](../graphics/mountain.svg){ width=100% }
+
+Now, before diving headlong into the anatomy of a compiler, it is worth mentioning some related language processing systems. We can try to categorize them according to the "type" of the input and output language. First of all, the classic example is when we want to convert a high-level language to a low-level language, and we call this system a **compiler**. The opposite case, when we want to convert from a low-level language to a high-level language, we can call it a **decompiler** by analogy. These types of tools are useful for analyzing and reverse engineering programs for which, perhaps, we no longer have the source code, and we need to understand or modify. The other two cases, high level to high level and low level to level are basically **translators**; and sometimes they are also called **transpilers**. For example, TypeScript is a high-level language that "transpiles" to JavaScript, another high-level language. Among low-level languages ​​we can also have translators. An example is the so-called **JIT** (*just-in-time*) compilers, which are used to translate a program compiled in a generic low-level language (for example **.NET IL**) into a machine language. specific to the architecture where it is executed.
+
+Let us then return to the classic case, the **compiler**. In this course we are going to use as a teaching guide the design of a compiler for the HULK language, which will compile to a machine language called MIPS. Details of both languages ​​will be introduced as appropriate, but for now it can be said that HULK is an object-oriented language, with automatic garbage collection, simple inheritance, polymorphism, and a unified type system. MIPS is a stack assembly language for a 32-bit architecture with registers and arithmetic, logic, and string-oriented operations.
+
+Let us then try to define this machinery step by step. Abstractly our compiler is a "black box" that converts programs written in HULK to programs written in MIPS:
+
+```python echo=False, results="plain"
+Pipeline(['HULK', 'Compiler', 'MIPS'], [
+ (0, 1, ""),
+ (1, 2, ""),
+], startshape='plaintext', endshape='plaintext').print(width="50%", float=False)
+```
+
+To begin to uncover this black box, let's notice that we have at least two independent components: one that operates in COOL language and another that operates in MIPS language. We need to be able to "read" a program in COOL and "write" it in MIPS. We will call the first module, which "reads", *parser*, or syntax analyzer, for historical reasons that we will see later. We will simply call the second component the *generator*.
+
+```python echo=False, results="plain"
+Pipeline(['HULK', 'Parser', 'Generator', 'MIPS'], [
+ (0, 1, ""),
+ (1, 2, ""),
+ (23, ""),
+], startshape='plaintext', endshape='plaintext').print(width="70%", float=False)
+```
+
+From here a question immediately arises: what communication protocol do these modules have? It is necessary to design a kind of intermediate language, a representation mechanism that is neither COOL nor MIPS, but something that is "halfway" between the two. That is, it is necessary to translate the COOL program into some form of abstract representation, independent of the syntax, which can then be interpreted by the generator and written in MIPS. Let's call it *intermediate representation (IR)* for now.
+
+```python echo=False, results="plain"
+Pipeline(['HULK', 'Parser', 'Generator', 'MIPS'], [
+ (0, 1, ""),
+ (1, 2, "GO"),
+ (23, ""),
+], startshape='plaintext', endshape='plaintext').print(width="75%", float=False)
+```

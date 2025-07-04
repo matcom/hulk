@@ -1,3 +1,0 @@
-# Preface {.unnumbered}
-
-This book is about making compilers. A compiler is one of the most exciting (and complex) software projects you could get into.

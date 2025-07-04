@@ -1,0 +1,47 @@
+project:
+  type: book
+  output-dir: "../docs"
+
+book:
+  title: "Compiler Construction with HULK"
+  author: "Alejandro Piad Morffis"
+  date: "7/12/2024"
+  cover-image: cover.png
+  chapters:
+    - index.qmd
+    - intro.qmd
+    - part: principles/index.qmd
+      chapters:
+        - "principles/intro.qmd"
+        - "principles/grammars.qmd"
+    - part: building/index.qmd
+      chapters: []
+    - part: extra/index.qmd
+      chapters: []
+    - part: hulk/index.qmd
+      chapters:
+        - hulk/expressions.md
+        - hulk/functions.md
+        - hulk/variables.md
+        - hulk/conditionals.md
+        - hulk/loops.md
+        - hulk/types.md
+        - hulk/typing.md
+        - hulk/inference.md
+        - hulk/protocols.md
+        - hulk/iterables.md
+        - hulk/vectors.md
+        - hulk/functors.md
+        - hulk/macros.md
+  appendices:
+    - instructors.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+  epub:
+    epub-cover-image: cover.png

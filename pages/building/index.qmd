@@ -1,0 +1,5 @@
+# Building a Compiler
+
+This is the main part of the book. In the following chapters, we will build a HULK compiler from the ground up, in an incremental way. Each chapter is a practical guide to implementing some new feature of the HULK language or the compiler, or some optimization of previous features.
+
+These chapters are based on Jupyter notebooks distributed with the source code of the book, available in the [public Github repository](https://github.com/matcom/hulk). Additionally, the notebooks this part is based on are used to generate a fully working reference implementation of the HULK compiler, which can be installed with `pip install hulk-compiler`.
