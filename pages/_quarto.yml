@@ -1,47 +1,44 @@
 project:
   type: book
-  output-dir: "../docs"
 
 book:
-  title: "Compiler Construction with HULK"
+  title: "Principles of Programming Languages"
+  subtitle: "Design and Implementation (A 14-Week Journey)"
   author: "Alejandro Piad Morffis"
-  date: "7/12/2024"
-  cover-image: cover.png
+  date: "today"
   chapters:
     - index.qmd
     - intro.qmd
-    - part: principles/index.qmd
+    - part: "I. The Architect (Frontend - Python)"
       chapters:
-        - "principles/intro.qmd"
-        - "principles/grammars.qmd"
-    - part: building/index.qmd
-      chapters: []
-    - part: extra/index.qmd
-      chapters: []
-    - part: hulk/index.qmd
+        - 01-dual-ancestry.qmd
+        - 02-atomization.qmd
+        - 03-structure.qmd
+        - 04-evaluation.qmd
+        - 05-binding.qmd
+        - 06-shield.qmd
+    - part: "II. The Bridge (Intermediate Representation)"
       chapters:
-        - hulk/expressions.md
-        - hulk/functions.md
-        - hulk/variables.md
-        - hulk/conditionals.md
-        - hulk/loops.md
-        - hulk/types.md
-        - hulk/typing.md
-        - hulk/inference.md
-        - hulk/protocols.md
-        - hulk/iterables.md
-        - hulk/vectors.md
-        - hulk/functors.md
-        - hulk/macros.md
-  appendices:
-    - instructors.qmd
-
-bibliography: references.bib
+        - 07-lowering.qmd
+        - 08-transpiler.qmd
+    - part: "III. The Engineer (Backend - Rust)"
+      chapters:
+        - 09-metal-sandbox.qmd
+        - 10-stack-machine.qmd
+        - 11-heap-memory.qmd
+        - 12-garbage-collector.qmd
+        - 13-standard-library.qmd
+        - 14-final-polish.qmd
+    - part: "Appendices"
+      chapters:
+        - appendix-hulk-syntax.qmd
+        - instructors.qmd
 
 format:
   html:
     theme: cosmo
-  pdf:
-    documentclass: scrreprt
-  epub:
-    epub-cover-image: cover.png
+    toc: true
+    code-fold: true
+  # pdf:
+  #   documentclass: scrreprt
+  #   toc: true

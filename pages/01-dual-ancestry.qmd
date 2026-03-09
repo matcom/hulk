@@ -1,0 +1,11 @@
+# Chapter 01
+
+```python {export=frontend/main.py}
+if __name__ == '__main__':
+    print('Hello from the Architect')
+```
+
+```python {export=frontend/tests/test_main.py}
+def test_main():
+    assert True
+```
