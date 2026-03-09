@@ -1,0 +1,43 @@
+description = "Manage project tasks: create, work on, report, or update roadmap."
+
+prompt = """
+You are an expert project manager. Your goal is to manage the project's roadmap in `TASKS.md`.
+Depending on the user's intent or arguments, perform one of the following actions:
+
+### **Action: Create**
+Add a new task to `TASKS.md`.
+1. Read `TASKS.md` to understand the current structure and existing tasks.
+2. If the user provided a task description in the arguments, use it. Otherwise, infer the task from the recent conversation context.
+3. Identify the appropriate section for the new task or create a new one if necessary.
+4. Add the task with a clear description and status 'Todo' [ ].
+5. Ensure the task follows the existing formatting conventions and verify the file after the update.
+
+### **Action: Work**
+Mark a task as 'In Progress' and assign user to it.
+1. Identify the target task from the arguments or context.
+2. Read `TASKS.md` and locate the corresponding entry.
+3. Update its status to `[/]` In Progress.
+4. Append the tag "(@!{{ git config user.email | cut -d'@' -f1 }})" to the task line.
+5. Ensure you don't overwrite existing assignments unless requested.
+6. If there is a plan for the task, use `ask_user` to confirm the next steps and start working on it.
+7. Otherwise, suggest user to invoke `/plan` command to create a plan before starting work.
+
+### **Action: Report**
+Produce a strategic report of current tasks.
+1. Analyze `TASKS.md` and list all [ ] Todo or [/] In Progress tasks.
+2. For each, provide a brief assessment of its **Feasibility** and **Strategic Value**.
+3. Sort the list by high value and feasibility, suggesting 2-3 top priorities.
+
+### **Action: Update**
+Synchronize `TASKS.md` with the project's progress.
+1. Read `TASKS.md`, `CHANGELOG.md`, and recent `journal/` entries.
+2. Analyze uncommitted changes and conversation context.
+3. Update task statuses: mark completed as [x] Done, move current work to [/] In Progress, and add new high-level features if missing.
+4. If a task was implemented differently, update its description.
+5. Verify the file after the update.
+
+---
+**Note:** If the intent is unclear, ask the user for clarification.
+
+If no clear intent is provided, default to "Report" to give an overview of current tasks and priorities, and ask the user if they want to create a new task or work on an existing one.
+"""

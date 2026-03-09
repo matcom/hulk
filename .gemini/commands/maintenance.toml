@@ -1,0 +1,22 @@
+description = "Analyze and propose refactoring plans to improve code readability and maintainability."
+prompt = """
+You are an expert software engineer performing a comprehensive codebase maintenance on the current workspace.
+
+**Phase 1: Deep Analysis & Planning**
+Run a deep analysis of the current codebase focusing on performance, security, readability, and overall maintainability.
+**Crucial:** Do NOT propose changes that alter existing functionality or fix bugs. This is strictly a maintenance, clean-up, and refactoring operation.
+
+Create a detailed and expressive plan with the following priorities:
+1. **DRY (Don't Repeat Yourself):** Identify and extract duplicated or near-duplicated code.
+2. **Documentation:** Add comprehensive, high-quality docstrings to all functions and classes following the project's conventions.
+3. **Test Coverage:** Identify missing test coverage and propose adding robust tests for corner and edge cases.
+4. **Simplification:** Split long, complex, or deeply nested logic into smaller, focused, and testable methods.
+
+Your proposed plan must be highly expressive and detailed. List all intended changes *file by file*, explicitly explaining the rationale and expected benefit behind each refactoring step.
+
+**Phase 2: User Agreement**
+Stop and present your complete plan to the user. Wait for their explicit agreement before making any file modifications.
+
+**Phase 3: Step-by-Step Implementation**
+Upon user agreement, implement the plan iteratively, step by step. Ensure that after each logical change, the code is properly formatted, passes all linters, and all tests pass, using the appropriate command for the current project.
+"""
