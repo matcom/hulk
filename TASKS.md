@@ -10,6 +10,7 @@ Legend:
 
 ## Active Tasks
 - [ ] Initialize the project goals.
+- [x] Revise and reorder the HULK syntax appendix. (@apiad) (See plan: plans/reorder-appendix.md)
 
 ---
 
