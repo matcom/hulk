@@ -1,0 +1,85 @@
+{
+  "experimental": {
+    "plan": true,
+    "enableAgents": true
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "name": "reset-log-on-startup",
+            "type": "command",
+            "command": "python3 .gemini/hooks/session.py"
+          },
+          {
+            "name": "welcome-message",
+            "type": "command",
+            "command": "python3 .gemini/hooks/welcome.py"
+          }
+        ]
+      },
+      {
+        "matcher": "resume",
+        "hooks": [
+          {
+            "name": "reset-log-on-resume",
+            "type": "command",
+            "command": "python3 .gemini/hooks/session.py"
+          },
+          {
+            "name": "welcome-message",
+            "type": "command",
+            "command": "python3 .gemini/hooks/welcome.py"
+          }
+        ]
+      },
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "name": "reset-log-on-clear",
+            "type": "command",
+            "command": "python3 .gemini/hooks/session.py"
+          },
+          {
+            "name": "welcome-message",
+            "type": "command",
+            "command": "python3 .gemini/hooks/welcome.py"
+          }
+        ]
+      }
+    ],
+    "AfterModel": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "log-model-output",
+            "type": "command",
+            "command": "python3 .gemini/hooks/log.py"
+          }
+        ]
+      }
+    ],
+    "AfterAgent": [
+      {
+        "matcher": "*",
+        "sequential": true,
+        "hooks": [
+          {
+            "name": "run-make-validation",
+            "type": "command",
+            "command": "python3 .gemini/hooks/make.py"
+          },
+          {
+            "name": "update-journal-and-changelog",
+            "type": "command",
+            "command": "python3 .gemini/hooks/journal.py"
+          }
+        ]
+      }
+    ]
+  }
+}

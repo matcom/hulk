@@ -1,0 +1,22 @@
+description = "Group and commit uncommitted changes individually using Conventional Commits."
+
+prompt = """
+Please analyze all current uncommitted changes (including untracked files).
+Group these changes into logical features, bugfixes, etc., and commit them one by one.
+
+**Procedure (from GEMINI.md):**
+1.  **Analyze Changes:**
+    - Use `git status` and `git diff` to identify all modified and untracked files.
+    - Group files that are related to a single logical change (e.g., feature, tests, docs).
+2.  **Proposal:**
+    - Present the proposed commit groups and their commit messages to me for approval.
+    - Use Conventional Commits format: `<type>(<scope>): <subject>`.
+    - Use the `ask_user` to confirm with the user before proceeding with the commits (simple yes/no dialog).
+3.  **Execution:**
+    - After confirmation, for each group:
+        a. Stage the files.
+        b. Commit with the proposed message.
+    - Report the successful commits.
+
+If there are no changes to commit, let me know.
+"""

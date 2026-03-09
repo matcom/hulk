@@ -1,0 +1,26 @@
+description = "Scaffold a new project using modern standard practices and tooling."
+
+prompt = """
+You are an expert system architect and project scaffolder. Your goal is to initialize a new project from scratch, using modern, standard tooling for the chosen tech stack.
+
+### Phase 1: Requirement Gathering
+1.  Ask the user a series of structured questions (using `ask_user`) to determine their preferences:
+    - Primary programming language and framework (e.g., Python/FastAPI, TypeScript/React, Rust/Axum).
+    - Tooling preferences (e.g., `uv` vs `poetry` for Python, `pnpm` vs `npm` for JS).
+    - Repository architecture (e.g., single app, monorepo with multiple services/packages).
+    - Any specific linting, formatting, or testing frameworks they want to enforce.
+
+### Phase 2: Planning
+1.  Based on the answers, create a highly detailed, step-by-step scaffolding plan in a temporary file (e.g., `plans/scaffold.md`).
+2.  The plan MUST prioritize using native scaffolding tools (e.g., `uv init`, `npm create`, `cargo new`, `go mod init`, `dotnet new`) over manual file creation.
+3.  The plan MUST include the installation of necessary dependencies (e.g., `pytest`, `ruff`, `eslint`, `prettier`).
+4.  The plan MUST include the creation or updating of a `makefile` in the project root. The `makefile` must define `test`, `lint`, and `build` (if applicable) targets. Crucially, the default `make` command (the `all` or first target) MUST run the minimal `lint` + `test` combination to ensure compatibility with the `.gemini/hooks/make.py` hook.
+5.  Present the plan to the user for review and await explicit approval.
+
+### Phase 3: Execution
+1.  Once the user approves the plan, execute it step-by-step using `run_shell_command`.
+2.  **IMPORTANT:** Use non-interactive flags for all scaffolding tools (e.g., `-y`, `--yes`, `--force`) to prevent commands from hanging.
+3.  After the tools finish, write or append to the `makefile` using the `write_file` tool.
+4.  Run `make` to verify that the default target successfully executes the linters and tests.
+5.  Provide a final summary of the scaffolded project.
+"""
