@@ -1,6 +1,21 @@
-.PHONY: all test lint format
+.PHONY: all tangle test lint format docs
 
-all: test lint
+all: tangle lint test
 
-test:
-	@echo "Running tests..."
+tangle:
+	illiterate pages/*.qmd --dir .
+
+test: tangle
+	cd frontend && uv run pytest
+	cd backend && cargo test
+
+lint: tangle
+	cd frontend && uv run ruff check .
+	cd backend && cargo clippy
+
+format: tangle
+	cd frontend && uv run ruff format .
+	cd backend && cargo fmt
+
+docs:
+	quarto publish gh-pages --no-prompt --no-browser pages/
