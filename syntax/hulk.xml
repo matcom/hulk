@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<language name="HULK" section="Sources" extensions="*.hulk" version="1" kateversion="5.0" author="Alejandro Piad Morffis" license="MIT">
+  <highlighting>
+    <contexts>
+      <context name="Normal Text" attribute="dsNormal" lineEndContext="#stay">
+        <RegExpr attribute="dsComment" context="#stay" String="//.*$"/>
+        <DetectChar attribute="dsString" context="ctx_dsString" char="&quot;"/>
+        <RegExpr attribute="dsFloat" context="#stay" String="\b\d+(\.\d+)?\b"/>
+        <RegExpr attribute="dsControlFlow" context="#stay" String="\b(if|else|elif|while|for|in|let|in|def|match|case|default)\b"/>
+        <RegExpr attribute="dsKeyword" context="#stay" String="\b(function|type|inherits|protocol|extends)\b"/>
+        <RegExpr attribute="dsKeyword" context="#stay" String="\bnew\b"/>
+        <RegExpr attribute="dsKeyword" context="#stay" String="\b(is|as)\b"/>
+        <RegExpr attribute="dsConstant" context="#stay" String="\b(true|false|PI|E)\b"/>
+        <RegExpr attribute="dsBuiltIn" context="#stay" String="\b(print|sin|cos|sqrt|exp|log|rand|range)\b"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(\+|-|\*|/|\^)"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(==|!=|&lt;=|&gt;=|&lt;|&gt;)"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(&amp;|\||!)"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(:=|=)"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(@|@@)"/>
+        <RegExpr attribute="dsOperator" context="#stay" String="(=&gt;|-&gt;)"/>
+        <RegExpr attribute="dsVariable" context="#stay" String="(\*|@|\$)[a-zA-Z][a-zA-Z0-9_]*"/>
+        <RegExpr attribute="dsDataType" context="#stay" String="\b(Number|String|Boolean|Object)\b"/>
+        <RegExpr attribute="dsDataType" context="#stay" String="\b[a-zA-Z][a-zA-Z0-9_]*(\*|\[\])"/>
+      </context>
+      <context name="ctx_dsString" attribute="dsString" lineEndContext="#pop">
+        <DetectChar attribute="dsString" context="#pop" char="&quot;"/>
+        <RegExpr attribute="dsSpecialChar" context="#stay" String="\\(n|t|\&quot;)"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="dsNormal" defStyleNum="dsNormal"/>
+      <itemData name="dsComment" defStyleNum="dsComment"/>
+      <itemData name="dsString" defStyleNum="dsString"/>
+      <itemData name="dsSpecialChar" defStyleNum="dsSpecialChar"/>
+      <itemData name="dsFloat" defStyleNum="dsFloat"/>
+      <itemData name="dsControlFlow" defStyleNum="dsControlFlow"/>
+      <itemData name="dsKeyword" defStyleNum="dsKeyword"/>
+      <itemData name="dsConstant" defStyleNum="dsConstant"/>
+      <itemData name="dsBuiltIn" defStyleNum="dsBuiltIn"/>
+      <itemData name="dsOperator" defStyleNum="dsOperator"/>
+      <itemData name="dsVariable" defStyleNum="dsVariable"/>
+      <itemData name="dsDataType" defStyleNum="dsDataType"/>
+    </itemDatas>
+  </highlighting>
+</language>

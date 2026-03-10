@@ -1,0 +1,146 @@
+// HULK Syntax Tour: A comprehensive guide to language constructs
+
+// 1. Built-in constants and math functions
+print(PI);
+print(E);
+print(sin(2 * PI) ^ 2 + cos(3 * PI / log(4, 64)));
+print(sqrt(16) + exp(1));
+print(rand());
+
+// 2. Literals and basic expressions
+let a = 42, b = "Hello", c = true in {
+    print(a + 10 * 2 / 5);
+    print(b @ " World"); // String concatenation
+    print("Escaped quote: \" and newline: \n");
+    print(if (c) "Yes" else "No");
+}
+
+// 3. Custom Functions (Inline and Full-form)
+function tan(x) => sin(x) / cos(x);
+
+function operate(x, y) {
+    print(x + y);
+    print(x - y);
+    print(x * y);
+    print(x / y);
+}
+
+// 4. Variables, Scoping and Destructive Assignment
+let x = 10 in {
+    let x = 20 in print(x); // Redefining symbols: prints 20
+    print(x); // Scoping rules: prints 10
+    x := 5; // Destructive assignment
+    print(x); // prints 5
+}
+
+// 5. Conditionals (if, elif, else)
+let a = 42, mod = a % 3 in
+    print(
+        if (mod == 0) "Magic"
+        elif (mod == 1) "Woke"
+        else "Dumb"
+    );
+
+// 6. Loops (while and for)
+let i = 5 in while (i >= 0) {
+    print(i);
+    i := i - 1;
+}
+
+for (x in range(0, 10)) print(x);
+
+// 7. Types, Inheritance and self
+type Point(x, y) {
+    x = x;
+    y = y;
+    getX() => self.x;
+    getY() => self.y;
+}
+
+type PolarPoint(phi, rho) inherits Point(rho * sin(phi), rho * cos(phi)) {
+    rho() => sqrt(self.getX() ^ 2 + self.getY() ^ 2);
+}
+
+// 8. Polymorphism, base and @@ (spaced concatenation)
+type Person(firstname, lastname) {
+    firstname = firstname;
+    lastname = lastname;
+    name() => self.firstname @@ self.lastname;
+}
+
+type Knight inherits Person {
+    name() => "Sir" @@ base();
+}
+
+// 9. Type Checking (is) and Downcasting (as)
+let x : Object = new Knight("Phil", "Collins") in {
+    if (x is Knight) {
+        let k = x as Knight in print(k.name());
+    } else {
+        print("Not a knight");
+    };
+}
+
+// 10. Protocols (Structural Typing)
+protocol Hashable {
+    hash(): Number;
+}
+
+protocol Equatable extends Hashable {
+    equals(other: Object): Boolean;
+}
+
+// 11. Iterables (T*) and Enumerable
+function sum(numbers: Number*): Number =>
+    let total = 0 in {
+        for (x in numbers) total := total + x;
+        total;
+    };
+
+// 12. Vectors (Explicit, Implicit and T[])
+let nums = [1, 2, 3, 4, 5] in print(sum(nums));
+let squares = [x^2 | x in range(1, 11)] in {
+    print("Size: " @ squares.size());
+    print("Sixth square: " @ squares[5]);
+}
+
+// 13. Functors and Lambda Expressions
+function count_when(numbers: Number*, filter: (Number) -> Boolean) {
+    let total = 0 in {
+        for (x in numbers)
+            total := total + if (filter(x)) 1 else 0;
+        total;
+    };
+}
+
+let is_even = (x) => x % 2 == 0 in
+    print(count_when(range(0, 100), is_even));
+
+// 14. Macros (Special arguments: *, @, $)
+def repeat($iter, n, *expr) {
+    let iter = 0, total = n in
+        while (total > 0) {
+            expr;
+            total := total - 1;
+            iter := iter + 1;
+        };
+}
+
+def swap(@a, @b) {
+    let temp = a in {
+        a := b;
+        b := temp;
+    }
+}
+
+// 15. Macro Pattern Matching
+def simplify(expr: Number) {
+    match(expr) {
+        case (x1 + 0) => simplify(x1);
+        case (x1 * 1) => simplify(x1);
+        default => expr;
+    };
+}
+
+// Global expression entry point
+print("HULK Tour Complete!");

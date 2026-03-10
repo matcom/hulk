@@ -2,14 +2,14 @@ project:
   type: book
 
 book:
-  title: "Principles of Programming Languages"
-  subtitle: "Design and Implementation (A 14-Week Journey)"
+  title: "Principles of Programming Languages Design and Implementation"
+  subtitle: "Builing a Hulk Interpreter and Compiler"
   author: "Alejandro Piad Morffis"
   date: "today"
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "I. The Architect (Frontend - Python)"
+    - part: "Frontend"
       chapters:
         - 01-dual-ancestry.qmd
         - 02-atomization.qmd
@@ -17,11 +17,11 @@ book:
         - 04-evaluation.qmd
         - 05-binding.qmd
         - 06-shield.qmd
-    - part: "II. The Bridge (Intermediate Representation)"
+    - part: "Bridge"
       chapters:
         - 07-lowering.qmd
         - 08-transpiler.qmd
-    - part: "III. The Engineer (Backend - Rust)"
+    - part: "Backend"
       chapters:
         - 09-metal-sandbox.qmd
         - 10-stack-machine.qmd
@@ -29,16 +29,17 @@ book:
         - 12-garbage-collector.qmd
         - 13-standard-library.qmd
         - 14-final-polish.qmd
-    - part: "Appendices"
-      chapters:
-        - appendix-hulk-syntax.qmd
-        - instructors.qmd
+  appendices:
+    - appendix-hulk-syntax.qmd
+    - instructors.qmd
 
 format:
   html:
     theme: cosmo
     toc: true
     code-fold: true
-  # pdf:
-  #   documentclass: scrreprt
-  #   toc: true
+    syntax-definitions:
+      - ../syntax/hulk.xml
+  pdf:
+    documentclass: scrreprt
+    toc: true

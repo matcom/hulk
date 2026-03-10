@@ -1,0 +1,93 @@
+name: HULK
+scopeName: source.hulk
+fileTypes: [hulk]
+
+tokens:
+  comments:
+    name: comment.line.double-slash.hulk
+    match: "//.*$"
+    kde_attribute: dsComment
+
+  strings:
+    name: string.quoted.double.hulk
+    begin: "\""
+    end: "\""
+    kde_attribute: dsString
+    patterns:
+      - name: constant.character.escape.hulk
+        match: "\\\\(n|t|\\\")"
+        kde_attribute: dsSpecialChar
+
+  numbers:
+    name: constant.numeric.hulk
+    match: "\\b\\d+(\\.\\d+)?\\b"
+    kde_attribute: dsFloat
+
+  keywords:
+    control:
+      name: keyword.control.hulk
+      match: "\\b(if|else|elif|while|for|in|let|in|def|match|case|default)\\b"
+      kde_attribute: dsControlFlow
+    declaration:
+      name: keyword.declaration.hulk
+      match: "\\b(function|type|inherits|protocol|extends)\\b"
+      kde_attribute: dsKeyword
+    operator:
+      name: keyword.operator.new.hulk
+      match: "\\bnew\\b"
+      kde_attribute: dsKeyword
+    expression:
+      name: keyword.operator.expression.hulk
+      match: "\\b(is|as)\\b"
+      kde_attribute: dsKeyword
+
+  constants:
+    name: constant.language.hulk
+    match: "\\b(true|false|PI|E)\\b"
+    kde_attribute: dsConstant
+
+  builtins:
+    name: support.function.hulk
+    match: "\\b(print|sin|cos|sqrt|exp|log|rand|range)\\b"
+    kde_attribute: dsBuiltIn
+
+  operators:
+    arithmetic:
+      name: keyword.operator.arithmetic.hulk
+      match: "(\\+|-|\\*|/|\\^)"
+      kde_attribute: dsOperator
+    comparison:
+      name: keyword.operator.comparison.hulk
+      match: "(==|!=|<=|>=|<|>)"
+      kde_attribute: dsOperator
+    logical:
+      name: keyword.operator.logical.hulk
+      match: "(&|\\||!)"
+      kde_attribute: dsOperator
+    assignment:
+      name: keyword.operator.assignment.hulk
+      match: "(:=|=)"
+      kde_attribute: dsOperator
+    concatenation:
+      name: keyword.operator.concatenation.hulk
+      match: "(@|@@)"
+      kde_attribute: dsOperator
+    arrow:
+      name: keyword.operator.arrow.hulk
+      match: "(=>|->)"
+      kde_attribute: dsOperator
+
+  macros:
+    name: variable.other.macro.hulk
+    match: "(\\*|@|\\$)[a-zA-Z][a-zA-Z0-9_]*"
+    kde_attribute: dsVariable
+
+  types:
+    name: entity.name.type.hulk
+    match: "\\b(Number|String|Boolean|Object)\\b"
+    kde_attribute: dsDataType
+
+  complex_types:
+    name: entity.name.type.hulk
+    match: "\\b[a-zA-Z][a-zA-Z0-9_]*(\\*|\\[\\])"
+    kde_attribute: dsDataType
