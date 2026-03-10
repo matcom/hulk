@@ -1,0 +1,65 @@
+name: Release Pipeline
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install PyYAML
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        
+      - name: Install TinyTeX
+        run: |
+          quarto install tinytex --no-prompt
+
+      - name: Build Syntax and VS Code Extension
+        run: |
+          make syntax
+          make vscode
+
+      - name: Render Documentation
+        run: |
+          quarto render pages/ --to html
+          quarto render pages/ --to pdf
+
+      - name: Deploy HTML to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: pages/_book
+          exclude_assets: '*.pdf'
+
+      - name: Prepare Release Assets
+        run: |
+          cp pages/_book/*.pdf hulk-docs.pdf
+
+      - name: Upload Release Assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            hulk-docs.pdf
+            hulk-vscode.vsix
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
