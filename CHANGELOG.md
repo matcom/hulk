@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+## [0.8.1] - 2026-03-10
+### Added
+- **Implementation:** Committed the initial tangled source code for the HULK frontend (Python) and Banner backend (Rust).
+- **Documentation:** Added a comprehensive developer documentation suite (`docs/`) and updated the project README with status, license, and technology badges.
+- **Documentation:** Refactored and drafted the introductory chapters of the book.
+
+### Changed
+- **Config:** Updated `.gitignore` to allow tracking of the tangled source files (`src/hulk/` and `src/banner/`).
+- **Tooling:** Integrated Gemini CLI framework.
+
 ## [0.8.0] - 2026-03-10
 ### Added
 - **Project Structure:** Consolidated `frontend/` and `backend/` into a single, unified root-level architecture with `src/hulk/` and `src/banner/`.
@@ -48,6 +60,3 @@ All notable changes to this project will be documented in this file.
 - **VS Code Extension:** Initial release of the `hulk-vscode` extension providing full syntax highlighting (including macros, protocols, and types).
 - **Quarto Syntax:** Implemented a single source of truth (`syntax/hulk.yaml`) that generates both VS Code TextMate JSON and Quarto KDE XML highlighting definitions.
 - **CI/CD:** Automated GitHub Actions pipeline to publish HTML/PDF documentation and the `.vsix` extension upon GitHub Release.
-
-## [Unreleased]
-- Integrated Gemini CLI framework.
