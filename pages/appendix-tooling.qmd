@@ -1,0 +1,42 @@
+# Tooling for HULK
+
+While the core of HULK is its compiler and runtime, a modern programming language also requires a robust set of tools to support developers. This appendix outlines the high-level design of the HULK tooling ecosystem, focusing on editor integration and language support.
+
+## Editor Support and Syntax Highlighting
+
+Syntax highlighting is the first step toward a good developer experience. For HULK, this is achieved through TextMate grammars and custom XML definitions.
+
+### TextMate Grammars
+HULK's syntax is primarily defined in `vscode/syntaxes/hulk.tmLanguage.json`. This JSON file uses regular expressions to categorize language constructs:
+- **Keywords**: Control flow (`if`, `else`, `while`, `for`), declarations (`function`, `type`, `let`, `protocol`, `def`).
+- **Literals**: Numbers, strings, and booleans.
+- **Operators**: Arithmetic, boolean, assignment (`:=`), and special macro operators (`@`, `$`).
+
+To support HULK code blocks in Markdown and Quarto files, a specialized grammar `hulk-markdown.tmLanguage.json` is used to inject HULK highlighting into fenced code blocks.
+
+### Quarto Integration
+For the static rendering of this book, Quarto uses a custom XML syntax definition (`syntax/hulk.xml`) that mirrors the rules of the TextMate grammar. This allows code blocks marked with ```hulk to be highlighted in the generated HTML and PDF formats.
+
+## Language Server Protocol (LSP)
+
+The Language Server Protocol provides a standard way for editors to communicate with language-specific backends. A HULK LSP would ideally provide the following features:
+
+### Diagnostics
+As the developer types, the HULK compiler should run in the background to report syntax errors and type mismatches. These appear as real-time feedback (e.g., red squiggly lines) in the editor.
+
+### Navigation and Go to Definition
+By traversing the symbol table created during the semantic analysis phase, the LSP can provide "Go to Definition" for functions, variables, and types, allowing for easier navigation of large codebases.
+
+### Hover Information
+Hovering over an identifier can show its inferred type or documentation. Since HULK features advanced type inference, the LSP reveals the exact type the compiler has deduced for a given variable.
+
+## VS Code Extension Development
+
+The HULK VS Code extension (located in the `vscode/` directory) serves as the primary integration point. Its main components are:
+
+1. **`package.json` Contributions**: Defines the `hulk` language ID, associated file extensions (`.hulk`), and pointers to grammars and snippets.
+2. **Language Configuration**: Specifies comment symbols (`//`), bracket pairs, and indentation rules.
+3. **Snippets**: Pre-defined templates for common HULK constructs like `function`, `type`, and `let` (located in `vscode/snippets/hulk.code-snippets`).
+4. **LSP Client (Future Work)**: A TypeScript component that launches the HULK compiler in "LSP Mode" and manages communication between the editor and the compiler.
+
+By following this architecture, HULK becomes not just a didactic language, but a well-integrated development environment.
