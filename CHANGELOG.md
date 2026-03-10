@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.2] - 2026-03-10
+### Fixed
+- **Documentation:** Enabled HULK syntax highlighting in the rendered PDF output by adding `syntax-definitions` to the Quarto PDF configuration.
+
 ## [0.6.1] - 2026-03-10
 ### Fixed
 - **CI/CD:** Repaired the release pipeline by switching to the official `install-tinytex` action and explicitly naming the PDF output.

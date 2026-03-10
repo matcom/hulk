@@ -45,3 +45,5 @@ format:
     output-file: hulk.pdf
     documentclass: scrreprt
     toc: true
+    syntax-definitions:
+      - ../syntax/hulk.xml
