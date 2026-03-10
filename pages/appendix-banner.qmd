@@ -1,0 +1,241 @@
+# The BANNER Intermediate Representation
+
+Every high-level abstraction is a well-intentioned lie told to the programmer to shield them from the cold, mechanical reality of the hardware. When we write in HULK, we inhabit a world of rich objects, nested expressions, and elegant recursion—a world where the complexity of the machine is hidden behind a veil of syntactic grace. However, the silicon upon which this logic eventually runs is fundamentally indifferent to such elegance. To a processor, there are no "objects" with "methods," nor are there "types" in the way we understand them; there is only memory, registers, and a relentless sequence of primitive operations. The BANNER Intermediate Representation (IR) is the site of the great reconciliation—it is Phase 1 of a structural audit where high-level intent is methodically stripped of its finery and translated into the explicit, linear, and minimalist language of raw execution.
+
+The transition from a language as expressive as HULK to raw machine code is too steep a cliff to be traversed in a single leap. Direct compilation would force the compiler to manage complex tasks simultaneously: register allocation and stack frame management would have to be handled while simultaneously unraveling deep semantic structures like inheritance hierarchies and dynamic dispatch. BANNER exists to decouple these concerns. By providing a "Three-Address Code" (3AC) architecture, it offers a representation that is close enough to the machine to be easily translated into assembly or bytecode, yet abstract enough to remain portable and amenable to systematic optimization.
+
+In the minimalist world of BANNER, the lush landscapes of HULK are flattened into a linear sequence of explicit instructions. Every complex mathematical expression is decomposed into a series of simple assignments involving temporary variables, ensuring that no instruction ever performs more than one fundamental operation. Control flow structures like `if-else` blocks and `while` loops are stripped of their structured sugar and reduced to the raw mechanics of labels and conditional jumps. This "flattening" process is not merely a simplification; it is a rigorous accounting of every operation the CPU must eventually perform. In BANNER, the ambiguity of high-level scope is replaced by the absolute clarity of `GOTO` and `LABEL`.
+
+Perhaps the most significant shift in BANNER is the loss of high-level type safety in favor of a "everything is a number" philosophy. While HULK enforces a strict type system, BANNER treats all values as 32-bit integers, where the meaning of a value is defined entirely by how it is used. An integer might be a literal constant, a memory address, or a pointer to a virtual method table. This transparency reveals the true cost of object-oriented programming: attribute access becomes a calculated offset, and a method call becomes a dynamic lookup. By enforcing this level of explicitness, BANNER allows the compiler to perform optimizations that would be impossible at a higher level, serving as the indispensable foundation upon which the final binary is built.
+
+## The Anatomy of a BANNER Program
+
+A BANNER file is not merely a list of instructions; it is a structured blueprint that organizes the entire memory and logic of a program into three distinct, top-down sections. This organization reflects the fundamental pillars of an object-oriented runtime: the definition of object layouts, the management of static resources, and the execution of procedural logic. By separating these concerns into `.TYPES`, `.DATA`, and `.CODE` blocks, BANNER provides a clear roadmap for how high-level HULK abstractions are physically mapped onto the computer's memory.
+
+### The `.TYPES` Section: Flattening the Hierarchy
+The `.TYPES` section is where the rich, recursive world of HULK classes is reduced to linear memory layouts. In HULK, a class might inherit from multiple ancestors, but in BANNER, all inheritance is resolved. Each entry in the `.TYPES` section defines a unique object structure, listing every attribute—including those inherited—in a fixed order. This ensures that an attribute like `x` always appears at the same memory offset relative to the object's start address, regardless of whether it was defined in a base class or a specialized subclass.
+
+Beyond attributes, the `.TYPES` section maps method names to specific function labels in the `.CODE` section. This is the foundation of dynamic dispatch. When a method is overridden in a subclass, the `.TYPES` entry for that subclass simply points the method name to a different function label. This explicit mapping turns the abstract concept of "method lookup" into a simple pointer redirection.
+
+**Example:**
+Consider a HULK class `A` and its subclass `B`. In BANNER, their layouts are explicitly defined to preserve structural compatibility:
+
+```banner
+.TYPES
+
+type A {
+    attribute x ;
+    method f : f1;
+}
+
+type B {
+    attribute x ;   # Inherited from A, same offset
+    attribute y ;   # New attribute
+    method f : f2 ; # Overridden method: points to f2 instead of f1
+    method g : f3 ; # New method
+}
+```
+
+### The `.DATA` Section: The Static Pool
+While most data in HULK is dynamic, certain values—most notably strings—are constant and known at compile time. The `.DATA` section serves as a global string pool. In BANNER, strings are treated as immutable blocks of memory. This section ensures that every unique string literal used in the program is allocated once and can be referenced by a label. Each entry in `.DATA` associates a human-readable label with a literal value, allowing the code to reference these resources by name rather than hard-coded memory addresses.
+
+**Example:**
+```banner
+.DATA
+
+msg = "Hello World";
+error_msg = "An error has occurred";
+```
+
+### The `.CODE` Section: Procedural Execution
+The heart of the program resides in the `.CODE` section, which contains the actual implementation of every function and method. Unlike HULK, where functions can be nested and capture variables from their environment, BANNER functions are strictly top-level entities. Each function follows a rigid internal structure: it first declares its `PARAM` variables (inputs from the caller), then its `LOCAL` variables (scratchpad memory for the function's own use), and finally its sequence of 3-address instructions.
+
+In this minimalist environment, there is no automatic scope management. Every temporary value used in a complex calculation must be explicitly declared as a `LOCAL` variable. This explicitness turns the implicit stack management of HULK into an observable, linear process.
+
+**Example:**
+An implementation for the functions referenced in the `.TYPES` section might look like this:
+
+```banner
+.CODE
+
+function f1 {
+    PARAM self ;     # Explicit 'self' parameter
+    PARAM x ;
+
+    LOCAL a ;        # Local scratchpad
+    LOCAL b ;
+
+    # ... instructions ...
+    RETURN a ;
+}
+
+function f2 {
+    PARAM self ;
+    # ... overridden logic ...
+    RETURN 0 ;
+}
+```
+
+By the time the compiler reaches the end of a BANNER program, the high-level intent of the programmer has been fully cataloged: the objects are measured, the constants are pooled, and the logic is linearized. This structural clarity is what makes BANNER an ideal bridge between the abstract and the mechanical.
+
+## The Instruction Set: A Minimalist Vocabulary
+
+The elegance of HULK's expression-based syntax is nowhere to be found in the BANNER instruction set. Instead, we are left with a sparse collection of primitives that reflect the iterative, step-by-step nature of physical execution. Every operation is explicit, every memory access is calculated, and every jump is absolute. By reducing the language to these few atomic actions, we ensure that the final translation to machine code is a systematic mapping of BANNER instructions to their CPU equivalents.
+
+#### Data Movement and Arithmetic
+At its most basic level, a program is a sequence of transformations applied to data. In BANNER, these transformations are expressed through three-address assignments—a format where every instruction has at most two operands and one result. No matter how complex a mathematical expression might be in HULK, it must be decomposed into a series of operations where a single operator is applied to its inputs.
+
+**Example:**
+The HULK expression `z = (x + y) * 2` cannot be represented as a single instruction. It must be broken down into discrete steps using temporary local variables to hold intermediate results—preserving the strict three-address format required by the IR.
+
+```banner
+t1 = x + y ;
+t2 = t1 * 2 ;
+z = t2 ;
+```
+
+#### Memory Management
+In a high-level language, memory management is often "invisible"—objects simply appear when needed and disappear when they are no longer reachable. In BANNER, the creation of every object and array is a deliberate act that must be explicitly requested from the runtime. This explicitness forces the compiler to account for the physical reality of heap allocation.
+
+**Example:**
+When a programmer instantiates a class or creates a fixed-size buffer, the BANNER representation uses `ALLOCATE` to reserve space for a structured type or `ARRAY` to request a contiguous block of memory—returning a pointer that will be treated as a 32-bit integer.
+
+```banner
+p = ALLOCATE Point ;  # Reserves memory for a 'Point' instance
+a = ARRAY 10 ;        # Reserves a block for 10 elements
+```
+
+#### Object Interaction
+Once an object is allocated, interacting with its internal state requires direct manipulation of its memory layout. BANNER does not understand high-level properties; it understands memory offsets relative to a base address. The `GETATTR` and `SETATTR` instructions are the primary tools for reading from and writing to the fields defined in the `.TYPES` section.
+
+**Example:**
+Updating the `x` coordinate of a `Point` object involves identifying the correct attribute label—which the backend eventually translates to a numerical offset—and performing a store operation. Reading that value back requires a corresponding load into a local variable.
+
+```banner
+val = 42 ;
+SETATTR p Point_x val ; # Writes 42 into the 'x' attribute of object 'p'
+curr = GETATTR p Point_x ; # Reads the value back into 'curr'
+```
+
+#### Control Flow
+High-level control structures like `if` statements and `while` loops are essentially "syntactic sugar" for conditional and unconditional jumps. BANNER strips away this structure, relying instead on a flat system of labels and jumps. This mimics how a CPU's instruction pointer moves through memory—branching only when specific conditions are met.
+
+**Example:**
+A conditional check is implemented by evaluating a predicate and then using `IF ... GOTO` to jump to a specific label. If the condition is not met, execution simply continues to the next instruction—effectively creating the "else" or "exit" logic.
+
+```banner
+LABEL check_zero ;
+IF x GOTO non_zero ;
+PRINT "is zero" ;
+GOTO end ;
+LABEL non_zero ;
+PRINT "is not zero" ;
+LABEL end ;
+```
+
+#### The Call Stack and Method Invocation
+The most complex part of BANNER is the management of function calls and dynamic dispatch. Since BANNER is a flat language, it must explicitly handle the passing of arguments and the retrieval of return values. This is achieved through a sequence of `PARAM` instructions that prepare the environment before a `CALL` (for static functions) or `VCALL` (for virtual methods) is executed.
+
+**Example:**
+Invoking a method `move(dx, dy)` on a `Point` object requires passing the object itself—the `self` pointer—followed by its arguments. A `VCALL` is then used to look up the correct function implementation in the object's virtual method table based on the provided type.
+
+```banner
+PARAM p ;           # Pass the object instance (self)
+PARAM 10 ;          # Pass dx
+PARAM 20 ;          # Pass dy
+r = VCALL Point move ; # Perform dynamic dispatch for 'move'
+RETURN r ;          # Send the result back to the caller
+```
+
+## Case Study: From HULK to BANNER
+
+The transformation from HULK’s high-level abstractions to the minimalist environment of BANNER is best understood as a structural audit. It is a process that strips away the syntactic elegance of the source language to reveal the explicit mechanical steps required for execution. This lowering process involves three primary tasks: decomposing nested expressions into linear three-address instructions, mapping class hierarchies into flat memory layouts, and converting implicit behaviors—like method dispatch and attribute access—into explicit calculations.
+
+To illustrate this transformation, consider a classic "Hello World" scenario implemented using a class structure in HULK. This example highlights how objects are managed and how strings are handled as static resources.
+
+#### The HULK Source
+Consider the following HULK program. It defines a `Main` class with a single attribute and a method that prints that attribute, followed by an instantiation and a method call:
+
+```hulk
+type Main {
+    msg: String = "Hello World";
+    run() => print(this.msg);
+}
+
+let m = new Main() in m.run();
+```
+
+At the Abstract Syntax Tree (AST) level, this program is a collection of nested nodes representing the class definition, attribute initialization, and a `Let` expression containing a `MethodCall`. To the BANNER compiler, this must be systematically dismantled and redistributed across the `.TYPES`, `.DATA`, and `.CODE` sections.
+
+#### Step 1: Mapping the Static Layout
+The first step is addressing the program's static requirements. The compiler identifies the `Main` class and determines its physical memory layout. In the `.TYPES` section, `Main` is registered with its attribute `msg` and its method `run`. Simultaneously, the string literal `"Hello World"` is extracted and placed in the `.DATA` section with a unique label, such as `s0`.
+
+```banner
+.TYPES
+type Main {
+    attribute Main_msg ;
+    method run : Main_run ;
+}
+
+.DATA
+s0 = "Hello World" ;
+```
+
+This separation is crucial: the object instance in memory will not contain the string itself, but rather a 32-bit reference (a pointer) to the address labeled `s0` in the data pool.
+
+#### Step 2: Lowering the Entry Point
+The logic found in the global scope of the HULK program (the `let` expression) is lowered into a special `entry` function in the `.CODE` section. Here, the "three-address" nature of BANNER becomes visible. The compiler generates temporary local variables (often prefixed with `t`) to hold intermediate results.
+
+The instantiation `new Main()` is transformed into an `ALLOCATE` instruction, and the attribute initialization is handled via `SETATTR`. Notice that the string must be explicitly "loaded" into a temporary variable before it can be assigned to the object.
+
+```banner
+function entry {
+    LOCAL m ;
+    LOCAL t1 ;
+    LOCAL t2 ;
+
+    t1 = LOAD s0 ;          # Load string address from .DATA
+    m = ALLOCATE Main ;     # Reserve heap space for Main
+    SETATTR m Main_msg t1 ; # Initialize 'msg' attribute
+
+    PARAM m ;               # Pass the 'self' pointer
+    t2 = VCALL Main run ;   # Perform dynamic dispatch
+    RETURN 0 ;
+}
+```
+
+#### Step 3: Implementing the Method
+Finally, the `run` method itself is lowered. In HULK, `this` is an implicit reference to the current object. In BANNER, this becomes an explicit first parameter named `self`. The access to `this.msg` is transformed into a `GETATTR` operation, using the label `Main_msg` to determine the correct memory offset. The call to the built-in `print` function is then lowered into a primitive `PRINT` instruction.
+
+```banner
+function Main_run {
+    PARAM self ;
+    LOCAL l_msg ;
+
+    l_msg = GETATTR self Main_msg ; # Extract the string reference
+    PRINT l_msg ;                   # Send reference to the IO system
+    RETURN self ;
+}
+```
+
+By the end of this process, every high-level "magic" feature—be it inheritance, dynamic dispatch, or automatic string management—has been reduced to a sequence of explicit, manageable operations. This granularity is what allows the compiler to perform final optimizations and eventually generate the binary code that the hardware can execute.
+
+## Technical Deep Dive: "Everything is a Number"
+
+At the heart of the BANNER architecture lies a radical commitment to architectural minimalism: the "everything is a number" philosophy. In the high-level world of HULK, developers reason about complex types—strings, boolean flags, and polymorphic class instances—but as these abstractions descend into the BANNER Intermediate Representation, they are stripped of their semantic metadata and reduced to a uniform 32-bit integer format. This homogenization is not merely a technical convenience; it is a fundamental design choice that aligns the IR with the mechanical reality of the hardware, where the distinction between a memory address, a numerical literal, and a bitmask is entirely a matter of perspective.
+
+In this environment, the meaning of a value is not inherent to the value itself but is instead derived from the context of its usage—a concept we might call *contextual semantics*. When a BANNER instruction performs an arithmetic operation like `x = y + z`, the virtual machine treats the operands as raw numerical data to be manipulated by the ALU. However, when the same variables appear in a memory-oriented instruction like `x = GETATTR y z`, the interpretation shifts dramatically: `y` is suddenly treated as a pointer to a base address in the heap, while `z` is interpreted as a numerical offset within that object’s structure. This flexibility allows for a highly compact instruction set, but it requires that the compiler maintains an absolute, unwavering map of what every number "represents" at any given point in execution.
+
+This design shift fundamentally reallocates the burden of semantic safety from the runtime to the compiler’s semantic analyzer. Unlike more "helpful" virtual machines—such as the JVM or the Python interpreter—the BANNER VM performs no runtime type-checking or safety audits on its instructions. If a compiler emits a `GETATTR` call on a value that is actually a string literal or a mathematical constant, the VM will dutifully attempt to dereference that memory location, likely resulting in a segmentation fault or the retrieval of garbage data. By removing these safety checks from the execution loop, BANNER achieves a level of performance closer to native code, operating on the assumption that the preceding compilation phases have already "proven" the correctness of the instruction stream.
+
+For the Rust-based backend, this minimalist approach creates a fascinating dichotomy of efficiency and complexity. On one hand, the VM’s core execution loop is exceptionally lean, as it can leverage Rust’s primitive integer types and direct memory access without the overhead of constant type-tagging or dynamic dispatch overhead. On the other hand, it necessitates a sophisticated heap management and garbage collection system. Since the VM itself cannot distinguish a pointer from a literal 32-bit integer, the backend must employ advanced techniques—such as shadow stacks or pointer tagging—to ensure that the garbage collector can safely identify reachable objects without accidentally "collecting" a valid memory address that looks like a large number. This tension between IR simplicity and backend robustness is the defining characteristic of the BANNER ecosystem.
+
+## Conclusion: The Unseen Foundation
+
+The journey from the high-level elegance of HULK to the minimalist, three-address world of BANNER represents more than just a technical translation; it is a fundamental shift in how we conceptualize computation. BANNER serves as what we might call "assembly for the mind"—a simplified yet remarkably powerful model that captures the essence of execution without the suffocating complexity of physical hardware. By stripping away the abstractions of classes, inheritance, and nested expressions, BANNER reveals the underlying mechanical logic that drives every software system. It is here, in this intermediate space, that the true architecture of a program is laid bare, offering a level of clarity that is often lost in the dense syntax of high-level languages or the cryptic mnemonics of machine code.
+
+From a pragmatic perspective, BANNER is the architectural pivot point that enables both optimization and portability. By decoupling the front-end analysis of HULK from the back-end details of the machine, BANNER provides a stable platform for intermediate passes. It is at this stage that a compiler can perform dead-code elimination, constant folding, and common subexpression elimination with surgical precision, independent of whether the final target is an x86 processor, an ARM chip, or a custom virtual machine. This separation of concerns is the hallmark of professional compiler design, ensuring that the "what" of the programmer’s intent is preserved while the "how" of its execution is refined for maximum efficiency.
+
+Ultimately, BANNER is the final, indispensable piece of the HULK-to-Machine puzzle. It is the bridge that spans the chasm between human-readable intent and silicon-executable instructions. Without this intermediate foundation, the task of building a compiler would be an overwhelming exercise in managing conflicting complexities. With BANNER, however, the process becomes a series of manageable, logical steps. It serves as a reminder that even the most sophisticated systems are built upon simple, atomic foundations—and that understanding these foundations is the key to mastering the art of software engineering.
+
+As you move forward into the implementation of the backend and the nuances of the garbage collector, keep the minimalist spirit of BANNER in mind. It is a testament to the idea that power does not always come from complexity, but often from the rigorous application of simple rules. BANNER invites us to look beneath the surface of our high-level tools and appreciate the unseen machinery that makes modern computing possible. In the end, the most robust foundations are often those that remain hidden, quietly supporting the weight of the abstractions we build upon them.

@@ -29,6 +29,7 @@ book:
         - 14-final-polish.qmd
   appendices:
     - appendix-hulk-syntax.qmd
+    - appendix-banner.qmd
     - appendix-tooling.qmd
     - instructors.qmd
 
@@ -40,9 +41,11 @@ format:
     favicon: images/hulk.png
     syntax-definitions:
       - ../syntax/hulk.xml
+      - ../syntax/banner.xml
   pdf:
     output-file: hulk.pdf
     documentclass: scrreprt
     toc: true
     syntax-definitions:
       - ../syntax/hulk.xml
+      - ../syntax/banner.xml
