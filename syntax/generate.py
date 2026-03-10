@@ -39,7 +39,8 @@ def generate_textmate(grammar, output_path):
 
     # Clean up None values
     def clean_dict(d):
-        if not isinstance(d, dict): return d
+        if not isinstance(d, dict):
+            return d
         return {k: clean_dict(v) for k, v in d.items() if v is not None}
 
     tm_grammar = clean_dict(tm_grammar)
