@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1] - 2026-03-10
+### Fixed
+- **CI/CD:** Repaired the release pipeline by switching to the official `install-tinytex` action and explicitly naming the PDF output.
+- **Quarto:** Fixed PDF rendering issues by configuring a predictable output filename (`hulk.pdf`) in `_quarto.yml`.
+- **VS Code Extension:** Improved Quarto syntax highlighting by adding the `text.html.quarto` scope to the injection grammar.
+
 ## [0.6.0] - 2026-03-10
 ### Added
 - **Project Structure:** Scaffolding for a split-brain architecture (Python frontend, Rust backend) using a literate programming approach (`illiterate`).
