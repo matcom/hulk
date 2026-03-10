@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {.unnumbered}
 
 We will begin this journey by dissecting the canonical computational system of formal language theory: a compiler. Broadly speaking, a compiler is nothing more than a program, whose input and output also happen to be programs. The input is a program in a language that we will call "high level", and the output in a "low level" language, which is equivalent to the first. Exactly what is high and low will depend on many factors, and there is no formal definition. In general, a high-level language is one that is comfortable for us as programmers to express the operations that we are interested in executing. Likewise, a low-level language is one that a computing device can execute efficiently. Perhaps the most typical examples are an object-oriented language and an assembly language respectively, but there are many other input and output language combinations of interest.
 

@@ -1,0 +1,7 @@
+# Garbage Collector
+
+Automatic memory management is a key feature of modern languages. We will implement a garbage collector to reclaim unused memory in our VM, ensuring our programs can run indefinitely without leaks.
+
+```rust {export=backend/src/gc.rs}
+// Garbage Collector implementation
+```

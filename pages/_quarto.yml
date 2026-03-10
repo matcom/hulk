@@ -9,28 +9,27 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "Frontend"
+    - part: "Part 1: The Frontend"
       chapters:
-        - 01-dual-ancestry.qmd
-        - 02-atomization.qmd
-        - 03-structure.qmd
-        - 04-evaluation.qmd
-        - 05-binding.qmd
-        - 06-shield.qmd
-    - part: "Bridge"
+        - 01-arithmetic-expressions.qmd
+        - 02-strings-and-builtins.qmd
+        - 03-variables-and-binding.qmd
+        - 04-control-flow.qmd
+        - 05-functions-and-recursion.qmd
+        - 06-objects-and-classes.qmd
+        - 07-type-checking-and-inference.qmd
+    - part: "Part 2: The Backend"
       chapters:
-        - 07-lowering.qmd
-        - 08-transpiler.qmd
-    - part: "Backend"
-      chapters:
-        - 09-metal-sandbox.qmd
+        - 08-lowering-to-banner-ir.qmd
+        - 09-the-metal-sandbox.qmd
         - 10-stack-machine.qmd
-        - 11-heap-memory.qmd
-        - 12-garbage-collector.qmd
-        - 13-standard-library.qmd
+        - 11-object-representation-and-heap.qmd
+        - 12-virtual-method-calls.qmd
+        - 13-garbage-collector.qmd
         - 14-final-polish.qmd
   appendices:
     - appendix-hulk-syntax.qmd
+    - appendix-tooling.qmd
     - instructors.qmd
 
 format:

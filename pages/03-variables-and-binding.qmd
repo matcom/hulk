@@ -1,0 +1,7 @@
+# Variables and Binding
+
+Variables allow us to store and reuse values. We will implement lexically-scoped variables using the `let` expression and manage local environments in our interpreter.
+
+```python {export=frontend/src/frontend/scope.py}
+# Scope and Environment management for HULK
+```

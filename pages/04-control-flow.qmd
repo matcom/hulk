@@ -1,0 +1,7 @@
+# Control Flow
+
+Decisions are fundamental to programming. We introduce boolean literals, comparison operators, and the `if-then-else` expression, which in HULK is itself an expression with a return value.
+
+```python {export=frontend/src/frontend/evaluator.py}
+# Evaluator updates for Control Flow
+```

@@ -1,0 +1,7 @@
+# The BANNER Intermediate Representation (IR)
+
+We bridge the gap between high-level HULK and low-level machine code. We define the BANNER Intermediate Representation (IR) and implement a "lowering" pass to transform our AST into a linear sequence of instructions.
+
+```python {export=frontend/src/frontend/lowering.py}
+# Transpiler from HULK to Banner IR
+```

@@ -1,0 +1,7 @@
+# Strings and Builtins
+
+In this chapter, we extend HULK with string literals and the concatenation operator. We also introduce the concept of builtin functions, allowing our language to interact with the outside world via `print` and mathematical constants like `PI`.
+
+```python {export=frontend/src/frontend/builtins.py}
+# Builtin functions and constants for HULK
+```

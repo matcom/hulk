@@ -1,0 +1,7 @@
+# Functions and Recursion
+
+We move beyond simple expressions to define reusable logic. We will implement global function definitions, parameter passing, and recursive calls, which are essential for complex algorithms.
+
+```python {export=frontend/src/frontend/functions.py}
+# Function management for HULK
+```

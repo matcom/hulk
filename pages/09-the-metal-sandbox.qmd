@@ -1,0 +1,9 @@
+# The Metal Sandbox
+
+We transition to the Rust ecosystem. This chapter sets up the backend project, introduces Rust's memory safety model, and prepares the environment for building our high-performance VM.
+
+```rust {export=backend/src/main.rs}
+fn main() {
+    println!("Hello from the Metal Sandbox");
+}
+```
