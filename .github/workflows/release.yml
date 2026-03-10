@@ -31,8 +31,7 @@ jobs:
         uses: quarto-dev/quarto-actions/setup@v2
         
       - name: Install TinyTeX
-        run: |
-          quarto install tinytex --no-prompt
+        uses: quarto-dev/quarto-actions/install-tinytex@v2
 
       - name: Build Syntax and VS Code Extension
         run: |
@@ -53,7 +52,8 @@ jobs:
 
       - name: Prepare Release Assets
         run: |
-          cp pages/_book/*.pdf hulk-docs.pdf
+          ls -R pages/_book/
+          cp pages/_book/hulk.pdf hulk-docs.pdf
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
