@@ -38,6 +38,7 @@ format:
     theme: cosmo
     toc: true
     code-fold: true
+    favicon: images/hulk.png
     syntax-definitions:
       - ../syntax/hulk.xml
   pdf:
