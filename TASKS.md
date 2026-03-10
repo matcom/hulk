@@ -10,6 +10,9 @@ Legend:
 
 ## Active Tasks
 - [ ] Initialize the project goals.
+- [x] Enable HULK syntax highlighting in Markdown/Quarto code blocks. (@apiad) (See plan: plans/hulk-markdown-syntax-injection.md)
+- [x] Implement single source of truth for HULK syntax highlighting. (@apiad) (See plan: plans/hulk-syntax-single-source.md)
+- [x] Create the HULK VS Code extension. (@apiad) (See plan: plans/hulk-vscode-extension.md)
 - [x] Revise and reorder the HULK syntax appendix. (@apiad) (See plan: plans/reorder-appendix.md)
 
 ---
