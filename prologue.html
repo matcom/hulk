@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Appendix D — The Instructor’s Manual – Principles of Programming Languages Design and Implementation</title>
+<title>A Tale of Two Languages – Principles of Programming Languages Design and Implementation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix-tooling.html" rel="prev">
+<link href="./intro.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -82,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-hulk-syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./instructors.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./prologue.html">A Tale of Two Languages</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -111,6 +112,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./prologue.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">A Tale of Two Languages</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -254,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./instructors.html" class="sidebar-item-text sidebar-link active">
+  <a href="./appendix-instructors.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></span></a>
   </div>
 </li>
@@ -265,15 +272,23 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-great-schism" id="toc-the-great-schism" class="nav-link active" data-scroll-target="#the-great-schism">The Great Schism</a></li>
+  <li><a href="#architects-of-discipline" id="toc-architects-of-discipline" class="nav-link" data-scroll-target="#architects-of-discipline">Architects of Discipline</a></li>
+  <li><a href="#the-core-question" id="toc-the-core-question" class="nav-link" data-scroll-target="#the-core-question">The Core Question</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./appendix-hulk-syntax.html">Appendices</a></li><li class="breadcrumb-item"><a href="./instructors.html"><span class="chapter-number">D</span>&nbsp; <span class="chapter-title">The Instructor’s Manual</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Appendix D — The Instructor’s Manual</h1>
+<h1 class="title">A Tale of Two Languages</h1>
 </div>
 
 
@@ -290,8 +305,23 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<p>The story of programming begins not with silicon, but with gears and steam. Ada Lovelace, working alongside Charles Babbage on the Analytical Engine, was the first to realize that a machine could do more than mere calculation; it could manipulate symbols according to rules. Decades later, Grace Hopper transformed the landscape with the creation of the A-0 compiler, paving the way for COBOL and the idea that we could write code in something resembling human language. Meanwhile, John Backus and his team at IBM were birthing FORTRAN, the first high-level language to achieve widespread adoption, proving that a compiler could produce code as efficient as hand-written assembly.</p>
+<section id="the-great-schism" class="level2">
+<h2 class="anchored" data-anchor-id="the-great-schism">The Great Schism</h2>
+<p>This dawn of computing gave rise to a fundamental divide. On one side stood the tradition of Alan Turing and FORTRAN, rooted in the Von Neumann architecture—a world of mutable state, loops, and step-by-step instructions that mirrored the physical movement of data in a machine. On the other side was the elegance of Alonzo Church and LISP, built upon the Lambda Calculus. Here, computation was not a sequence of commands but the evaluation of mathematical functions, where recursion replaced iteration and data was often immutable. This “Great Schism” between the imperative and the functional would define the next fifty years of language design.</p>
+<p>The history of modern programming is, in many ways, the history of their synthesis. Successful modern languages like Java, Python, and Rust are often described as “Fortran syntax with Lisp semantics.” They offer the familiar, imperative-looking control flow of the Turing tradition, while increasingly embracing the powerful abstractions of the Church tradition: first-class functions, lexical scoping, and automatic memory management. We have learned that we want the performance and predictability of the machine, but we need the expressive power of the mathematical model.</p>
+</section>
+<section id="architects-of-discipline" class="level2">
+<h2 class="anchored" data-anchor-id="architects-of-discipline">Architects of Discipline</h2>
+<p>As the field matured, it became clear that just having a language was not enough. We needed a discipline of programming. Donald Knuth taught us to treat algorithms with mathematical rigor and code as a form of literature. Edsger W. Dijkstra campaigned against the “spaghetti code” of the early era, advocating for structured programming and the elimination of the GOTO statement. Niklaus Wirth championed simplicity and type safety with Pascal, reminding us that a language should be a tool for thinking clearly. These architects of discipline provided the foundation upon which all modern compiler theory and software engineering rest.</p>
+</section>
+<section id="the-core-question" class="level2">
+<h2 class="anchored" data-anchor-id="the-core-question">The Core Question</h2>
+<p>At the heart of all this development lies a single, profound question: <strong>How to talk to a computer?</strong> This is not merely a technical hurdle but a philosophical one. It is a question that bridges the gap between human thought and mechanical execution. We seek a medium that is precise enough for a machine to follow, yet expressive enough for a human to reason within.</p>
+<p>A compiler is our most sophisticated answer to that question. It is a bridge built of logic and syntax that allows us to project our abstract intentions onto the physical reality of the machine. In the following pages, we will explore the architecture of this bridge, dismantling its components to understand how we can turn human thought into executable reality.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -696,11 +726,14 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./appendix-tooling.html" class="pagination-link" aria-label="Tooling for HULK">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">C</span>&nbsp; <span class="chapter-title">Tooling for HULK</span></span>
+      <a href="./index.html" class="pagination-link" aria-label="Preface">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./intro.html" class="pagination-link" aria-label="Introduction">
+        <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
