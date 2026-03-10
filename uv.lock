@@ -275,7 +275,7 @@ wheels = [
 
 [[package]]
 name = "frontend"
-version = "0.1.0"
+version = "0.6.0"
 source = { editable = "frontend" }
 
 [package.dev-dependencies]
