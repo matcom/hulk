@@ -8,6 +8,7 @@ book:
   date: "today"
   chapters:
     - index.qmd
+    - prologue.qmd
     - intro.qmd
     - part: The Frontend
       chapters:
@@ -31,7 +32,7 @@ book:
     - appendix-hulk-syntax.qmd
     - appendix-banner.qmd
     - appendix-tooling.qmd
-    - instructors.qmd
+    - appendix-instructors.qmd
 
 format:
   html:

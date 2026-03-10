@@ -10,6 +10,7 @@ Legend:
 
 ## Active Tasks
 - [ ] Initialize the project goals.
+- [x] Refactor and draft the book beginning (Preface, Prologue, Introduction). (@apiad)
 - [x] Consolidate project into unified root-level Python and Rust projects. (@apiad) (See plan: plans/restructure-project.md)
 - [x] Implement syntax highlighting for Banner IR. (@apiad) (See plan: plans/implement-banner-syntax.md)
 - [x] Add the "Tooling for HULK" appendix. (@apiad) (See plan: plans/add-tooling-appendix.md)
