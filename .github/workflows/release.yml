@@ -29,9 +29,8 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        
-      - name: Install TinyTeX
-        uses: quarto-dev/quarto-actions/install-tinytex@v2
+        with:
+          tinytex: true
 
       - name: Build Syntax and VS Code Extension
         run: |
