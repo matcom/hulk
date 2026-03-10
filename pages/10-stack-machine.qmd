@@ -2,6 +2,6 @@
 
 We implement the heart of our backend: a stack-based virtual machine. We will define the instruction set and the execution loop that processes BANNER IR at high speeds.
 
-```rust {export=backend/src/vm.rs}
+```rust {export=src/banner/vm.rs}
 // Stack Machine implementation
 ```

@@ -2,6 +2,6 @@
 
 Before code generation, we must ensure its correctness. We will build a semantic analyzer that verifies types and performs type inference to keep our HULK programs safe.
 
-```python {export=frontend/src/frontend/analyzer.py}
+```python {export=src/hulk/analyzer.py}
 # Semantic analyzer and Type inference for HULK
 ```

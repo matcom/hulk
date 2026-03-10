@@ -1,15 +1,27 @@
 [project]
 name = "hulk"
-version = "0.1.0"
-description = "Add your description here"
+version = "0.7.0"
+description = "HULK Language Implementation"
 readme = "README.md"
+authors = [
+    { name = "Alejandro Piad Morffis", email = "apiad@apiad.net" }
+]
 requires-python = ">=3.13"
 dependencies = []
 
+[project.scripts]
+hulk = "hulk.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [dependency-groups]
 dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.15.5",
     "jupyter>=1.1.1",
 ]
 
-[tool.uv.workspace]
-members = ["frontend"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/hulk"]

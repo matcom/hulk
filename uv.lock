@@ -1,12 +1,6 @@
 version = 1
 requires-python = ">=3.13"
 
-[manifest]
-members = [
-    "frontend",
-    "hulk",
-]
-
 [[package]]
 name = "anyio"
 version = "4.9.0"
@@ -274,25 +268,6 @@ wheels = [
 ]
 
 [[package]]
-name = "frontend"
-version = "0.7.0"
-source = { editable = "frontend" }
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=9.0.2" },
-    { name = "ruff", specifier = ">=0.15.5" },
-]
-
-[[package]]
 name = "h11"
 version = "0.16.0"
 source = { registry = "https://pypi.org/simple" }
@@ -331,18 +306,24 @@ wheels = [
 
 [[package]]
 name = "hulk"
-version = "0.1.0"
-source = { virtual = "." }
+version = "0.7.0"
+source = { editable = "." }
 
 [package.dev-dependencies]
 dev = [
     { name = "jupyter" },
+    { name = "pytest" },
+    { name = "ruff" },
 ]
 
 [package.metadata]
 
 [package.metadata.requires-dev]
-dev = [{ name = "jupyter", specifier = ">=1.1.1" }]
+dev = [
+    { name = "jupyter", specifier = ">=1.1.1" },
+    { name = "pytest", specifier = ">=9.0.2" },
+    { name = "ruff", specifier = ">=0.15.5" },
+]
 
 [[package]]
 name = "idna"

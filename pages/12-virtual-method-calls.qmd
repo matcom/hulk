@@ -2,6 +2,6 @@
 
 Supporting polymorphism requires dynamic dispatch. We implement virtual method tables (vtables) and the runtime logic needed to resolve method calls on objects.
 
-```rust {export=backend/src/vtable.rs}
+```rust {export=src/banner/vtable.rs}
 // VTable and Dynamic Dispatch
 ```

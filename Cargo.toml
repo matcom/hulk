@@ -1,0 +1,10 @@
+[package]
+name = "banner"
+version = "0.7.0"
+edition = "2021"
+
+[[bin]]
+name = "banner"
+path = "src/banner/main.rs"
+
+[dependencies]

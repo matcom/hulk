@@ -12,6 +12,9 @@ __pycache__/
 env/
 venv/
 
+# Rust
+target/
+
 # Quarto
 _publish/
 _freeze/
@@ -20,7 +23,10 @@ pages/_book/
 *.tex
 
 # Hulk
-backend/target/
+src/hulk/*
+!src/hulk/cli.py
+src/banner/*
+!src/banner/main.rs
 fix_appendix.py
 gemini.log
 hulk-vscode.vsix

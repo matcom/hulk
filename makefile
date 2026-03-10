@@ -6,24 +6,24 @@ syntax:
 	python3 syntax/generate.py
 
 tangle:
-	cd frontend/src && rm -rf *
-	cd backend/src && rm -rf *
+	rm -rf src/hulk/*
+	rm -rf src/banner/*
 	illiterate pages/*.qmd --dir .
 
 vscode: syntax
 	cd vscode && npx @vscode/vsce package -o ../hulk-vscode.vsix
 
 test: tangle
-	cd frontend && uv run pytest
-	cd backend && cargo test
+	uv run pytest
+	cargo test
 
 lint: tangle
-	cd frontend && uv run ruff check .
-	cd backend && cargo clippy
+	uv run ruff check .
+	cargo clippy
 
 format: tangle
-	cd frontend && uv run ruff format .
-	cd backend && cargo fmt
+	uv run ruff format .
+	cargo fmt
 
 docs: syntax
 	quarto publish gh-pages --no-prompt --no-browser pages/

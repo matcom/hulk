@@ -2,6 +2,6 @@
 
 We bring everything together. In this final chapter, we refine the CLI, add the remaining standard library functions, and reflect on the journey of building a complete language from scratch.
 
-```rust {export=backend/src/cli.rs}
+```rust {export=src/banner/cli.rs}
 // CLI and Final Integration
 ```

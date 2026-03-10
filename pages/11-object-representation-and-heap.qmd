@@ -2,6 +2,6 @@
 
 High-level objects need a low-level home. We design the memory layout for strings, class instances, and arrays, and implement a heap to manage their lifecycle.
 
-```rust {export=backend/src/heap.rs}
+```rust {export=src/banner/heap.rs}
 // Heap and Object representation
 ```

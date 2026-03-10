@@ -2,6 +2,6 @@
 
 HULK is an object-oriented language. We will implement class definitions, attribute storage, and method invocation, laying the groundwork for more advanced abstraction.
 
-```python {export=frontend/src/frontend/types.py}
+```python {export=src/hulk/types.py}
 # Type and Object system for HULK
 ```

@@ -2,10 +2,10 @@
 
 We begin our journey by building the core of any expression language: arithmetic. We will implement a lexer, a parser, and a tree-walking interpreter capable of evaluating basic mathematical operations.
 
-```python {export=frontend/src/frontend/lexer.py}
+```python {export=src/hulk/lexer.py}
 # Lexer implementation for HULK
 ```
 
-```python {export=frontend/src/frontend/parser.py}
+```python {export=src/hulk/parser.py}
 # Parser implementation for HULK
 ```
