@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction – Principles of Programming Languages Design and Implementation</title>
+<title>7&nbsp; Type Checking and Inference – Principles of Programming Languages Design and Implementation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-arithmetic-expressions.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./08-lowering-to-banner-ir.html" rel="next">
+<link href="./06-objects-and-classes.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -83,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-arithmetic-expressions.html">Part 1: The Frontend</a></li><li class="breadcrumb-item"><a href="./07-type-checking-and-inference.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Type Checking and Inference</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -116,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -167,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-type-checking-and-inference.html" class="sidebar-item-text sidebar-link">
+  <a href="./07-type-checking-and-inference.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Type Checking and Inference</span></span></a>
   </div>
 </li>
@@ -272,9 +307,9 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-arithmetic-expressions.html">Part 1: The Frontend</a></li><li class="breadcrumb-item"><a href="./07-type-checking-and-inference.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Type Checking and Inference</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Introduction</h1>
+<h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Type Checking and Inference</span></h1>
 </div>
 
 
@@ -291,12 +326,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>We will begin this journey by dissecting the canonical computational system of formal language theory: a compiler. Broadly speaking, a compiler is nothing more than a program, whose input and output also happen to be programs. The input is a program in a language that we will call “high level”, and the output in a “low level” language, which is equivalent to the first. Exactly what is high and low will depend on many factors, and there is no formal definition. In general, a high-level language is one that is comfortable for us as programmers to express the operations that we are interested in executing. Likewise, a low-level language is one that a computing device can execute efficiently. Perhaps the most typical examples are an object-oriented language and an assembly language respectively, but there are many other input and output language combinations of interest.</p>
-<p>Now, before diving headlong into the anatomy of a compiler, it is worth mentioning some related language processing systems. We can try to categorize them according to the “type” of the input and output language. First of all, the classic example is when we want to convert a high-level language to a low-level language, and we call this system a <strong>compiler</strong>. The opposite case, when we want to convert from a low-level language to a high-level language, we can call it a <strong>decompiler</strong> by analogy. These types of tools are useful for analyzing and reverse engineering programs for which, perhaps, we no longer have the source code, and we need to understand or modify. The other two cases, high level to high level and low level to level are basically <strong>translators</strong>; and sometimes they are also called <strong>transpilers</strong>. For example, TypeScript is a high-level language that “transpiles” to JavaScript, another high-level language. Among low-level languages ​​we can also have translators. An example is the so-called <strong>JIT</strong> (<em>just-in-time</em>) compilers, which are used to translate a program compiled in a generic low-level language (for example <strong>.NET IL</strong>) into a machine language. specific to the architecture where it is executed.</p>
-<p>Let us then return to the classic case, the <strong>compiler</strong>. In this course we are going to use as a teaching guide the design of a compiler for the HULK language, which will compile to a machine language called MIPS. Details of both languages ​​will be introduced as appropriate, but for now it can be said that HULK is an object-oriented language, with automatic garbage collection, simple inheritance, polymorphism, and a unified type system. MIPS is a stack assembly language for a 32-bit architecture with registers and arithmetic, logic, and string-oriented operations.</p>
-<p>Let us then try to define this machinery step by step. Abstractly our compiler is a “black box” that converts programs written in HULK to programs written in MIPS:</p>
-<p>To begin to uncover this black box, let’s notice that we have at least two independent components: one that operates in HULK language and another that operates in MIPS language. We need to be able to “read” a program in HULK and “write” it in MIPS. We will call the first module, which “reads”, <em>parser</em>, or syntax analyzer, for historical reasons that we will see later. We will simply call the second component the <em>generator</em>.</p>
-<p>From here a question immediately arises: what communication protocol do these modules have? It is necessary to design a kind of intermediate language, a representation mechanism that is neither HULK nor MIPS, but something that is “halfway” between the two. That is, it is necessary to translate the HULK program into some form of abstract representation, independent of the syntax, which can then be interpreted by the generator and written in MIPS. Let’s call it <em>intermediate representation (IR)</em> for now.</p>
+<p>Before code generation, we must ensure its correctness. We will build a semantic analyzer that verifies types and performs type inference to keep our HULK programs safe.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-export="frontend/src/frontend/analyzer.py"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Semantic analyzer and Type inference for HULK</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 
@@ -703,13 +734,13 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./06-objects-and-classes.html" class="pagination-link" aria-label="Objects and Classes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Objects and Classes</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-arithmetic-expressions.html" class="pagination-link" aria-label="Arithmetic Expressions">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Arithmetic Expressions</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./08-lowering-to-banner-ir.html" class="pagination-link" aria-label="The BANNER Intermediate Representation (IR)">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">The BANNER Intermediate Representation (IR)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

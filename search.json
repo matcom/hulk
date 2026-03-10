@@ -12,22 +12,165 @@
   {
     "objectID": "intro.html",
     "href": "intro.html",
-    "title": "1  Introduction",
+    "title": "Introduction",
     "section": "",
     "text": "We will begin this journey by dissecting the canonical computational system of formal language theory: a compiler. Broadly speaking, a compiler is nothing more than a program, whose input and output also happen to be programs. The input is a program in a language that we will call “high level”, and the output in a “low level” language, which is equivalent to the first. Exactly what is high and low will depend on many factors, and there is no formal definition. In general, a high-level language is one that is comfortable for us as programmers to express the operations that we are interested in executing. Likewise, a low-level language is one that a computing device can execute efficiently. Perhaps the most typical examples are an object-oriented language and an assembly language respectively, but there are many other input and output language combinations of interest.\nNow, before diving headlong into the anatomy of a compiler, it is worth mentioning some related language processing systems. We can try to categorize them according to the “type” of the input and output language. First of all, the classic example is when we want to convert a high-level language to a low-level language, and we call this system a compiler. The opposite case, when we want to convert from a low-level language to a high-level language, we can call it a decompiler by analogy. These types of tools are useful for analyzing and reverse engineering programs for which, perhaps, we no longer have the source code, and we need to understand or modify. The other two cases, high level to high level and low level to level are basically translators; and sometimes they are also called transpilers. For example, TypeScript is a high-level language that “transpiles” to JavaScript, another high-level language. Among low-level languages ​​we can also have translators. An example is the so-called JIT (just-in-time) compilers, which are used to translate a program compiled in a generic low-level language (for example .NET IL) into a machine language. specific to the architecture where it is executed.\nLet us then return to the classic case, the compiler. In this course we are going to use as a teaching guide the design of a compiler for the HULK language, which will compile to a machine language called MIPS. Details of both languages ​​will be introduced as appropriate, but for now it can be said that HULK is an object-oriented language, with automatic garbage collection, simple inheritance, polymorphism, and a unified type system. MIPS is a stack assembly language for a 32-bit architecture with registers and arithmetic, logic, and string-oriented operations.\nLet us then try to define this machinery step by step. Abstractly our compiler is a “black box” that converts programs written in HULK to programs written in MIPS:\nTo begin to uncover this black box, let’s notice that we have at least two independent components: one that operates in HULK language and another that operates in MIPS language. We need to be able to “read” a program in HULK and “write” it in MIPS. We will call the first module, which “reads”, parser, or syntax analyzer, for historical reasons that we will see later. We will simply call the second component the generator.\nFrom here a question immediately arises: what communication protocol do these modules have? It is necessary to design a kind of intermediate language, a representation mechanism that is neither HULK nor MIPS, but something that is “halfway” between the two. That is, it is necessary to translate the HULK program into some form of abstract representation, independent of the syntax, which can then be interpreted by the generator and written in MIPS. Let’s call it intermediate representation (IR) for now.",
     "crumbs": [
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+      "Introduction"
     ]
   },
   {
-    "objectID": "01-dual-ancestry.html",
-    "href": "01-dual-ancestry.html",
-    "title": "2  Chapter 01",
+    "objectID": "01-arithmetic-expressions.html",
+    "href": "01-arithmetic-expressions.html",
+    "title": "1  Arithmetic Expressions",
     "section": "",
-    "text": "if __name__ == '__main__':\n    print('Hello from the Architect')\ndef test_main():\n    assert True",
+    "text": "We begin our journey by building the core of any expression language: arithmetic. We will implement a lexer, a parser, and a tree-walking interpreter capable of evaluating basic mathematical operations.\n# Lexer implementation for HULK\n# Parser implementation for HULK",
     "crumbs": [
-      "Frontend",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Chapter 01</span>"
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetic Expressions</span>"
+    ]
+  },
+  {
+    "objectID": "02-strings-and-builtins.html",
+    "href": "02-strings-and-builtins.html",
+    "title": "2  Strings and Builtins",
+    "section": "",
+    "text": "In this chapter, we extend HULK with string literals and the concatenation operator. We also introduce the concept of builtin functions, allowing our language to interact with the outside world via print and mathematical constants like PI.\n# Builtin functions and constants for HULK",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Strings and Builtins</span>"
+    ]
+  },
+  {
+    "objectID": "03-variables-and-binding.html",
+    "href": "03-variables-and-binding.html",
+    "title": "3  Variables and Binding",
+    "section": "",
+    "text": "Variables allow us to store and reuse values. We will implement lexically-scoped variables using the let expression and manage local environments in our interpreter.\n# Scope and Environment management for HULK",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Variables and Binding</span>"
+    ]
+  },
+  {
+    "objectID": "04-control-flow.html",
+    "href": "04-control-flow.html",
+    "title": "4  Control Flow",
+    "section": "",
+    "text": "Decisions are fundamental to programming. We introduce boolean literals, comparison operators, and the if-then-else expression, which in HULK is itself an expression with a return value.\n# Evaluator updates for Control Flow",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Control Flow</span>"
+    ]
+  },
+  {
+    "objectID": "05-functions-and-recursion.html",
+    "href": "05-functions-and-recursion.html",
+    "title": "5  Functions and Recursion",
+    "section": "",
+    "text": "We move beyond simple expressions to define reusable logic. We will implement global function definitions, parameter passing, and recursive calls, which are essential for complex algorithms.\n# Function management for HULK",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Functions and Recursion</span>"
+    ]
+  },
+  {
+    "objectID": "06-objects-and-classes.html",
+    "href": "06-objects-and-classes.html",
+    "title": "6  Objects and Classes",
+    "section": "",
+    "text": "HULK is an object-oriented language. We will implement class definitions, attribute storage, and method invocation, laying the groundwork for more advanced abstraction.\n# Type and Object system for HULK",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Objects and Classes</span>"
+    ]
+  },
+  {
+    "objectID": "07-type-checking-and-inference.html",
+    "href": "07-type-checking-and-inference.html",
+    "title": "7  Type Checking and Inference",
+    "section": "",
+    "text": "Before code generation, we must ensure its correctness. We will build a semantic analyzer that verifies types and performs type inference to keep our HULK programs safe.\n# Semantic analyzer and Type inference for HULK",
+    "crumbs": [
+      "Part 1: The Frontend",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Type Checking and Inference</span>"
+    ]
+  },
+  {
+    "objectID": "08-lowering-to-banner-ir.html",
+    "href": "08-lowering-to-banner-ir.html",
+    "title": "8  The BANNER Intermediate Representation (IR)",
+    "section": "",
+    "text": "We bridge the gap between high-level HULK and low-level machine code. We define the BANNER Intermediate Representation (IR) and implement a “lowering” pass to transform our AST into a linear sequence of instructions.\n# Transpiler from HULK to Banner IR",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>The BANNER Intermediate Representation (IR)</span>"
+    ]
+  },
+  {
+    "objectID": "09-the-metal-sandbox.html",
+    "href": "09-the-metal-sandbox.html",
+    "title": "9  The Metal Sandbox",
+    "section": "",
+    "text": "We transition to the Rust ecosystem. This chapter sets up the backend project, introduces Rust’s memory safety model, and prepares the environment for building our high-performance VM.\nfn main() {\n    println!(\"Hello from the Metal Sandbox\");\n}",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>The Metal Sandbox</span>"
+    ]
+  },
+  {
+    "objectID": "10-stack-machine.html",
+    "href": "10-stack-machine.html",
+    "title": "10  Stack Machine",
+    "section": "",
+    "text": "We implement the heart of our backend: a stack-based virtual machine. We will define the instruction set and the execution loop that processes BANNER IR at high speeds.\n// Stack Machine implementation",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stack Machine</span>"
+    ]
+  },
+  {
+    "objectID": "11-object-representation-and-heap.html",
+    "href": "11-object-representation-and-heap.html",
+    "title": "11  Object Representation",
+    "section": "",
+    "text": "High-level objects need a low-level home. We design the memory layout for strings, class instances, and arrays, and implement a heap to manage their lifecycle.\n// Heap and Object representation",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Object Representation</span>"
+    ]
+  },
+  {
+    "objectID": "12-virtual-method-calls.html",
+    "href": "12-virtual-method-calls.html",
+    "title": "12  Virtual Method Calls",
+    "section": "",
+    "text": "Supporting polymorphism requires dynamic dispatch. We implement virtual method tables (vtables) and the runtime logic needed to resolve method calls on objects.\n// VTable and Dynamic Dispatch",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Virtual Method Calls</span>"
+    ]
+  },
+  {
+    "objectID": "13-garbage-collector.html",
+    "href": "13-garbage-collector.html",
+    "title": "13  Garbage Collector",
+    "section": "",
+    "text": "Automatic memory management is a key feature of modern languages. We will implement a garbage collector to reclaim unused memory in our VM, ensuring our programs can run indefinitely without leaks.\n// Garbage Collector implementation",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Garbage Collector</span>"
+    ]
+  },
+  {
+    "objectID": "14-final-polish.html",
+    "href": "14-final-polish.html",
+    "title": "14  Final Polish",
+    "section": "",
+    "text": "We bring everything together. In this final chapter, we refine the CLI, add the remaining standard library functions, and reflect on the journey of building a complete language from scratch.\n// CLI and Final Integration",
+    "crumbs": [
+      "Part 2: The Backend",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Final Polish</span>"
     ]
   },
   {
@@ -193,6 +336,116 @@
     "crumbs": [
       "Appendices",
       "<span class='chapter-number'>A</span>  <span class='chapter-title'>The HULK Programming Language</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html",
+    "href": "appendix-banner.html",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "",
+    "text": "B.1 The Anatomy of a BANNER Program\nEvery high-level abstraction is a well-intentioned lie told to the programmer to shield them from the cold, mechanical reality of the hardware. When we write in HULK, we inhabit a world of rich objects, nested expressions, and elegant recursion—a world where the complexity of the machine is hidden behind a veil of syntactic grace. However, the silicon upon which this logic eventually runs is fundamentally indifferent to such elegance. To a processor, there are no “objects” with “methods,” nor are there “types” in the way we understand them; there is only memory, registers, and a relentless sequence of primitive operations. The BANNER Intermediate Representation (IR) is the site of the great reconciliation—it is Phase 1 of a structural audit where high-level intent is methodically stripped of its finery and translated into the explicit, linear, and minimalist language of raw execution.\nThe transition from a language as expressive as HULK to raw machine code is too steep a cliff to be traversed in a single leap. Direct compilation would force the compiler to manage complex tasks simultaneously: register allocation and stack frame management would have to be handled while simultaneously unraveling deep semantic structures like inheritance hierarchies and dynamic dispatch. BANNER exists to decouple these concerns. By providing a “Three-Address Code” (3AC) architecture, it offers a representation that is close enough to the machine to be easily translated into assembly or bytecode, yet abstract enough to remain portable and amenable to systematic optimization.\nIn the minimalist world of BANNER, the lush landscapes of HULK are flattened into a linear sequence of explicit instructions. Every complex mathematical expression is decomposed into a series of simple assignments involving temporary variables, ensuring that no instruction ever performs more than one fundamental operation. Control flow structures like if-else blocks and while loops are stripped of their structured sugar and reduced to the raw mechanics of labels and conditional jumps. This “flattening” process is not merely a simplification; it is a rigorous accounting of every operation the CPU must eventually perform. In BANNER, the ambiguity of high-level scope is replaced by the absolute clarity of GOTO and LABEL.\nPerhaps the most significant shift in BANNER is the loss of high-level type safety in favor of a “everything is a number” philosophy. While HULK enforces a strict type system, BANNER treats all values as 32-bit integers, where the meaning of a value is defined entirely by how it is used. An integer might be a literal constant, a memory address, or a pointer to a virtual method table. This transparency reveals the true cost of object-oriented programming: attribute access becomes a calculated offset, and a method call becomes a dynamic lookup. By enforcing this level of explicitness, BANNER allows the compiler to perform optimizations that would be impossible at a higher level, serving as the indispensable foundation upon which the final binary is built.\nA BANNER file is not merely a list of instructions; it is a structured blueprint that organizes the entire memory and logic of a program into three distinct, top-down sections. This organization reflects the fundamental pillars of an object-oriented runtime: the definition of object layouts, the management of static resources, and the execution of procedural logic. By separating these concerns into .TYPES, .DATA, and .CODE blocks, BANNER provides a clear roadmap for how high-level HULK abstractions are physically mapped onto the computer’s memory.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html#the-anatomy-of-a-banner-program",
+    "href": "appendix-banner.html#the-anatomy-of-a-banner-program",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "",
+    "text": "B.1.1 The .TYPES Section: Flattening the Hierarchy\nThe .TYPES section is where the rich, recursive world of HULK classes is reduced to linear memory layouts. In HULK, a class might inherit from multiple ancestors, but in BANNER, all inheritance is resolved. Each entry in the .TYPES section defines a unique object structure, listing every attribute—including those inherited—in a fixed order. This ensures that an attribute like x always appears at the same memory offset relative to the object’s start address, regardless of whether it was defined in a base class or a specialized subclass.\nBeyond attributes, the .TYPES section maps method names to specific function labels in the .CODE section. This is the foundation of dynamic dispatch. When a method is overridden in a subclass, the .TYPES entry for that subclass simply points the method name to a different function label. This explicit mapping turns the abstract concept of “method lookup” into a simple pointer redirection.\nExample: Consider a HULK class A and its subclass B. In BANNER, their layouts are explicitly defined to preserve structural compatibility:\n.TYPES\n\ntype A {\n    attribute x ;\n    method f : f1;\n}\n\ntype B {\n    attribute x ;   # Inherited from A, same offset\n    attribute y ;   # New attribute\n    method f : f2 ; # Overridden method: points to f2 instead of f1\n    method g : f3 ; # New method\n}\n\n\nB.1.2 The .DATA Section: The Static Pool\nWhile most data in HULK is dynamic, certain values—most notably strings—are constant and known at compile time. The .DATA section serves as a global string pool. In BANNER, strings are treated as immutable blocks of memory. This section ensures that every unique string literal used in the program is allocated once and can be referenced by a label. Each entry in .DATA associates a human-readable label with a literal value, allowing the code to reference these resources by name rather than hard-coded memory addresses.\nExample:\n.DATA\n\nmsg = \"Hello World\";\nerror_msg = \"An error has occurred\";\n\n\nB.1.3 The .CODE Section: Procedural Execution\nThe heart of the program resides in the .CODE section, which contains the actual implementation of every function and method. Unlike HULK, where functions can be nested and capture variables from their environment, BANNER functions are strictly top-level entities. Each function follows a rigid internal structure: it first declares its PARAM variables (inputs from the caller), then its LOCAL variables (scratchpad memory for the function’s own use), and finally its sequence of 3-address instructions.\nIn this minimalist environment, there is no automatic scope management. Every temporary value used in a complex calculation must be explicitly declared as a LOCAL variable. This explicitness turns the implicit stack management of HULK into an observable, linear process.\nExample: An implementation for the functions referenced in the .TYPES section might look like this:\n.CODE\n\nfunction f1 {\n    PARAM self ;     # Explicit 'self' parameter\n    PARAM x ;\n\n    LOCAL a ;        # Local scratchpad\n    LOCAL b ;\n\n    # ... instructions ...\n    RETURN a ;\n}\n\nfunction f2 {\n    PARAM self ;\n    # ... overridden logic ...\n    RETURN 0 ;\n}\nBy the time the compiler reaches the end of a BANNER program, the high-level intent of the programmer has been fully cataloged: the objects are measured, the constants are pooled, and the logic is linearized. This structural clarity is what makes BANNER an ideal bridge between the abstract and the mechanical.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html#the-instruction-set-a-minimalist-vocabulary",
+    "href": "appendix-banner.html#the-instruction-set-a-minimalist-vocabulary",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "B.2 The Instruction Set: A Minimalist Vocabulary",
+    "text": "B.2 The Instruction Set: A Minimalist Vocabulary\nThe elegance of HULK’s expression-based syntax is nowhere to be found in the BANNER instruction set. Instead, we are left with a sparse collection of primitives that reflect the iterative, step-by-step nature of physical execution. Every operation is explicit, every memory access is calculated, and every jump is absolute. By reducing the language to these few atomic actions, we ensure that the final translation to machine code is a systematic mapping of BANNER instructions to their CPU equivalents.\n\nB.2.0.1 Data Movement and Arithmetic\nAt its most basic level, a program is a sequence of transformations applied to data. In BANNER, these transformations are expressed through three-address assignments—a format where every instruction has at most two operands and one result. No matter how complex a mathematical expression might be in HULK, it must be decomposed into a series of operations where a single operator is applied to its inputs.\nExample: The HULK expression z = (x + y) * 2 cannot be represented as a single instruction. It must be broken down into discrete steps using temporary local variables to hold intermediate results—preserving the strict three-address format required by the IR.\nt1 = x + y ;\nt2 = t1 * 2 ;\nz = t2 ;\n\n\nB.2.0.2 Memory Management\nIn a high-level language, memory management is often “invisible”—objects simply appear when needed and disappear when they are no longer reachable. In BANNER, the creation of every object and array is a deliberate act that must be explicitly requested from the runtime. This explicitness forces the compiler to account for the physical reality of heap allocation.\nExample: When a programmer instantiates a class or creates a fixed-size buffer, the BANNER representation uses ALLOCATE to reserve space for a structured type or ARRAY to request a contiguous block of memory—returning a pointer that will be treated as a 32-bit integer.\np = ALLOCATE Point ;  # Reserves memory for a 'Point' instance\na = ARRAY 10 ;        # Reserves a block for 10 elements\n\n\nB.2.0.3 Object Interaction\nOnce an object is allocated, interacting with its internal state requires direct manipulation of its memory layout. BANNER does not understand high-level properties; it understands memory offsets relative to a base address. The GETATTR and SETATTR instructions are the primary tools for reading from and writing to the fields defined in the .TYPES section.\nExample: Updating the x coordinate of a Point object involves identifying the correct attribute label—which the backend eventually translates to a numerical offset—and performing a store operation. Reading that value back requires a corresponding load into a local variable.\nval = 42 ;\nSETATTR p Point_x val ; # Writes 42 into the 'x' attribute of object 'p'\ncurr = GETATTR p Point_x ; # Reads the value back into 'curr'\n\n\nB.2.0.4 Control Flow\nHigh-level control structures like if statements and while loops are essentially “syntactic sugar” for conditional and unconditional jumps. BANNER strips away this structure, relying instead on a flat system of labels and jumps. This mimics how a CPU’s instruction pointer moves through memory—branching only when specific conditions are met.\nExample: A conditional check is implemented by evaluating a predicate and then using IF ... GOTO to jump to a specific label. If the condition is not met, execution simply continues to the next instruction—effectively creating the “else” or “exit” logic.\nLABEL check_zero ;\nIF x GOTO non_zero ;\nPRINT \"is zero\" ;\nGOTO end ;\nLABEL non_zero ;\nPRINT \"is not zero\" ;\nLABEL end ;\n\n\nB.2.0.5 The Call Stack and Method Invocation\nThe most complex part of BANNER is the management of function calls and dynamic dispatch. Since BANNER is a flat language, it must explicitly handle the passing of arguments and the retrieval of return values. This is achieved through a sequence of PARAM instructions that prepare the environment before a CALL (for static functions) or VCALL (for virtual methods) is executed.\nExample: Invoking a method move(dx, dy) on a Point object requires passing the object itself—the self pointer—followed by its arguments. A VCALL is then used to look up the correct function implementation in the object’s virtual method table based on the provided type.\nPARAM p ;           # Pass the object instance (self)\nPARAM 10 ;          # Pass dx\nPARAM 20 ;          # Pass dy\nr = VCALL Point move ; # Perform dynamic dispatch for 'move'\nRETURN r ;          # Send the result back to the caller",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html#case-study-from-hulk-to-banner",
+    "href": "appendix-banner.html#case-study-from-hulk-to-banner",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "B.3 Case Study: From HULK to BANNER",
+    "text": "B.3 Case Study: From HULK to BANNER\nThe transformation from HULK’s high-level abstractions to the minimalist environment of BANNER is best understood as a structural audit. It is a process that strips away the syntactic elegance of the source language to reveal the explicit mechanical steps required for execution. This lowering process involves three primary tasks: decomposing nested expressions into linear three-address instructions, mapping class hierarchies into flat memory layouts, and converting implicit behaviors—like method dispatch and attribute access—into explicit calculations.\nTo illustrate this transformation, consider a classic “Hello World” scenario implemented using a class structure in HULK. This example highlights how objects are managed and how strings are handled as static resources.\n\nB.3.0.1 The HULK Source\nConsider the following HULK program. It defines a Main class with a single attribute and a method that prints that attribute, followed by an instantiation and a method call:\ntype Main {\n    msg: String = \"Hello World\";\n    run() =&gt; print(this.msg);\n}\n\nlet m = new Main() in m.run();\nAt the Abstract Syntax Tree (AST) level, this program is a collection of nested nodes representing the class definition, attribute initialization, and a Let expression containing a MethodCall. To the BANNER compiler, this must be systematically dismantled and redistributed across the .TYPES, .DATA, and .CODE sections.\n\n\nB.3.0.2 Step 1: Mapping the Static Layout\nThe first step is addressing the program’s static requirements. The compiler identifies the Main class and determines its physical memory layout. In the .TYPES section, Main is registered with its attribute msg and its method run. Simultaneously, the string literal \"Hello World\" is extracted and placed in the .DATA section with a unique label, such as s0.\n.TYPES\ntype Main {\n    attribute Main_msg ;\n    method run : Main_run ;\n}\n\n.DATA\ns0 = \"Hello World\" ;\nThis separation is crucial: the object instance in memory will not contain the string itself, but rather a 32-bit reference (a pointer) to the address labeled s0 in the data pool.\n\n\nB.3.0.3 Step 2: Lowering the Entry Point\nThe logic found in the global scope of the HULK program (the let expression) is lowered into a special entry function in the .CODE section. Here, the “three-address” nature of BANNER becomes visible. The compiler generates temporary local variables (often prefixed with t) to hold intermediate results.\nThe instantiation new Main() is transformed into an ALLOCATE instruction, and the attribute initialization is handled via SETATTR. Notice that the string must be explicitly “loaded” into a temporary variable before it can be assigned to the object.\nfunction entry {\n    LOCAL m ;\n    LOCAL t1 ;\n    LOCAL t2 ;\n\n    t1 = LOAD s0 ;          # Load string address from .DATA\n    m = ALLOCATE Main ;     # Reserve heap space for Main\n    SETATTR m Main_msg t1 ; # Initialize 'msg' attribute\n\n    PARAM m ;               # Pass the 'self' pointer\n    t2 = VCALL Main run ;   # Perform dynamic dispatch\n    RETURN 0 ;\n}\n\n\nB.3.0.4 Step 3: Implementing the Method\nFinally, the run method itself is lowered. In HULK, this is an implicit reference to the current object. In BANNER, this becomes an explicit first parameter named self. The access to this.msg is transformed into a GETATTR operation, using the label Main_msg to determine the correct memory offset. The call to the built-in print function is then lowered into a primitive PRINT instruction.\nfunction Main_run {\n    PARAM self ;\n    LOCAL l_msg ;\n\n    l_msg = GETATTR self Main_msg ; # Extract the string reference\n    PRINT l_msg ;                   # Send reference to the IO system\n    RETURN self ;\n}\nBy the end of this process, every high-level “magic” feature—be it inheritance, dynamic dispatch, or automatic string management—has been reduced to a sequence of explicit, manageable operations. This granularity is what allows the compiler to perform final optimizations and eventually generate the binary code that the hardware can execute.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html#technical-deep-dive-everything-is-a-number",
+    "href": "appendix-banner.html#technical-deep-dive-everything-is-a-number",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "B.4 Technical Deep Dive: “Everything is a Number”",
+    "text": "B.4 Technical Deep Dive: “Everything is a Number”\nAt the heart of the BANNER architecture lies a radical commitment to architectural minimalism: the “everything is a number” philosophy. In the high-level world of HULK, developers reason about complex types—strings, boolean flags, and polymorphic class instances—but as these abstractions descend into the BANNER Intermediate Representation, they are stripped of their semantic metadata and reduced to a uniform 32-bit integer format. This homogenization is not merely a technical convenience; it is a fundamental design choice that aligns the IR with the mechanical reality of the hardware, where the distinction between a memory address, a numerical literal, and a bitmask is entirely a matter of perspective.\nIn this environment, the meaning of a value is not inherent to the value itself but is instead derived from the context of its usage—a concept we might call contextual semantics. When a BANNER instruction performs an arithmetic operation like x = y + z, the virtual machine treats the operands as raw numerical data to be manipulated by the ALU. However, when the same variables appear in a memory-oriented instruction like x = GETATTR y z, the interpretation shifts dramatically: y is suddenly treated as a pointer to a base address in the heap, while z is interpreted as a numerical offset within that object’s structure. This flexibility allows for a highly compact instruction set, but it requires that the compiler maintains an absolute, unwavering map of what every number “represents” at any given point in execution.\nThis design shift fundamentally reallocates the burden of semantic safety from the runtime to the compiler’s semantic analyzer. Unlike more “helpful” virtual machines—such as the JVM or the Python interpreter—the BANNER VM performs no runtime type-checking or safety audits on its instructions. If a compiler emits a GETATTR call on a value that is actually a string literal or a mathematical constant, the VM will dutifully attempt to dereference that memory location, likely resulting in a segmentation fault or the retrieval of garbage data. By removing these safety checks from the execution loop, BANNER achieves a level of performance closer to native code, operating on the assumption that the preceding compilation phases have already “proven” the correctness of the instruction stream.\nFor the Rust-based backend, this minimalist approach creates a fascinating dichotomy of efficiency and complexity. On one hand, the VM’s core execution loop is exceptionally lean, as it can leverage Rust’s primitive integer types and direct memory access without the overhead of constant type-tagging or dynamic dispatch overhead. On the other hand, it necessitates a sophisticated heap management and garbage collection system. Since the VM itself cannot distinguish a pointer from a literal 32-bit integer, the backend must employ advanced techniques—such as shadow stacks or pointer tagging—to ensure that the garbage collector can safely identify reachable objects without accidentally “collecting” a valid memory address that looks like a large number. This tension between IR simplicity and backend robustness is the defining characteristic of the BANNER ecosystem.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-banner.html#conclusion-the-unseen-foundation",
+    "href": "appendix-banner.html#conclusion-the-unseen-foundation",
+    "title": "Appendix B — The BANNER Intermediate Representation",
+    "section": "B.5 Conclusion: The Unseen Foundation",
+    "text": "B.5 Conclusion: The Unseen Foundation\nThe journey from the high-level elegance of HULK to the minimalist, three-address world of BANNER represents more than just a technical translation; it is a fundamental shift in how we conceptualize computation. BANNER serves as what we might call “assembly for the mind”—a simplified yet remarkably powerful model that captures the essence of execution without the suffocating complexity of physical hardware. By stripping away the abstractions of classes, inheritance, and nested expressions, BANNER reveals the underlying mechanical logic that drives every software system. It is here, in this intermediate space, that the true architecture of a program is laid bare, offering a level of clarity that is often lost in the dense syntax of high-level languages or the cryptic mnemonics of machine code.\nFrom a pragmatic perspective, BANNER is the architectural pivot point that enables both optimization and portability. By decoupling the front-end analysis of HULK from the back-end details of the machine, BANNER provides a stable platform for intermediate passes. It is at this stage that a compiler can perform dead-code elimination, constant folding, and common subexpression elimination with surgical precision, independent of whether the final target is an x86 processor, an ARM chip, or a custom virtual machine. This separation of concerns is the hallmark of professional compiler design, ensuring that the “what” of the programmer’s intent is preserved while the “how” of its execution is refined for maximum efficiency.\nUltimately, BANNER is the final, indispensable piece of the HULK-to-Machine puzzle. It is the bridge that spans the chasm between human-readable intent and silicon-executable instructions. Without this intermediate foundation, the task of building a compiler would be an overwhelming exercise in managing conflicting complexities. With BANNER, however, the process becomes a series of manageable, logical steps. It serves as a reminder that even the most sophisticated systems are built upon simple, atomic foundations—and that understanding these foundations is the key to mastering the art of software engineering.\nAs you move forward into the implementation of the backend and the nuances of the garbage collector, keep the minimalist spirit of BANNER in mind. It is a testament to the idea that power does not always come from complexity, but often from the rigorous application of simple rules. BANNER invites us to look beneath the surface of our high-level tools and appreciate the unseen machinery that makes modern computing possible. In the end, the most robust foundations are often those that remain hidden, quietly supporting the weight of the abstractions we build upon them.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>The BANNER Intermediate Representation</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-tooling.html",
+    "href": "appendix-tooling.html",
+    "title": "Appendix C — Tooling for HULK",
+    "section": "",
+    "text": "C.1 Editor Support and Syntax Highlighting\nWhile the core of HULK is its compiler and runtime, a modern programming language also requires a robust set of tools to support developers. This appendix outlines the high-level design of the HULK tooling ecosystem, focusing on editor integration and language support.\nSyntax highlighting is the first step toward a good developer experience. For HULK, this is achieved through TextMate grammars and custom XML definitions.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Tooling for HULK</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-tooling.html#editor-support-and-syntax-highlighting",
+    "href": "appendix-tooling.html#editor-support-and-syntax-highlighting",
+    "title": "Appendix C — Tooling for HULK",
+    "section": "",
+    "text": "C.1.1 TextMate Grammars\nHULK’s syntax is primarily defined in vscode/syntaxes/hulk.tmLanguage.json. This JSON file uses regular expressions to categorize language constructs: - Keywords: Control flow (if, else, while, for), declarations (function, type, let, protocol, def). - Literals: Numbers, strings, and booleans. - Operators: Arithmetic, boolean, assignment (:=), and special macro operators (@, $).\nTo support HULK code blocks in Markdown and Quarto files, a specialized grammar hulk-markdown.tmLanguage.json is used to inject HULK highlighting into fenced code blocks.\n\n\nC.1.2 Quarto Integration\nFor the static rendering of this book, Quarto uses a custom XML syntax definition (syntax/hulk.xml) that mirrors the rules of the TextMate grammar. This allows code blocks marked with ```hulk to be highlighted in the generated HTML and PDF formats.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Tooling for HULK</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-tooling.html#language-server-protocol-lsp",
+    "href": "appendix-tooling.html#language-server-protocol-lsp",
+    "title": "Appendix C — Tooling for HULK",
+    "section": "C.2 Language Server Protocol (LSP)",
+    "text": "C.2 Language Server Protocol (LSP)\nThe Language Server Protocol provides a standard way for editors to communicate with language-specific backends. A HULK LSP would ideally provide the following features:\n\nC.2.1 Diagnostics\nAs the developer types, the HULK compiler should run in the background to report syntax errors and type mismatches. These appear as real-time feedback (e.g., red squiggly lines) in the editor.\n\n\nC.2.2 Navigation and Go to Definition\nBy traversing the symbol table created during the semantic analysis phase, the LSP can provide “Go to Definition” for functions, variables, and types, allowing for easier navigation of large codebases.\n\n\nC.2.3 Hover Information\nHovering over an identifier can show its inferred type or documentation. Since HULK features advanced type inference, the LSP reveals the exact type the compiler has deduced for a given variable.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Tooling for HULK</span>"
+    ]
+  },
+  {
+    "objectID": "appendix-tooling.html#vs-code-extension-development",
+    "href": "appendix-tooling.html#vs-code-extension-development",
+    "title": "Appendix C — Tooling for HULK",
+    "section": "C.3 VS Code Extension Development",
+    "text": "C.3 VS Code Extension Development\nThe HULK VS Code extension (located in the vscode/ directory) serves as the primary integration point. Its main components are:\n\npackage.json Contributions: Defines the hulk language ID, associated file extensions (.hulk), and pointers to grammars and snippets.\nLanguage Configuration: Specifies comment symbols (//), bracket pairs, and indentation rules.\nSnippets: Pre-defined templates for common HULK constructs like function, type, and let (located in vscode/snippets/hulk.code-snippets).\nLSP Client (Future Work): A TypeScript component that launches the HULK compiler in “LSP Mode” and manages communication between the editor and the compiler.\n\nBy following this architecture, HULK becomes not just a didactic language, but a well-integrated development environment.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>C</span>  <span class='chapter-title'>Tooling for HULK</span>"
     ]
   }
 ]
