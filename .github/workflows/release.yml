@@ -39,8 +39,7 @@ jobs:
 
       - name: Render Documentation
         run: |
-          quarto render pages/ --to html
-          quarto render pages/ --to pdf
+          quarto render pages/
 
       - name: Deploy HTML to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
@@ -51,8 +50,8 @@ jobs:
 
       - name: Prepare Release Assets
         run: |
-          ls -R pages/_book/
-          cp pages/_book/hulk.pdf hulk-docs.pdf
+          find pages/_book -name "*.pdf" -exec cp {} hulk-docs.pdf \;
+          ls -lh hulk-docs.pdf
 
       - name: Upload Release Assets
         uses: softprops/action-gh-release@v2
