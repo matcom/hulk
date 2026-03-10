@@ -1,0 +1,160 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "HULK",
+    "scopeName": "source.hulk",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#keywords_control"
+        },
+        {
+            "include": "#keywords_declaration"
+        },
+        {
+            "include": "#keywords_operator"
+        },
+        {
+            "include": "#keywords_expression"
+        },
+        {
+            "include": "#constants"
+        },
+        {
+            "include": "#builtins"
+        },
+        {
+            "include": "#operators_arithmetic"
+        },
+        {
+            "include": "#operators_comparison"
+        },
+        {
+            "include": "#operators_logical"
+        },
+        {
+            "include": "#operators_assignment"
+        },
+        {
+            "include": "#operators_concatenation"
+        },
+        {
+            "include": "#operators_arrow"
+        },
+        {
+            "include": "#macros"
+        },
+        {
+            "include": "#types"
+        },
+        {
+            "include": "#complex_types"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "name": "comment.line.double-slash.hulk",
+            "match": "//.*$",
+            "patterns": []
+        },
+        "strings": {
+            "name": "string.quoted.double.hulk",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.hulk",
+                    "match": "\\\\(n|t|\\\")",
+                    "kde_attribute": "dsSpecialChar"
+                }
+            ]
+        },
+        "numbers": {
+            "name": "constant.numeric.hulk",
+            "match": "\\b\\d+(\\.\\d+)?\\b",
+            "patterns": []
+        },
+        "keywords_control": {
+            "name": "keyword.control.hulk",
+            "match": "\\b(if|else|elif|while|for|in|let|in|def|match|case|default)\\b",
+            "patterns": []
+        },
+        "keywords_declaration": {
+            "name": "keyword.declaration.hulk",
+            "match": "\\b(function|type|inherits|protocol|extends)\\b",
+            "patterns": []
+        },
+        "keywords_operator": {
+            "name": "keyword.operator.new.hulk",
+            "match": "\\bnew\\b",
+            "patterns": []
+        },
+        "keywords_expression": {
+            "name": "keyword.operator.expression.hulk",
+            "match": "\\b(is|as)\\b",
+            "patterns": []
+        },
+        "constants": {
+            "name": "constant.language.hulk",
+            "match": "\\b(true|false|PI|E)\\b",
+            "patterns": []
+        },
+        "builtins": {
+            "name": "support.function.hulk",
+            "match": "\\b(print|sin|cos|sqrt|exp|log|rand|range)\\b",
+            "patterns": []
+        },
+        "operators_arithmetic": {
+            "name": "keyword.operator.arithmetic.hulk",
+            "match": "(\\+|-|\\*|/|\\^)",
+            "patterns": []
+        },
+        "operators_comparison": {
+            "name": "keyword.operator.comparison.hulk",
+            "match": "(==|!=|<=|>=|<|>)",
+            "patterns": []
+        },
+        "operators_logical": {
+            "name": "keyword.operator.logical.hulk",
+            "match": "(&|\\||!)",
+            "patterns": []
+        },
+        "operators_assignment": {
+            "name": "keyword.operator.assignment.hulk",
+            "match": "(:=|=)",
+            "patterns": []
+        },
+        "operators_concatenation": {
+            "name": "keyword.operator.concatenation.hulk",
+            "match": "(@|@@)",
+            "patterns": []
+        },
+        "operators_arrow": {
+            "name": "keyword.operator.arrow.hulk",
+            "match": "(=>|->)",
+            "patterns": []
+        },
+        "macros": {
+            "name": "variable.other.macro.hulk",
+            "match": "(\\*|@|\\$)[a-zA-Z][a-zA-Z0-9_]*",
+            "patterns": []
+        },
+        "types": {
+            "name": "entity.name.type.hulk",
+            "match": "\\b(Number|String|Boolean|Object)\\b",
+            "patterns": []
+        },
+        "complex_types": {
+            "name": "entity.name.type.hulk",
+            "match": "\\b[a-zA-Z][a-zA-Z0-9_]*(\\*|\\[\\])",
+            "patterns": []
+        }
+    }
+}

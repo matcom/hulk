@@ -1,0 +1,61 @@
+{
+    "name": "hulk-vscode",
+    "displayName": "HULK Programming Language",
+    "description": "Syntax highlighting and support for the HULK programming language.",
+    "version": "0.5.0",
+    "publisher": "apiad",
+    "author": "Alejandro Piad Morffis <apiad@apiad.net>",
+    "engines": {
+        "vscode": "^1.80.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/matcom/hulk.git"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "hulk",
+                "aliases": [
+                    "HULK",
+                    "hulk"
+                ],
+                "extensions": [
+                    ".hulk"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "hulk",
+                "scopeName": "source.hulk",
+                "path": "./syntaxes/hulk.tmLanguage.json"
+            },
+            {
+                "scopeName": "markdown.hulk.codeblock",
+                "path": "./syntaxes/hulk-markdown.tmLanguage.json",
+                "injectTo": [
+                    "text.html.markdown",
+                    "text.quarto",
+                    "source.quarto",
+                    "source.qmd",
+                    "source.markdown",
+                    "text.markdown",
+                    "text.html.quarto",
+                    "markup.fenced_code.block.quarto"
+                ]
+            }
+        ],
+
+        "snippets": [
+            {
+                "language": "hulk",
+                "path": "./snippets/hulk.code-snippets"
+            }
+        ]
+    }
+}

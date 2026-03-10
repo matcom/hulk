@@ -20,5 +20,6 @@ pages/_book/
 *.tex
 
 # Hulk
-plans/
 fix_appendix.py
+gemini.log
+hulk-vscode.vsix
