@@ -6,6 +6,8 @@ syntax:
 	python3 syntax/generate.py
 
 tangle:
+	cd frontend/src && rm -rf *
+	cd backend/src && rm -rf *
 	illiterate pages/*.qmd --dir .
 
 vscode: syntax
