@@ -10,7 +10,7 @@ type Point {
     method get_x : Point_get_x ;
 }
 
-type PolarPoint inherits Point {
+type PolarPoint {
     attribute rho ;
     attribute phi ;
     method move : PolarPoint_move ; # Overridden
@@ -48,7 +48,7 @@ function Point_move {
 function main {
     LOCAL p ;
     LOCAL hello ;
-    
+
     hello = LOAD msg_hello ;
     PRINT hello ;
 
