@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2026-03-10
+### Added
+- **Syntax:** Full syntax highlighting for Banner IR (standalone files and Quarto code block injection).
+- **VS Code Extension:** HULK icon support for Banner files.
+- **Documentation:** New "BANNER Intermediate Representation" appendix with formal design details.
+- **Documentation:** New "Tooling" appendix describing the HULK ecosystem.
+
+### Changed
+- **Documentation:** Restructured the book into "Part 1: The Frontend" and "Part 2: The Backend" for a clearer curriculum.
+- **Build:** Updated project structure and dependencies for better literate programming support.
+- **Build:** Explicitly defined `hatch` build targets for the `frontend` package to resolve build errors.
+
+### Removed
+- Redundant `requirements.txt` (redundant with `uv`).
+
 ## [0.6.2] - 2026-03-10
 ### Fixed
 - **Documentation:** Enabled HULK syntax highlighting in the rendered PDF output by adding `syntax-definitions` to the Quarto PDF configuration.
