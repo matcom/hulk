@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0] - 2026-03-10
+### Added
+- **Project Structure:** Consolidated `frontend/` and `backend/` into a single, unified root-level architecture with `src/hulk/` and `src/banner/`.
+- **CLI:** Added `hulk` CLI entry point to the root package.
+
+### Changed
+- **Build:** Unified `pyproject.toml` and `Cargo.toml` at the root.
+- **Literate Programming:** Updated all Quarto chapters to export to the new root-level structure.
+- **Build System:** Refactored `makefile` for simplified root-level command execution.
+
+### Fixed
+- **Syntax:** Corrected inheritance declaration for the `PolarPoint` type in syntax examples.
+- **Syntax Generator:** Fixed a linting error (E701) in the grammar generation script.
+
 ## [0.7.0] - 2026-03-10
 ### Added
 - **Syntax:** Full syntax highlighting for Banner IR (standalone files and Quarto code block injection).

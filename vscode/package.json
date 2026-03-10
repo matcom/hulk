@@ -2,7 +2,7 @@
     "name": "hulk-vscode",
     "displayName": "HULK Programming Language",
     "description": "Syntax highlighting and support for the HULK programming language.",
-    "version": "0.7.0",
+    "version": "0.8.0",
     "publisher": "apiad",
     "author": "Alejandro Piad Morffis <apiad@apiad.net>",
     "engines": {
