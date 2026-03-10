@@ -23,10 +23,5 @@ pages/_book/
 *.tex
 
 # Hulk
-src/hulk/*
-!src/hulk/cli.py
-src/banner/*
-!src/banner/main.rs
-fix_appendix.py
 gemini.log
 hulk-vscode.vsix
