@@ -9,7 +9,7 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
-    - part: "Part 1: The Frontend"
+    - part: The Frontend
       chapters:
         - 01-arithmetic-expressions.qmd
         - 02-strings-and-builtins.qmd
@@ -18,7 +18,7 @@ book:
         - 05-functions-and-recursion.qmd
         - 06-objects-and-classes.qmd
         - 07-type-checking-and-inference.qmd
-    - part: "Part 2: The Backend"
+    - part: The Backend
       chapters:
         - 08-lowering-to-banner-ir.qmd
         - 09-the-metal-sandbox.qmd
