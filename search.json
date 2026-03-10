@@ -26,7 +26,7 @@
     "section": "",
     "text": "We begin our journey by building the core of any expression language: arithmetic. We will implement a lexer, a parser, and a tree-walking interpreter capable of evaluating basic mathematical operations.\n# Lexer implementation for HULK\n# Parser implementation for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Arithmetic Expressions</span>"
     ]
   },
@@ -37,7 +37,7 @@
     "section": "",
     "text": "In this chapter, we extend HULK with string literals and the concatenation operator. We also introduce the concept of builtin functions, allowing our language to interact with the outside world via print and mathematical constants like PI.\n# Builtin functions and constants for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Strings and Builtins</span>"
     ]
   },
@@ -48,7 +48,7 @@
     "section": "",
     "text": "Variables allow us to store and reuse values. We will implement lexically-scoped variables using the let expression and manage local environments in our interpreter.\n# Scope and Environment management for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Variables and Binding</span>"
     ]
   },
@@ -59,7 +59,7 @@
     "section": "",
     "text": "Decisions are fundamental to programming. We introduce boolean literals, comparison operators, and the if-then-else expression, which in HULK is itself an expression with a return value.\n# Evaluator updates for Control Flow",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Control Flow</span>"
     ]
   },
@@ -70,7 +70,7 @@
     "section": "",
     "text": "We move beyond simple expressions to define reusable logic. We will implement global function definitions, parameter passing, and recursive calls, which are essential for complex algorithms.\n# Function management for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Functions and Recursion</span>"
     ]
   },
@@ -81,7 +81,7 @@
     "section": "",
     "text": "HULK is an object-oriented language. We will implement class definitions, attribute storage, and method invocation, laying the groundwork for more advanced abstraction.\n# Type and Object system for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Objects and Classes</span>"
     ]
   },
@@ -92,7 +92,7 @@
     "section": "",
     "text": "Before code generation, we must ensure its correctness. We will build a semantic analyzer that verifies types and performs type inference to keep our HULK programs safe.\n# Semantic analyzer and Type inference for HULK",
     "crumbs": [
-      "Part 1: The Frontend",
+      "The Frontend",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Type Checking and Inference</span>"
     ]
   },
@@ -103,7 +103,7 @@
     "section": "",
     "text": "We bridge the gap between high-level HULK and low-level machine code. We define the BANNER Intermediate Representation (IR) and implement a “lowering” pass to transform our AST into a linear sequence of instructions.\n# Transpiler from HULK to Banner IR",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>The BANNER Intermediate Representation (IR)</span>"
     ]
   },
@@ -114,7 +114,7 @@
     "section": "",
     "text": "We transition to the Rust ecosystem. This chapter sets up the backend project, introduces Rust’s memory safety model, and prepares the environment for building our high-performance VM.\nfn main() {\n    println!(\"Hello from the Metal Sandbox\");\n}",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>The Metal Sandbox</span>"
     ]
   },
@@ -125,7 +125,7 @@
     "section": "",
     "text": "We implement the heart of our backend: a stack-based virtual machine. We will define the instruction set and the execution loop that processes BANNER IR at high speeds.\n// Stack Machine implementation",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Stack Machine</span>"
     ]
   },
@@ -136,7 +136,7 @@
     "section": "",
     "text": "High-level objects need a low-level home. We design the memory layout for strings, class instances, and arrays, and implement a heap to manage their lifecycle.\n// Heap and Object representation",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Object Representation</span>"
     ]
   },
@@ -147,7 +147,7 @@
     "section": "",
     "text": "Supporting polymorphism requires dynamic dispatch. We implement virtual method tables (vtables) and the runtime logic needed to resolve method calls on objects.\n// VTable and Dynamic Dispatch",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Virtual Method Calls</span>"
     ]
   },
@@ -158,7 +158,7 @@
     "section": "",
     "text": "Automatic memory management is a key feature of modern languages. We will implement a garbage collector to reclaim unused memory in our VM, ensuring our programs can run indefinitely without leaks.\n// Garbage Collector implementation",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Garbage Collector</span>"
     ]
   },
@@ -169,7 +169,7 @@
     "section": "",
     "text": "We bring everything together. In this final chapter, we refine the CLI, add the remaining standard library functions, and reflect on the journey of building a complete language from scratch.\n// CLI and Final Integration",
     "crumbs": [
-      "Part 2: The Backend",
+      "The Backend",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Final Polish</span>"
     ]
   },
