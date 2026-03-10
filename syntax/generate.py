@@ -3,6 +3,7 @@ import json
 import os
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+import glob
 
 def generate_textmate(grammar, output_path):
     tm_grammar = {
@@ -46,16 +47,16 @@ def generate_textmate(grammar, output_path):
     with open(output_path, "w") as f:
         json.dump(tm_grammar, f, indent=4)
 
-def generate_markdown_injection(grammar, output_path):
+def generate_markdown_injection(grammar, output_path, lang_id):
     injection = {
         "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
         "name": f"{grammar['name']} Injection (Markdown/Quarto)",
-        "scopeName": "markdown.hulk.codeblock",
+        "scopeName": f"markdown.{lang_id}.codeblock",
         "injectionSelector": "L:text.html.markdown, L:text.quarto, L:source.quarto, L:source.qmd, L:source.markdown, L:text.markdown, L:text.html.quarto, L:markup.fenced_code.block.quarto",
         "patterns": [
             {
                 "name": "markup.fenced_code.block.markdown",
-                "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?:\\{\\s*)?(?i:(hulk))\\b[^}]*(\\}?)",
+                "begin": f"(^|\\G)(\\s*)(`{{3,}}|~{{3,}})\\s*(?:\\{{\\s*)?(?i:({lang_id}))\\b[^}}]*(\\?}})",
                 "beginCaptures": {
                     "3": { "name": "punctuation.definition.markdown" },
                     "4": { "name": "fenced_code.block.language.markdown" },
@@ -77,10 +78,11 @@ def generate_markdown_injection(grammar, output_path):
         json.dump(injection, f, indent=4)
 
 def generate_kde_xml(grammar, output_path):
+    extensions = ";".join([f"*.{ext}" for ext in grammar.get("fileTypes", [])])
     language = ET.Element("language", {
         "name": grammar["name"],
         "section": "Sources",
-        "extensions": "*.hulk",
+        "extensions": extensions,
         "version": "1",
         "kateversion": "5.0",
         "author": "Alejandro Piad Morffis",
@@ -153,11 +155,16 @@ def generate_kde_xml(grammar, output_path):
         f.write(reparsed.toprettyxml(indent="  "))
 
 if __name__ == "__main__":
-    with open("syntax/hulk.yaml", "r") as f:
-        grammar = yaml.safe_load(f)
-    
     os.makedirs("vscode/syntaxes", exist_ok=True)
-    generate_textmate(grammar, "vscode/syntaxes/hulk.tmLanguage.json")
-    generate_markdown_injection(grammar, "vscode/syntaxes/hulk-markdown.tmLanguage.json")
-    generate_kde_xml(grammar, "syntax/hulk.xml")
-    print("Generated VS Code grammar, Markdown injection, and Quarto/Pandoc XML.")
+    
+    for yaml_path in glob.glob("syntax/*.yaml"):
+        with open(yaml_path, "r") as f:
+            grammar = yaml.safe_load(f)
+        
+        lang_id = os.path.splitext(os.path.basename(yaml_path))[0]
+        
+        generate_textmate(grammar, f"vscode/syntaxes/{lang_id}.tmLanguage.json")
+        generate_markdown_injection(grammar, f"vscode/syntaxes/{lang_id}-markdown.tmLanguage.json", lang_id)
+        generate_kde_xml(grammar, f"syntax/{lang_id}.xml")
+        
+        print(f"Generated grammars and XML for: {grammar['name']} ({lang_id})")

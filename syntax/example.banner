@@ -1,0 +1,65 @@
+# Banner Intermediate Representation Example
+# This file demonstrates the syntax for standalone Banner files (.banner or .cil)
+
+.TYPES
+
+type Point {
+    attribute x ;
+    attribute y ;
+    method move : Point_move ;
+    method get_x : Point_get_x ;
+}
+
+type PolarPoint inherits Point {
+    attribute rho ;
+    attribute phi ;
+    method move : PolarPoint_move ; # Overridden
+}
+
+.DATA
+
+msg_hello = "Hello, BANNER!" ;
+msg_format = "Point at (%d, %d)\n" ;
+
+.CODE
+
+function Point_move {
+    PARAM self ;
+    PARAM dx ;
+    PARAM dy ;
+
+    LOCAL cur_x ;
+    LOCAL cur_y ;
+    LOCAL new_x ;
+    LOCAL new_y ;
+
+    cur_x = GETATTR self x ;
+    cur_y = GETATTR self y ;
+
+    new_x = cur_x + dx ;
+    new_y = cur_y + dy ;
+
+    SETATTR self x new_x ;
+    SETATTR self y new_y ;
+
+    RETURN self ;
+}
+
+function main {
+    LOCAL p ;
+    LOCAL hello ;
+    
+    hello = LOAD msg_hello ;
+    PRINT hello ;
+
+    p = ALLOCATE Point ;
+    SETATTR p x 10 ;
+    SETATTR p y 20 ;
+
+    PARAM p ;
+    PARAM 5 ;
+    PARAM -5 ;
+    VCALL Point move ;
+
+    RETURN 0 ;
+}

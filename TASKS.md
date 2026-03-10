@@ -10,6 +10,7 @@ Legend:
 
 ## Active Tasks
 - [ ] Initialize the project goals.
+- [x] Implement syntax highlighting for Banner IR. (@apiad) (See plan: plans/implement-banner-syntax.md)
 - [x] Add the "Tooling for HULK" appendix. (@apiad) (See plan: plans/add-tooling-appendix.md)
 - [x] Refactor the HULK book into Part 1 (Frontend) and Part 2 (Backend). (@apiad) (See plan: plans/refactor-hulk-book.md)
 - [ ] Implement HULK Language Server Protocol (LSP). (@apiad) (See plan: plans/implement-hulk-lsp.md)

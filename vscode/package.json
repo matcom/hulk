@@ -36,6 +36,24 @@
                     "light": "images/hulk.png",
                     "dark": "images/hulk.png"
                 }
+            },
+            {
+                "id": "banner",
+                "aliases": [
+                    "Banner",
+                    "banner",
+                    "CIL",
+                    "cil"
+                ],
+                "extensions": [
+                    ".banner",
+                    ".cil"
+                ],
+                "configuration": "./language-configuration-banner.json",
+                "icon": {
+                    "light": "images/hulk.png",
+                    "dark": "images/hulk.png"
+                }
             }
         ],
         "grammars": [
@@ -47,6 +65,25 @@
             {
                 "scopeName": "markdown.hulk.codeblock",
                 "path": "./syntaxes/hulk-markdown.tmLanguage.json",
+                "injectTo": [
+                    "text.html.markdown",
+                    "text.quarto",
+                    "source.quarto",
+                    "source.qmd",
+                    "source.markdown",
+                    "text.markdown",
+                    "text.html.quarto",
+                    "markup.fenced_code.block.quarto"
+                ]
+            },
+            {
+                "language": "banner",
+                "scopeName": "source.banner",
+                "path": "./syntaxes/banner.tmLanguage.json"
+            },
+            {
+                "scopeName": "markdown.banner.codeblock",
+                "path": "./syntaxes/banner-markdown.tmLanguage.json",
                 "injectTo": [
                     "text.html.markdown",
                     "text.quarto",

@@ -1,0 +1,58 @@
+name: Banner
+scopeName: source.banner
+fileTypes: [banner, cil]
+
+tokens:
+  comments:
+    name: comment.line.number-sign.banner
+    match: "#.*$"
+    kde_attribute: dsComment
+
+  strings:
+    name: string.quoted.double.banner
+    begin: "\""
+    end: "\""
+    kde_attribute: dsString
+    patterns:
+      - name: constant.character.escape.banner
+        match: "\\\\(n|t|\\\")"
+        kde_attribute: dsSpecialChar
+
+  numbers:
+    name: constant.numeric.banner
+    match: "\\b\\d+(\\.\\d+)?\\b"
+    kde_attribute: dsFloat
+
+  directives:
+    name: keyword.other.directive.banner
+    match: "\\.(TYPES|DATA|CODE)\\b"
+    kde_attribute: dsAttribute
+
+  keywords:
+    control:
+      name: keyword.control.banner
+      match: "\\b(GOTO|IF|RETURN)\\b"
+      kde_attribute: dsControlFlow
+    declaration:
+      name: keyword.declaration.banner
+      match: "\\b(function|PARAM|LOCAL|type|attribute|method)\\b"
+      kde_attribute: dsKeyword
+    instruction:
+      name: support.function.banner
+      match: "\\b(GETATTR|SETATTR|GETINDEX|SETINDEX|ALLOCATE|ARRAY|TYPEOF|LABEL|CALL|VCALL|LOAD|PRINT|READ|LENGTH|CONCAT|PREFIX|SUBSTRING|STR)\\b"
+      kde_attribute: dsBuiltIn
+
+  operators:
+    assignment:
+      name: keyword.operator.assignment.banner
+      match: "="
+      kde_attribute: dsOperator
+    arithmetic:
+      name: keyword.operator.arithmetic.banner
+      match: "(\\+|-|\\*|/)"
+      kde_attribute: dsOperator
+
+  labels:
+    name: entity.name.label.banner
+    match: "[a-zA-Z_][a-zA-Z0-9_]*:"
+    kde_attribute: dsFunction

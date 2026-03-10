@@ -1,12 +1,12 @@
 {
     "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-    "name": "HULK Injection (Markdown/Quarto)",
-    "scopeName": "markdown.hulk.codeblock",
+    "name": "Banner Injection (Markdown/Quarto)",
+    "scopeName": "markdown.banner.codeblock",
     "injectionSelector": "L:text.html.markdown, L:text.quarto, L:source.quarto, L:source.qmd, L:source.markdown, L:text.markdown, L:text.html.quarto, L:markup.fenced_code.block.quarto",
     "patterns": [
         {
             "name": "markup.fenced_code.block.markdown",
-            "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?:\\{\\s*)?(?i:(hulk))\\b[^}]*(\\?})",
+            "begin": "(^|\\G)(\\s*)(`{3,}|~{3,})\\s*(?:\\{\\s*)?(?i:(banner))\\b[^}]*(\\?})",
             "beginCaptures": {
                 "3": {
                     "name": "punctuation.definition.markdown"
@@ -24,10 +24,10 @@
                     "name": "punctuation.definition.markdown"
                 }
             },
-            "contentName": "source.hulk",
+            "contentName": "source.banner",
             "patterns": [
                 {
-                    "include": "source.hulk"
+                    "include": "source.banner"
                 }
             ]
         }

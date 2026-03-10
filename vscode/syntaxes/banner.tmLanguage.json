@@ -1,0 +1,96 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "Banner",
+    "scopeName": "source.banner",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#directives"
+        },
+        {
+            "include": "#keywords_control"
+        },
+        {
+            "include": "#keywords_declaration"
+        },
+        {
+            "include": "#keywords_instruction"
+        },
+        {
+            "include": "#operators_assignment"
+        },
+        {
+            "include": "#operators_arithmetic"
+        },
+        {
+            "include": "#labels"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "name": "comment.line.number-sign.banner",
+            "match": "#.*$",
+            "patterns": []
+        },
+        "strings": {
+            "name": "string.quoted.double.banner",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "constant.character.escape.banner",
+                    "match": "\\\\(n|t|\\\")",
+                    "kde_attribute": "dsSpecialChar"
+                }
+            ]
+        },
+        "numbers": {
+            "name": "constant.numeric.banner",
+            "match": "\\b\\d+(\\.\\d+)?\\b",
+            "patterns": []
+        },
+        "directives": {
+            "name": "keyword.other.directive.banner",
+            "match": "\\.(TYPES|DATA|CODE)\\b",
+            "patterns": []
+        },
+        "keywords_control": {
+            "name": "keyword.control.banner",
+            "match": "\\b(GOTO|IF|RETURN)\\b",
+            "patterns": []
+        },
+        "keywords_declaration": {
+            "name": "keyword.declaration.banner",
+            "match": "\\b(function|PARAM|LOCAL|type|attribute|method)\\b",
+            "patterns": []
+        },
+        "keywords_instruction": {
+            "name": "support.function.banner",
+            "match": "\\b(GETATTR|SETATTR|GETINDEX|SETINDEX|ALLOCATE|ARRAY|TYPEOF|LABEL|CALL|VCALL|LOAD|PRINT|READ|LENGTH|CONCAT|PREFIX|SUBSTRING|STR)\\b",
+            "patterns": []
+        },
+        "operators_assignment": {
+            "name": "keyword.operator.assignment.banner",
+            "match": "=",
+            "patterns": []
+        },
+        "operators_arithmetic": {
+            "name": "keyword.operator.arithmetic.banner",
+            "match": "(\\+|-|\\*|/)",
+            "patterns": []
+        },
+        "labels": {
+            "name": "entity.name.label.banner",
+            "match": "[a-zA-Z_][a-zA-Z0-9_]*:",
+            "patterns": []
+        }
+    }
+}
